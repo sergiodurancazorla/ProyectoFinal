@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 mar. 2021 19:33:56 by Hibernate Tools 5.0.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="incidencias" dynamic-insert="false" dynamic-update="false" mutable="true" name="pojos.Tipo" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="tipo">
+        <id name="idtipo" type="java.lang.Integer">
+            <column name="idtipo"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="tipo" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="tipo" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="incidencias" optimistic-lock="true" sort="unsorted" table="incidencia">
+            <key on-delete="noaction">
+                <column name="tipo_idtipo" not-null="true"/>
+            </key>
+            <one-to-many class="pojos.Incidencia" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

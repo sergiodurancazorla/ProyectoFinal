@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 mar. 2021 19:33:56 by Hibernate Tools 5.0.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="incidencias" dynamic-insert="false" dynamic-update="false" mutable="true" name="pojos.RolPermiso" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="rol_permiso">
+        <composite-id class="pojos.RolPermisoId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="rolIdrol" type="int">
+                <column name="rol_idrol"/>
+            </key-property>
+            <key-property name="permisoIdpermiso" type="int">
+                <column name="permiso_idpermiso"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="pojos.Permiso" embed-xml="true" fetch="select" insert="false" name="permiso" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="permiso_idpermiso" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojos.Rol" embed-xml="true" fetch="select" insert="false" name="rol" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="rol_idrol" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="boolean_" optimistic-lock="true" type="byte" unique="false">
+            <column name="boolean" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

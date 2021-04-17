@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 mar. 2021 19:33:56 by Hibernate Tools 5.0.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="incidencias" dynamic-insert="false" dynamic-update="false" mutable="true" name="pojos.Incidencia" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="incidencia">
+        <id name="idincidencia" type="java.lang.Integer">
+            <column name="idincidencia"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="pojos.Aula" embed-xml="true" fetch="select" insert="true" name="aula" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="aula_idaula" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojos.Departamento" embed-xml="true" fetch="select" insert="true" name="departamento" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="departamento_iddepartamento" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojos.Estado" embed-xml="true" fetch="select" insert="true" name="estado" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="estado_idestado" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojos.Profesor" embed-xml="true" fetch="select" insert="true" name="profesorByResponsableSolucion" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="20" name="responsable_solucion"/>
+        </many-to-one>
+        <many-to-one class="pojos.Profesor" embed-xml="true" fetch="select" insert="true" name="profesorByProfesorIdprofesor" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="20" name="profesor_idprofesor" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojos.Tipo" embed-xml="true" fetch="select" insert="true" name="tipo" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="tipo_idtipo" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="fechaIncidencia" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="fecha_incidencia"/>
+        </property>
+        <property generated="never" lazy="false" name="fechaIntroduccion" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="fecha_introduccion"/>
+        </property>
+        <property generated="never" lazy="false" name="descripcion" optimistic-lock="true" type="string" unique="false">
+            <column length="16777215" name="descripcion"/>
+        </property>
+        <property generated="never" lazy="false" name="observaciones" optimistic-lock="true" type="string" unique="false">
+            <column length="16777215" name="observaciones"/>
+        </property>
+        <property generated="never" lazy="false" name="fechaResolucion" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="fecha_resolucion"/>
+        </property>
+        <property generated="never" lazy="false" name="tiempoResolucion" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="tiempo_resolucion"/>
+        </property>
+        <property generated="never" lazy="false" name="informacion" optimistic-lock="true" type="binary" unique="false">
+            <column name="informacion"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="infoHardwares" optimistic-lock="true" sort="unsorted" table="info_hardware">
+            <key on-delete="noaction">
+                <column name="id_incidencia" not-null="true"/>
+            </key>
+            <one-to-many class="pojos.InfoHardware" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

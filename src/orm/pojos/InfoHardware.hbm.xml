@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 mar. 2021 19:33:56 by Hibernate Tools 5.0.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="incidencias" dynamic-insert="false" dynamic-update="false" mutable="true" name="pojos.InfoHardware" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="info_hardware">
+        <id name="idtipoHardware" type="java.lang.Integer">
+            <column name="idtipo_hardware"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="pojos.Incidencia" embed-xml="true" fetch="select" insert="true" name="incidencia" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="id_incidencia" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojos.TipoHarware" embed-xml="true" fetch="select" insert="true" name="tipoHarware" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="tipo_harware" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="modelo" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="modelo"/>
+        </property>
+        <property generated="never" lazy="false" name="numeroSerie" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="numero_serie"/>
+        </property>
+    </class>
+</hibernate-mapping>

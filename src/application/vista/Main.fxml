@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="980.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlador.MainController">
+   <left>
+      <AnchorPane prefHeight="640.0" prefWidth="92.0" style="-fx-background-color: #21427D;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="btnHome" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="45.0" onMouseClicked="#clickHome" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="45.0">
+               <image>
+                  <Image url="@../../recursos/iconos/home.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="btnAdd" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="99.0" onMouseClicked="#clickAdd" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../recursos/iconos/add.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="btnGraficos" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="150.0" onMouseClicked="#clickGraficos" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../recursos/iconos/chart.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="btnDocumentos" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="207.0" onMouseClicked="#clickDocumentos" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../recursos/iconos/informes.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="btnUsuario" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="265.0" onMouseClicked="#clickUsuario" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../recursos/iconos/usuario.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="btnCerrar" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="576.0" onMouseClicked="#clickCerrar" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="26.0">
+               <image>
+                  <Image url="@../../recursos/iconos/signout.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="btnAjuste" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="525.0" onMouseClicked="#clickAjustes" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="75.0">
+               <image>
+                  <Image url="@../../recursos/iconos/ajustes.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

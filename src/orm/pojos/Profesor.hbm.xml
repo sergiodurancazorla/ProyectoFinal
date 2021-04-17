@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 mar. 2021 19:33:56 by Hibernate Tools 5.0.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="incidencias" dynamic-insert="false" dynamic-update="false" mutable="true" name="pojos.Profesor" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="profesor">
+        <id name="dni" type="string">
+            <column length="20" name="dni"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="pojos.Departamento" embed-xml="true" fetch="select" insert="true" name="departamento" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="departamento" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojos.Rol" embed-xml="true" fetch="select" insert="true" name="rol" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="rol_idrol" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="nombre" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="apellido1" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="apellido1" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="apellido2" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="apellido2"/>
+        </property>
+        <property generated="never" lazy="false" name="email" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="email"/>
+        </property>
+        <property generated="never" lazy="false" name="password" optimistic-lock="true" type="string" unique="false">
+            <column length="25" name="password"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="incidenciasForResponsableSolucion" optimistic-lock="true" sort="unsorted" table="incidencia">
+            <key on-delete="noaction">
+                <column length="20" name="responsable_solucion"/>
+            </key>
+            <one-to-many class="pojos.Incidencia" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="incidenciasForProfesorIdprofesor" optimistic-lock="true" sort="unsorted" table="incidencia">
+            <key on-delete="noaction">
+                <column length="20" name="profesor_idprofesor" not-null="true"/>
+            </key>
+            <one-to-many class="pojos.Incidencia" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>
