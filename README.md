@@ -6,5 +6,9 @@ incidencias de Hardware y Software que se producen en el centro.
 
 # Guía
 
-
+-Para ver el proyecto se tiene que entrar en la rama "master"
+-Descargar script base de datos y ejecutar. 
+-La base de datos, de momento, solo tiene como datos un usuario para probar el login:
+  usuario: admin
+  pass: admin
 
