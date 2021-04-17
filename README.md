@@ -12,7 +12,7 @@ incidencias de Hardware y Software que se producen en el centro.
   usuario: admin 
   pass: admin 
 
-##Cosas a tener en cuenta
+## Cosas a tener en cuenta
 
 1. Para que el proyecto funcione correctamente es necesario el JDK 1.8
 2. Si da error con JavaFX hay que añadir las librerias de JavaFX desde Build Path>Add Libraries > JavaFX SDK
