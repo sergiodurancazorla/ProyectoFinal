@@ -37,13 +37,13 @@ public class MainController {
 	private ImageView btnCerrar;
 
 	@FXML
-	private ImageView btnAjuste;
+	private ImageView btnAjustes;
 
 	@FXML
-	void clickAdd(MouseEvent event) throws IOException {
+	void clickAdd(MouseEvent event) throws Exception {
 		limpiarEfectos();
 
-		AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/PRUEBA2.fxml"));
+		AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Add.fxml"));
 
 		btnAdd.setEffect(new DropShadow(30, Color.BLACK));
 		borderPane.setCenter(pane);
@@ -52,6 +52,8 @@ public class MainController {
 
 	@FXML
 	void clickAjustes(MouseEvent event) {
+		limpiarEfectos();
+		btnAjustes.setEffect(new DropShadow(30, Color.BLACK));
 
 	}
 
@@ -74,16 +76,22 @@ public class MainController {
 
 	@FXML
 	void clickDocumentos(MouseEvent event) {
+		limpiarEfectos();
+		btnDocumentos.setEffect(new DropShadow(30, Color.BLACK));
 
 	}
 
 	@FXML
 	void clickGraficos(MouseEvent event) {
+		limpiarEfectos();
+		btnGraficos.setEffect(new DropShadow(30, Color.BLACK));
 
 	}
 
 	@FXML
 	void clickUsuario(MouseEvent event) {
+		limpiarEfectos();
+		btnUsuario.setEffect(new DropShadow(30, Color.BLACK));
 
 	}
 
@@ -101,8 +109,12 @@ public class MainController {
 	 */
 	private void limpiarEfectos() {
 		btnHome.setEffect(null);
-
 		btnAdd.setEffect(null);
+		btnCerrar.setEffect(null);
+		btnDocumentos.setEffect(null);
+		btnGraficos.setEffect(null);
+		btnAjustes.setEffect(null);
+		btnUsuario.setEffect(null);
 
 	}
 

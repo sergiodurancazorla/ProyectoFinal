@@ -66,4 +66,9 @@ public class Tipo implements java.io.Serializable {
 		this.incidencias = incidencias;
 	}
 
+	@Override
+	public String toString() {
+		return tipo;
+	}
+
 }

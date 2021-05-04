@@ -58,7 +58,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="btnAjuste" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="525.0" onMouseClicked="#clickAjustes" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="75.0">
+            <ImageView fx:id="btnAjustes" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="525.0" onMouseClicked="#clickAjustes" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="75.0">
                <image>
                   <Image url="@../../recursos/iconos/ajustes.png" />
                </image>
