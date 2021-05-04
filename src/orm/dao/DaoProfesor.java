@@ -1,5 +1,6 @@
 package orm.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -37,6 +38,29 @@ public class DaoProfesor extends DaoGenericoHibernate<Profesor, Integer> {
 
 		return correcto;
 
+	}
+
+	public ArrayList<Profesor> listadoProfesores() {
+
+		// comenzamos sesion
+		Session s = UtilesHibernate.getSessionFactory().getCurrentSession();
+
+		// Objeto a devolver
+		ArrayList lista = null;
+
+		try {
+
+			String hql = " from Profesor p";
+
+			Query q = s.createQuery(hql);
+
+			lista = new ArrayList(q.list());
+
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+
+		return lista;
 	}
 
 }

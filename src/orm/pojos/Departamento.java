@@ -78,4 +78,9 @@ public class Departamento implements java.io.Serializable {
 		this.incidencias = incidencias;
 	}
 
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
 }

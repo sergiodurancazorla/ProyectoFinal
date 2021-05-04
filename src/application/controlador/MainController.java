@@ -100,8 +100,8 @@ public class MainController {
 		limpiarEfectos();
 		btnHome.setEffect(new DropShadow(30, Color.BLACK));
 
-		AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/PRUEBA.fxml"));
-		borderPane.setCenter(pane);
+//		AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/PRUEBA.fxml"));
+//		borderPane.setCenter(pane);
 	}
 
 	/**

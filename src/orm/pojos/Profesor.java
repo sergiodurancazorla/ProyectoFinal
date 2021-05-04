@@ -151,4 +151,9 @@ public class Profesor implements java.io.Serializable {
 		this.incidenciasForProfesorIdprofesor = incidenciasForProfesorIdprofesor;
 	}
 
+	@Override
+	public String toString() {
+		return apellido1 + " " + apellido2 + ", " + nombre;
+	}
+
 }

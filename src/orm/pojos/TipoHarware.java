@@ -62,4 +62,9 @@ public class TipoHarware implements java.io.Serializable {
 		this.infoHardwares = infoHardwares;
 	}
 
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
 }

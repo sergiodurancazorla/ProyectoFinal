@@ -1,13 +1,15 @@
 package orm.pojos;
 // Generated 8 mar. 2021 19:33:56 by Hibernate Tools 5.0.6.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -59,6 +61,11 @@ public class Aula implements java.io.Serializable {
 
 	public void setIncidencias(Set<Incidencia> incidencias) {
 		this.incidencias = incidencias;
+	}
+
+	@Override
+	public String toString() {
+		return descripcion;
 	}
 
 }
