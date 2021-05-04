@@ -69,6 +69,6 @@
       </GridPane>
       <TextArea fx:id="txtDescripcion" layoutX="209.0" layoutY="293.0" prefHeight="99.0" prefWidth="384.0" style="-fx-wrap-text: true;" />
       <JFXButton fx:id="btnAnyadirIncidencia" buttonType="RAISED" layoutX="755.0" layoutY="583.0" prefHeight="38.0" prefWidth="121.0" style="-fx-background-color: #2D5FB8;" text="Añadir incidencia" textFill="WHITE" />
-      <JFXButton fx:id="btnLimpiar" layoutX="685.0" layoutY="590.0" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Limpiar" textFill="#2e89b8" />
+      <JFXButton fx:id="btnLimpiar" layoutX="685.0" layoutY="590.0" onAction="#btnLimpiar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Limpiar" textFill="#2e89b8" />
    </children>
 </AnchorPane>

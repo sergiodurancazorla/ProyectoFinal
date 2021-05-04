@@ -59,7 +59,6 @@ public class MainController {
 
 	@FXML
 	void clickCerrar(MouseEvent event) {
-		// PONER ALERTA DE ¿SEGURO QUE QUIERES CERRAR SESION?
 		limpiarEfectos();
 
 		UtilesHibernate.closeSession();

@@ -80,12 +80,33 @@ public class AddController implements Initializable {
 	 */
 	@FXML
 	void seleccionarItem(ActionEvent event) {
-		if (comboTipoIncidencia.getSelectionModel().getSelectedItem().getTipo().equals("Hardware")) {
+		if (!comboTipoIncidencia.getSelectionModel().isEmpty()
+				&& comboTipoIncidencia.getSelectionModel().getSelectedItem().getTipo().equals("Hardware")) {
 			gridHardware.setVisible(true);
 			iniciarComboHardware();
 		} else {
 			gridHardware.setVisible(false);
 		}
+
+	}
+
+	/**
+	 * Metodo que limpia los inputs y combobox del formulario
+	 * 
+	 * @param event
+	 */
+	@FXML
+	void btnLimpiar(ActionEvent event) {
+		txtModelo.setText("");
+		txtNumeroSerie.setText("");
+		comboTipoHardware.setValue(null);
+		fechaIncidencia.setValue(LocalDate.now());
+		comboTipoIncidencia.setValue(null);
+		comboProfesor.setValue(null);
+		comboDepartamento.setValue(null);
+		comboUbicacion.setValue(null);
+		comboEstado.setValue(null);
+		txtDescripcion.setText("");
 
 	}
 
