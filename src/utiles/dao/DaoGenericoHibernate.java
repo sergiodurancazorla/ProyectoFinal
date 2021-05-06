@@ -20,7 +20,7 @@ public class DaoGenericoHibernate<T, ID extends Serializable> extends DaoGeneric
 	public void grabar(T objeto) throws BusinessException {
 		Session s = UtilesHibernate.getSessionFactory().getCurrentSession();
 		try {
-			s.beginTransaction();
+			// s.beginTransaction();
 			s.save(objeto);
 			s.getTransaction().commit();
 		} catch (ConstraintViolationException cve) {

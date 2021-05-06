@@ -19,15 +19,18 @@ import javafx.scene.layout.GridPane;
 import orm.dao.DaoAula;
 import orm.dao.DaoDepartamento;
 import orm.dao.DaoEstado;
+import orm.dao.DaoIncidencia;
 import orm.dao.DaoInfoHardware;
 import orm.dao.DaoProfesor;
 import orm.dao.DaoTipo;
 import orm.pojos.Aula;
 import orm.pojos.Departamento;
 import orm.pojos.Estado;
+import orm.pojos.Incidencia;
 import orm.pojos.Profesor;
 import orm.pojos.Tipo;
 import orm.pojos.TipoHarware;
+import utiles.excepciones.BusinessException;
 
 public class AddController implements Initializable {
 
@@ -107,6 +110,36 @@ public class AddController implements Initializable {
 		comboUbicacion.setValue(null);
 		comboEstado.setValue(null);
 		txtDescripcion.setText("");
+
+	}
+
+	@FXML
+	void clickAnyadirIncidencia(ActionEvent event) {
+
+		// VALIDACIÓN
+		Estado estado = comboEstado.getValue();
+		Tipo tipo = comboTipoIncidencia.getValue();
+		Profesor profesor = comboProfesor.getValue();
+		Departamento departamento = comboDepartamento.getValue();
+		Aula aula = comboUbicacion.getValue();
+
+		// Crear incidencia
+		Incidencia incidencia = new Incidencia(aula, departamento, estado, profesor, tipo);
+
+		// DAO y guardar incidencia
+		orm.dao.DaoIncidencia daoIncidencia = new DaoIncidencia();
+
+		try {
+			daoIncidencia.grabar(incidencia);
+			System.out.println("HA GUARDADO LA INCIDENCIA, ID: " + incidencia.getIdincidencia());
+		} catch (BusinessException e) {
+			// Mostrar error al guardar incidencia
+			e.printStackTrace();
+		}
+
+		btnLimpiar.fire();
+
+		// MOSTRAR SI SE HA GUARDADO ALGO
 
 	}
 
