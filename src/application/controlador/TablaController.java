@@ -64,6 +64,7 @@ public class TablaController implements Initializable {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -114,19 +115,94 @@ public class TablaController implements Initializable {
 									format.format(param.getValue().getValue().getFechaIncidencia()).toString());
 						}
 					});
-			// ESTADO
+
 			// PROFESOR
+			JFXTreeTableColumn<Incidencia, String> columnaProfesor = new JFXTreeTableColumn<>("Informador");
+			columnaProfesor.setCellValueFactory(
+					new Callback<TreeTableColumn.CellDataFeatures<Incidencia, String>, ObservableValue<String>>() {
+
+						@Override
+						public ObservableValue<String> call(CellDataFeatures<Incidencia, String> param) {
+
+							return new SimpleStringProperty(
+									param.getValue().getValue().getProfesorByProfesorIdprofesor().toString());
+						}
+					});
+
 			// DEPARTAMENTO
+
+			JFXTreeTableColumn<Incidencia, String> columnaDepartamento = new JFXTreeTableColumn<>("Departamento");
+			columnaDepartamento.setCellValueFactory(
+					new Callback<TreeTableColumn.CellDataFeatures<Incidencia, String>, ObservableValue<String>>() {
+
+						@Override
+						public ObservableValue<String> call(CellDataFeatures<Incidencia, String> param) {
+
+							return new SimpleStringProperty(param.getValue().getValue().getDepartamento().getNombre());
+						}
+					});
+
 			// AULA
+
+			JFXTreeTableColumn<Incidencia, String> columnaAula = new JFXTreeTableColumn<>("Aula");
+			columnaAula.setCellValueFactory(
+					new Callback<TreeTableColumn.CellDataFeatures<Incidencia, String>, ObservableValue<String>>() {
+
+						@Override
+						public ObservableValue<String> call(CellDataFeatures<Incidencia, String> param) {
+
+							return new SimpleStringProperty(param.getValue().getValue().getAula().getDescripcion());
+						}
+					});
+
 			// PROFESOR RESOLUCION
+
+			JFXTreeTableColumn<Incidencia, String> columnaResolucionProfesor = new JFXTreeTableColumn<>("Responsable");
+			columnaResolucionProfesor.setCellValueFactory(
+					new Callback<TreeTableColumn.CellDataFeatures<Incidencia, String>, ObservableValue<String>>() {
+
+						@Override
+						public ObservableValue<String> call(CellDataFeatures<Incidencia, String> param) {
+							SimpleStringProperty valor = new SimpleStringProperty();
+							if (param.getValue().getValue().getProfesorByResponsableSolucion() == null) {
+								valor.set("Responsable sin asignar");
+							} else {
+								valor.set(param.getValue().getValue().getProfesorByResponsableSolucion().toString());
+							}
+
+							return valor;
+						}
+					});
+
+			// FECHA RESOLUCION
+
+			JFXTreeTableColumn<Incidencia, String> columnaResolucionFecha = new JFXTreeTableColumn<>("Resolucion");
+			columnaResolucionFecha.setCellValueFactory(
+					new Callback<TreeTableColumn.CellDataFeatures<Incidencia, String>, ObservableValue<String>>() {
+
+						@Override
+						public ObservableValue<String> call(CellDataFeatures<Incidencia, String> param) {
+							SimpleStringProperty valor = new SimpleStringProperty();
+							if (param.getValue().getValue().getFechaResolucion() == null) {
+								valor.set("No resuelta");
+							} else {
+								SimpleDateFormat format = new SimpleDateFormat("dd-MM-YYYY");
+
+								valor.set(format.format(param.getValue().getValue().getFechaResolucion()).toString());
+							}
+
+							return valor;
+						}
+					});
 
 			final TreeItem<Incidencia> root = new RecursiveTreeItem<Incidencia>(data, RecursiveTreeObject::getChildren);
 
 			// Add a la tabla las columnas
 
-			tablaIncidencias.getColumns().setAll(columnaId, columnaTipo, columnaFecha);
+			tablaIncidencias.getColumns().setAll(columnaId, columnaTipo, columnaFecha, columnaProfesor,
+					columnaDepartamento, columnaAula, columnaResolucionProfesor, columnaResolucionFecha);
 			tablaIncidencias.setRoot(root);
-			tablaIncidencias.setShowRoot(false);
+			// tablaIncidencias.setShowRoot(false);
 
 		} catch (BusinessException e) {
 			e.printStackTrace();
