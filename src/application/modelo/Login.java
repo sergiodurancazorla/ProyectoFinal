@@ -25,7 +25,6 @@ public class Login extends Application {
 			UtilesHibernate.openSession();
 			// comenzamos sesion ;
 			Session s = UtilesHibernate.getSessionFactory().getCurrentSession();
-			s.beginTransaction();
 
 			root = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Login.fxml"));
 			Scene scene = new Scene(root);
