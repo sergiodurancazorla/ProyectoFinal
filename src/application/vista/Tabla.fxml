@@ -2,7 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,7 +20,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></JFXButton>
-      <JFXButton fx:id="btnEditar" disable="true" layoutX="681.0" layoutY="595.0" onAction="#btnEditar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Editar" textFill="#2e89b8">
+      <JFXButton fx:id="btnEditar" disable="true" layoutX="673.0" layoutY="595.0" onAction="#btnEditar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Editar" textFill="#2e89b8">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></JFXButton>
@@ -29,15 +31,30 @@
          </font>
       </Text>
       <JFXTreeTableView fx:id="tablaIncidencias" layoutX="30.0" layoutY="110.0" prefHeight="468.0" prefWidth="820.0" showRoot="false" tableMenuButtonVisible="true" />
-      <HBox layoutX="30.0" layoutY="68.0" prefHeight="42.0" prefWidth="820.0">
+      <HBox layoutX="30.0" layoutY="68.0" prefHeight="42.0" prefWidth="693.0" spacing="10.0">
          <children>
-            <TextField fx:id="busquedaProfesor" prefHeight="29.0" prefWidth="173.0" promptText="Búsqueda por profesor" />
-            <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../recursos/iconos/search.png" />
-               </image>
-            </ImageView>
+            <TextField fx:id="busquedaProfesor" prefHeight="29.0" prefWidth="173.0" promptText="Búsqueda por profesor">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
+            <ComboBox fx:id="filtroTipo" prefWidth="150.0" promptText="Filtrar por tipo" />
+            <ComboBox fx:id="filtroEstado" prefWidth="150.0" promptText="Filtrar por estado" />
+            <ComboBox fx:id="filtroDepartamento" prefHeight="25.0" prefWidth="197.0" promptText="Filtrar por departamento" />
          </children>
       </HBox>
+      <ImageView fitHeight="29.0" fitWidth="33.0" layoutX="821.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../recursos/iconos/search.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnLimpiarFiltro" layoutX="722.0" layoutY="68.0" onAction="#btnLimpiarFiltros" prefHeight="25.0" prefWidth="99.0" ripplerFill="#0a5479" text="Limpiar filtros" textFill="#2e89b8">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <padding>
+            <Insets right="8.0" />
+         </padding>
+      </JFXButton>
    </children>
 </AnchorPane>

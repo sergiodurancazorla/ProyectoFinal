@@ -18,10 +18,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -30,8 +32,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
+import orm.dao.DaoDepartamento;
+import orm.dao.DaoEstado;
 import orm.dao.DaoIncidencia;
+import orm.dao.DaoTipo;
+import orm.pojos.Departamento;
+import orm.pojos.Estado;
 import orm.pojos.Incidencia;
+import orm.pojos.Tipo;
 import utiles.excepciones.BusinessException;
 
 public class TablaController implements Initializable {
@@ -54,8 +62,34 @@ public class TablaController implements Initializable {
 	private TextField busquedaProfesor;
 
 	@FXML
+	private ComboBox<Estado> filtroEstado;
+
+	@FXML
+	private ComboBox<Departamento> filtroDepartamento;
+
+	@FXML
+	private ComboBox<Tipo> filtroTipo;
+
+	@FXML
+	private JFXButton btnLimpiarFiltro;
+
+	private FilteredList<Incidencia> listaFiltros;
+
+	@FXML
+	void btnLimpiarFiltros(ActionEvent event) {
+
+		filtroDepartamento.getSelectionModel().clearSelection();
+		filtroEstado.getSelectionModel().clearSelection();
+		filtroTipo.getSelectionModel().clearSelection();
+		tablaIncidencias.refresh();
+	}
+
+	@FXML
 	void btnEditar(ActionEvent event) {
 
+		TreeItem item = tablaIncidencias.getSelectionModel().getSelectedItem();
+
+		System.out.println(((Incidencia) item.getValue()).getIdincidencia());
 	}
 
 	@FXML
@@ -75,12 +109,12 @@ public class TablaController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		// MOSTRAR INFORMACION EN LAS TABLAS
-
-		// DAOS
-		orm.dao.DaoIncidencia daoIncidencia = new DaoIncidencia();
-
 		try {
+
+			// MOSTRAR INFORMACION EN LAS TABLAS
+
+			// DAOS
+			orm.dao.DaoIncidencia daoIncidencia = new DaoIncidencia();
 
 			data = FXCollections.observableArrayList(daoIncidencia.buscarTodos());
 
@@ -217,10 +251,29 @@ public class TablaController implements Initializable {
 
 			tablaIncidencias.getColumns().setAll(columnaId, columnaTipo, columnaFecha, columnaProfesor,
 					columnaDepartamento, columnaAula, columnaResolucionProfesor, columnaResolucionFecha);
+
+			// Caracteristicas de las tablas
 			tablaIncidencias.setRoot(root);
 			tablaIncidencias.setShowRoot(false);
 
-			// Filtro busqueda
+			// Listener de seleccion
+			tablaIncidencias.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+
+				@Override
+				public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+					btnEditar.setDisable(false);
+
+				}
+
+			});
+
+			inciarCombosFiltros();
+
+			// Listener de Filtros busqueda
+
+			listaFiltros = new FilteredList<>(data, e -> true);
+
 			busquedaProfesor.textProperty().addListener(new ChangeListener<String>() {
 
 				@Override
@@ -239,10 +292,97 @@ public class TablaController implements Initializable {
 
 				}
 			});
+			filtroEstado.valueProperty().addListener(new ChangeListener<Estado>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Estado> observable, Estado oldValue, Estado newValue) {
+					tablaIncidencias.setPredicate(new Predicate<TreeItem<Incidencia>>() {
+
+						@Override
+						public boolean test(TreeItem<Incidencia> incidencia) {
+
+							Boolean resultado;
+
+							if (newValue == null) {
+								resultado = true;
+							} else {
+								resultado = incidencia.getValue().getEstado().equals(newValue);
+							}
+
+							return resultado;
+						}
+					});
+				}
+
+			});
+			filtroDepartamento.valueProperty().addListener(new ChangeListener<Departamento>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Departamento> observable, Departamento oldValue,
+						Departamento newValue) {
+					tablaIncidencias.setPredicate(new Predicate<TreeItem<Incidencia>>() {
+
+						@Override
+						public boolean test(TreeItem<Incidencia> incidencia) {
+
+							Boolean resultado;
+
+							if (newValue == null) {
+								resultado = true;
+							} else {
+								resultado = incidencia.getValue().getDepartamento().equals(newValue);
+							}
+
+							return resultado;
+						}
+					});
+				}
+			});
+
+			filtroTipo.valueProperty().addListener(new ChangeListener<Tipo>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Tipo> observable, Tipo oldValue, Tipo newValue) {
+
+					tablaIncidencias.setPredicate(new Predicate<TreeItem<Incidencia>>() {
+
+						@Override
+						public boolean test(TreeItem<Incidencia> incidencia) {
+
+							Boolean resultado;
+
+							if (newValue == null) {
+								resultado = true;
+							} else {
+								resultado = incidencia.getValue().getTipo().equals(newValue);
+							}
+
+							return resultado;
+						}
+					});
+
+				}
+			});
 
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	private void inciarCombosFiltros() {
+		orm.dao.DaoEstado daoEstado = new DaoEstado();
+		orm.dao.DaoTipo daoTipo = new DaoTipo();
+		orm.dao.DaoDepartamento daoDepartamento = new DaoDepartamento();
+
+		ObservableList<Tipo> listaTipos = FXCollections.observableArrayList(daoTipo.tiposIncidencias());
+		ObservableList<Departamento> listaDepartamento = FXCollections
+				.observableArrayList(daoDepartamento.listadoDepartamentos());
+		ObservableList<Estado> listaEstados = FXCollections.observableArrayList(daoEstado.listadoEstados());
+
+		filtroTipo.setItems(listaTipos);
+		filtroEstado.setItems(listaEstados);
+		filtroDepartamento.setItems(listaDepartamento);
 
 	}
 

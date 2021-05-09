@@ -211,14 +211,6 @@ public class AddController implements Initializable {
 				contenido.setActions(boton);
 				dialogo.show();
 
-//				System.out.println("HA GUARDADO LA INCIDENCIA, ID: " + incidencia.getIdincidencia());
-//				Alert alerta = new Alert(AlertType.INFORMATION);
-//				alerta.setHeaderText("Incidencia creada");
-//				alerta.setTitle("TITULO");
-//				alerta.setContentText("La incidencia se ha creado con éxito");
-//
-//				alerta.showAndWait();
-
 			} catch (BusinessException e) {
 				// Mostrar error al guardar incidencia
 				e.printStackTrace();
