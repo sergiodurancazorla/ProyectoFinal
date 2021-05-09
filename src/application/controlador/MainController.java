@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import utiles.hibernate.UtilesHibernate;
@@ -44,7 +45,7 @@ public class MainController {
 	void clickAdd(MouseEvent event) throws Exception {
 		limpiarEfectos();
 
-		AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Add.fxml"));
+		StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Add.fxml"));
 
 		btnAdd.setEffect(new DropShadow(30, Color.BLACK));
 		borderPane.setCenter(pane);

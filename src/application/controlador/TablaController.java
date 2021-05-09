@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -13,6 +14,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,11 +22,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import orm.dao.DaoIncidencia;
 import orm.pojos.Incidencia;
@@ -47,6 +51,9 @@ public class TablaController implements Initializable {
 	private ObservableList<Incidencia> data;
 
 	@FXML
+	private TextField busquedaProfesor;
+
+	@FXML
 	void btnEditar(ActionEvent event) {
 
 	}
@@ -56,7 +63,7 @@ public class TablaController implements Initializable {
 
 		// Abrir Add incidencia
 
-		AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Add.fxml"));
+		StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Add.fxml"));
 
 		((BorderPane) idAnchorPane.getParent()).setCenter(pane);
 
@@ -89,6 +96,8 @@ public class TablaController implements Initializable {
 							return new SimpleStringProperty(param.getValue().getValue().getEstado().getNombre());
 						}
 					});
+			columnaId.setContextMenu(null);
+
 			// TIPO
 			JFXTreeTableColumn<Incidencia, String> columnaTipo = new JFXTreeTableColumn<>("Tipo");
 			columnaTipo.setCellValueFactory(
@@ -99,6 +108,7 @@ public class TablaController implements Initializable {
 							return new SimpleStringProperty(param.getValue().getValue().getTipo().getTipo());
 						}
 					});
+			columnaTipo.setContextMenu(null);
 
 			// FECHA
 
@@ -115,6 +125,7 @@ public class TablaController implements Initializable {
 									format.format(param.getValue().getValue().getFechaIncidencia()).toString());
 						}
 					});
+			columnaFecha.setContextMenu(null);
 
 			// PROFESOR
 			JFXTreeTableColumn<Incidencia, String> columnaProfesor = new JFXTreeTableColumn<>("Informador");
@@ -128,6 +139,7 @@ public class TablaController implements Initializable {
 									param.getValue().getValue().getProfesorByProfesorIdprofesor().toString());
 						}
 					});
+			columnaProfesor.setContextMenu(null);
 
 			// DEPARTAMENTO
 
@@ -141,6 +153,7 @@ public class TablaController implements Initializable {
 							return new SimpleStringProperty(param.getValue().getValue().getDepartamento().getNombre());
 						}
 					});
+			columnaDepartamento.setContextMenu(null);
 
 			// AULA
 
@@ -154,6 +167,7 @@ public class TablaController implements Initializable {
 							return new SimpleStringProperty(param.getValue().getValue().getAula().getDescripcion());
 						}
 					});
+			columnaAula.setContextMenu(null);
 
 			// PROFESOR RESOLUCION
 
@@ -173,6 +187,7 @@ public class TablaController implements Initializable {
 							return valor;
 						}
 					});
+			columnaResolucionProfesor.setContextMenu(null);
 
 			// FECHA RESOLUCION
 
@@ -194,6 +209,7 @@ public class TablaController implements Initializable {
 							return valor;
 						}
 					});
+			columnaResolucionFecha.setContextMenu(null);
 
 			final TreeItem<Incidencia> root = new RecursiveTreeItem<Incidencia>(data, RecursiveTreeObject::getChildren);
 
@@ -202,7 +218,27 @@ public class TablaController implements Initializable {
 			tablaIncidencias.getColumns().setAll(columnaId, columnaTipo, columnaFecha, columnaProfesor,
 					columnaDepartamento, columnaAula, columnaResolucionProfesor, columnaResolucionFecha);
 			tablaIncidencias.setRoot(root);
-			// tablaIncidencias.setShowRoot(false);
+			tablaIncidencias.setShowRoot(false);
+
+			// Filtro busqueda
+			busquedaProfesor.textProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+					tablaIncidencias.setPredicate(new Predicate<TreeItem<Incidencia>>() {
+
+						@Override
+						public boolean test(TreeItem<Incidencia> incidencia) {
+
+							Boolean resultado = incidencia.getValue().getProfesorByProfesorIdprofesor().toString()
+									.contains(newValue);
+
+							return resultado;
+						}
+					});
+
+				}
+			});
 
 		} catch (BusinessException e) {
 			e.printStackTrace();

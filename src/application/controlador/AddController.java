@@ -10,19 +10,22 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import orm.dao.DaoAula;
 import orm.dao.DaoDepartamento;
@@ -42,6 +45,9 @@ import orm.pojos.TipoHarware;
 import utiles.excepciones.BusinessException;
 
 public class AddController implements Initializable {
+
+	@FXML
+	private StackPane stackPane;
 
 	@FXML
 	private AnchorPane idAnchorPane;
@@ -185,13 +191,33 @@ public class AddController implements Initializable {
 				}
 
 				// PRUEBA DE ALERTA
-				System.out.println("HA GUARDADO LA INCIDENCIA, ID: " + incidencia.getIdincidencia());
-				Alert alerta = new Alert(AlertType.INFORMATION);
-				alerta.setHeaderText("Incidencia creada");
-				alerta.setTitle("TITULO");
-				alerta.setContentText("La incidencia se ha creado con éxito");
 
-				alerta.showAndWait();
+				JFXDialogLayout contenido = new JFXDialogLayout();
+				contenido.setHeading(new Text("Incidencia creada"));
+				contenido.setBody(new Text("La incidencia se ha creado con éxito"));
+
+				JFXDialog dialogo = new JFXDialog();
+				dialogo.setContent(contenido);
+				dialogo.setTransitionType(JFXDialog.DialogTransition.CENTER);
+				dialogo.setDialogContainer(stackPane);
+
+				JFXButton boton = new JFXButton("Aceptar");
+				boton.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						dialogo.close();
+					}
+				});
+				contenido.setActions(boton);
+				dialogo.show();
+
+//				System.out.println("HA GUARDADO LA INCIDENCIA, ID: " + incidencia.getIdincidencia());
+//				Alert alerta = new Alert(AlertType.INFORMATION);
+//				alerta.setHeaderText("Incidencia creada");
+//				alerta.setTitle("TITULO");
+//				alerta.setContentText("La incidencia se ha creado con éxito");
+//
+//				alerta.showAndWait();
 
 			} catch (BusinessException e) {
 				// Mostrar error al guardar incidencia
