@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import utiles.hibernate.UtilesHibernate;
 
 public class MainController {
+
 	@FXML
 	private BorderPane borderPane;
 
@@ -74,9 +75,11 @@ public class MainController {
 	}
 
 	@FXML
-	void clickDocumentos(MouseEvent event) {
+	void clickDocumentos(MouseEvent event) throws IOException {
 		limpiarEfectos();
 		btnDocumentos.setEffect(new DropShadow(30, Color.BLACK));
+		AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Tabla.fxml"));
+		borderPane.setCenter(pane);
 
 	}
 
@@ -99,8 +102,6 @@ public class MainController {
 		limpiarEfectos();
 		btnHome.setEffect(new DropShadow(30, Color.BLACK));
 
-//		AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/PRUEBA.fxml"));
-//		borderPane.setCenter(pane);
 	}
 
 	/**

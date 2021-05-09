@@ -153,6 +153,9 @@ public class AddController implements Initializable {
 			// ELEMENTOS EXTRA, fecha - descripcion - file
 			if (fechaIncidencia.getValue() != null) {
 				incidencia.setFechaIncidencia(Date.valueOf(fechaIncidencia.getValue()));
+			} else {
+				incidencia.setFechaIncidencia(Date.valueOf(LocalDate.now()));
+
 			}
 
 			if (txtDescripcion.getText() != null) {

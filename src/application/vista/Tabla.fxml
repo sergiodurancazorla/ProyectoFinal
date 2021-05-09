@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="idAnchorPane" prefHeight="635.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlador.TablaController">
+   <children>
+      <JFXButton fx:id="btnAnyadirIncidencia" buttonType="RAISED" layoutX="361.0" layoutY="572.0" onAction="#clickAnyadirIncidencia" prefHeight="28.0" prefWidth="107.0" style="-fx-background-color: #2D5FB8;" text="Añadir incidencia" textFill="WHITE" />
+      <JFXButton fx:id="btnEditar" layoutX="287.0" layoutY="574.0" onAction="#btnEditar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Editar" textFill="#2e89b8" />
+      <Line endX="719.0" endY="-8.0" layoutX="131.0" layoutY="61.0" startX="-100.5" startY="-8.0" />
+      <Text layoutX="30.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTADOS " wrappingWidth="257.146484375">
+         <font>
+            <Font name="Calibri" size="28.0" />
+         </font>
+      </Text>
+      <JFXTreeTableView fx:id="tablaIncidencias" layoutX="30.0" layoutY="67.0" prefHeight="494.0" prefWidth="438.0" />
+   </children>
+</AnchorPane>
