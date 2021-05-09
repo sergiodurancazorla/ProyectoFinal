@@ -1,6 +1,9 @@
 package application.controlador;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -20,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import orm.dao.DaoAula;
 import orm.dao.DaoDepartamento;
 import orm.dao.DaoEstado;
@@ -84,8 +88,10 @@ public class AddController implements Initializable {
 	@FXML
 	private JFXButton btnLimpiar;
 
+	private File archivo;
+
 	/***
-	 * Metodo que hace visible/oculta el grid de harware
+	 * Metodo que hace visible/oculta el grid de hardware
 	 * 
 	 * @param event
 	 */
@@ -144,13 +150,21 @@ public class AddController implements Initializable {
 			// Crear incidencia
 			Incidencia incidencia = new Incidencia(aula, departamento, estado, profesor, tipo);
 
-			// ELEMENTOS EXTRA
+			// ELEMENTOS EXTRA, fecha - descripcion - file
 			if (fechaIncidencia.getValue() != null) {
 				incidencia.setFechaIncidencia(Date.valueOf(fechaIncidencia.getValue()));
 			}
 
 			if (txtDescripcion.getText() != null) {
 				incidencia.setDescripcion(txtDescripcion.getText());
+			}
+
+			if (archivo != null) {
+				try {
+					incidencia.setInformacion(Files.readAllBytes(archivo.toPath()));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 
 			// DAO y guardar incidencia
@@ -186,6 +200,18 @@ public class AddController implements Initializable {
 
 			// MOSTRAR SI SE HA GUARDADO ALGO
 		}
+	}
+
+	@FXML
+	void clickSubirArchivo(ActionEvent event) {
+
+		FileChooser fileChooser = new FileChooser();
+
+		fileChooser.setTitle("Selecciona un archivo para añadir a la incidencia");
+
+		// Seleccionar y guardar archivo
+		archivo = fileChooser.showOpenDialog(idAnchorPane.getScene().getWindow());
+
 	}
 
 	@Override
