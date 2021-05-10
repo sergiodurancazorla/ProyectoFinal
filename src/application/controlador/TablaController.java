@@ -13,6 +13,9 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -61,6 +64,8 @@ public class TablaController implements Initializable {
 	 */
 	private ObservableList<Incidencia> data;
 
+	private FilteredList<Incidencia> listaPrueba;
+
 	@FXML
 	private TextField busquedaProfesor;
 
@@ -84,6 +89,7 @@ public class TablaController implements Initializable {
 		filtroDepartamento.getSelectionModel().clearSelection();
 		filtroEstado.getSelectionModel().clearSelection();
 		filtroTipo.getSelectionModel().clearSelection();
+		busquedaProfesor.setText("");
 		tablaIncidencias.refresh();
 	}
 
@@ -108,7 +114,6 @@ public class TablaController implements Initializable {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -118,101 +123,7 @@ public class TablaController implements Initializable {
 
 			inciarCombosFiltros();
 
-			// Listener de Filtros busqueda
-
-			listaFiltros = new FilteredList<Incidencia>(data);
-
-			busquedaProfesor.textProperty().addListener(new ChangeListener<String>() {
-
-				@Override
-				public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
-					tablaIncidencias.setPredicate(new Predicate<TreeItem<Incidencia>>() {
-
-						@Override
-						public boolean test(TreeItem<Incidencia> incidencia) {
-
-							Boolean resultado = incidencia.getValue().getProfesorByProfesorIdprofesor().toString()
-									.contains(newValue);
-
-							return resultado;
-						}
-					});
-
-				}
-			});
-
-			filtroEstado.valueProperty().addListener(new ChangeListener<Estado>() {
-
-				@Override
-				public void changed(ObservableValue<? extends Estado> observable, Estado oldValue, Estado newValue) {
-					tablaIncidencias.setPredicate(new Predicate<TreeItem<Incidencia>>() {
-
-						@Override
-						public boolean test(TreeItem<Incidencia> incidencia) {
-
-							Boolean resultado;
-
-							if (newValue == null) {
-								resultado = true;
-							} else {
-								resultado = incidencia.getValue().getEstado().equals(newValue);
-							}
-
-							return resultado;
-						}
-					});
-				}
-
-			});
-			filtroDepartamento.valueProperty().addListener(new ChangeListener<Departamento>() {
-
-				@Override
-				public void changed(ObservableValue<? extends Departamento> observable, Departamento oldValue,
-						Departamento newValue) {
-					tablaIncidencias.setPredicate(new Predicate<TreeItem<Incidencia>>() {
-
-						@Override
-						public boolean test(TreeItem<Incidencia> incidencia) {
-
-							Boolean resultado;
-
-							if (newValue == null) {
-								resultado = true;
-							} else {
-								resultado = incidencia.getValue().getDepartamento().equals(newValue);
-							}
-
-							return resultado;
-						}
-					});
-				}
-			});
-
-			filtroTipo.valueProperty().addListener(new ChangeListener<Tipo>() {
-
-				@Override
-				public void changed(ObservableValue<? extends Tipo> observable, Tipo oldValue, Tipo newValue) {
-
-					tablaIncidencias.setPredicate(new Predicate<TreeItem<Incidencia>>() {
-
-						@Override
-						public boolean test(TreeItem<Incidencia> incidencia) {
-
-							Boolean resultado;
-
-							if (newValue == null) {
-								resultado = true;
-							} else {
-								resultado = incidencia.getValue().getTipo().equals(newValue);
-							}
-
-							return resultado;
-						}
-					});
-
-				}
-			});
+			filtros();
 
 		} catch (BusinessException e) {
 			e.printStackTrace();
@@ -221,10 +132,63 @@ public class TablaController implements Initializable {
 	}
 
 	/**
+	 * Método que crea los filtros de la tabla
+	 */
+
+	private void filtros() {
+		ObjectProperty<Predicate<Incidencia>> nombreFiltro = new SimpleObjectProperty<>();
+		ObjectProperty<Predicate<Incidencia>> estadoFiltro = new SimpleObjectProperty<>();
+		ObjectProperty<Predicate<Incidencia>> departamentoFiltro = new SimpleObjectProperty<>();
+		ObjectProperty<Predicate<Incidencia>> tipoFiltro = new SimpleObjectProperty<>();
+
+		nombreFiltro
+				.bind(Bindings
+						.createObjectBinding(
+								() -> incidencia -> incidencia.getProfesorByProfesorIdprofesor().toString()
+										.toLowerCase().contains(busquedaProfesor.getText().toLowerCase()),
+								busquedaProfesor.textProperty()
+
+						));
+
+		estadoFiltro
+				.bind(Bindings
+						.createObjectBinding(
+								() -> incidencia -> filtroEstado.getValue() == null
+										|| incidencia.getEstado().equals(filtroEstado.getValue()),
+								filtroEstado.valueProperty()
+
+						));
+
+		departamentoFiltro.bind(Bindings.createObjectBinding(
+				() -> incidencia -> filtroDepartamento.getValue() == null
+						|| incidencia.getDepartamento().equals(filtroDepartamento.getValue()),
+				filtroDepartamento.valueProperty()
+
+		));
+
+		tipoFiltro.bind(Bindings.createObjectBinding(
+				() -> incidencia -> filtroTipo.getValue() == null || incidencia.getTipo().equals(filtroTipo.getValue()),
+				filtroTipo.valueProperty()
+
+		));
+
+		listaFiltros = new FilteredList<Incidencia>(data);
+
+		final TreeItem<Incidencia> root = new RecursiveTreeItem<Incidencia>(listaFiltros,
+				RecursiveTreeObject::getChildren);
+
+		tablaIncidencias.setRoot(root);
+		listaFiltros.predicateProperty().bind(Bindings.createObjectBinding(
+				() -> nombreFiltro.get().and(estadoFiltro.get()).and(departamentoFiltro.get()).and(tipoFiltro.get()),
+				nombreFiltro, estadoFiltro, departamentoFiltro, tipoFiltro));
+	}
+
+	/**
 	 * Metodo que genera la tabla y añade las columnas
 	 * 
 	 * @throws BusinessException
 	 */
+
 	@SuppressWarnings("unchecked")
 	private void iniciarTabla() throws BusinessException {
 		// DAO NECESARIO
@@ -232,6 +196,7 @@ public class TablaController implements Initializable {
 
 		// Lista incidencias
 		data = FXCollections.observableArrayList(daoIncidencia.buscarTodos());
+		listaPrueba = new FilteredList<Incidencia>(data);
 
 		// -------COLUMNAS-----------
 
@@ -360,7 +325,8 @@ public class TablaController implements Initializable {
 				});
 		columnaResolucionFecha.setContextMenu(null);
 
-		final TreeItem<Incidencia> root = new RecursiveTreeItem<Incidencia>(data, RecursiveTreeObject::getChildren);
+		final TreeItem<Incidencia> root = new RecursiveTreeItem<Incidencia>(listaPrueba,
+				RecursiveTreeObject::getChildren);
 
 		// Add a la tabla las columnas
 
@@ -388,6 +354,7 @@ public class TablaController implements Initializable {
 	/**
 	 * Metodo que inicia los comboboxes de los filtros.
 	 */
+
 	private void inciarCombosFiltros() {
 		orm.dao.DaoEstado daoEstado = new DaoEstado();
 		orm.dao.DaoTipo daoTipo = new DaoTipo();
