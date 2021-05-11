@@ -190,7 +190,7 @@ public class AddController implements Initializable {
 				// PRUEBA DE ALERTA
 
 				Alerta alerta = new Alerta(stackPane, "Incidencia creada", "La incidencia se ha creado con éxito");
-				alerta.mostrar();
+				alerta.mostrarAlerta();
 
 			} catch (BusinessException e) {
 				// Mostrar error al guardar incidencia

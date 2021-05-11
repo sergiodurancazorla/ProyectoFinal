@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import application.modelo.Alerta;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,6 +33,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -63,8 +66,6 @@ public class TablaController implements Initializable {
 	 * Variable que guarda la lista de incidencias que se va a mostrar en la tabla
 	 */
 	private ObservableList<Incidencia> data;
-
-	private FilteredList<Incidencia> listaPrueba;
 
 	@FXML
 	private TextField busquedaProfesor;
@@ -124,6 +125,20 @@ public class TablaController implements Initializable {
 			inciarCombosFiltros();
 
 			filtros();
+
+			// controlador doble click
+			tablaIncidencias.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent mouseEvent) {
+					if (mouseEvent.getClickCount() == 2) {
+
+						TreeItem<Incidencia> item = tablaIncidencias.getSelectionModel().getSelectedItem();
+						Alerta alerta = new Alerta((StackPane) (idAnchorPane.getParent().getParent()),
+								"Información detallada de la incidencia", item.getValue());
+						alerta.mostrarAlerta();
+					}
+				}
+			});
 
 		} catch (BusinessException e) {
 			e.printStackTrace();
@@ -196,7 +211,6 @@ public class TablaController implements Initializable {
 
 		// Lista incidencias
 		data = FXCollections.observableArrayList(daoIncidencia.buscarTodos());
-		listaPrueba = new FilteredList<Incidencia>(data);
 
 		// -------COLUMNAS-----------
 
@@ -325,8 +339,7 @@ public class TablaController implements Initializable {
 				});
 		columnaResolucionFecha.setContextMenu(null);
 
-		final TreeItem<Incidencia> root = new RecursiveTreeItem<Incidencia>(listaPrueba,
-				RecursiveTreeObject::getChildren);
+		final TreeItem<Incidencia> root = new RecursiveTreeItem<Incidencia>(data, RecursiveTreeObject::getChildren);
 
 		// Add a la tabla las columnas
 

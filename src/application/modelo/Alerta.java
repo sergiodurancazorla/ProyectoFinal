@@ -8,11 +8,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import orm.pojos.Incidencia;
 
 public class Alerta {
 	private StackPane stackPane;
 	private String titulo;
 	private String cuerpo;
+	private Incidencia incidencia;
 
 	public Alerta(StackPane stackPane, String titulo, String cuerpo) {
 		super();
@@ -21,12 +23,24 @@ public class Alerta {
 		this.cuerpo = cuerpo;
 	}
 
-	public void mostrar() {
+	public Alerta(StackPane stackPane, String titulo, Incidencia incidencia) {
+		super();
+		this.stackPane = stackPane;
+		this.titulo = titulo;
+		this.incidencia = incidencia;
+	}
+
+	public void mostrarAlerta() {
 
 		JFXDialogLayout contenido = new JFXDialogLayout();
 		contenido.setHeading(new Text(titulo));
-		contenido.setBody(new Text(cuerpo));
 
+		if (incidencia == null) {
+			contenido.setBody(new Text(cuerpo));
+		} else {
+
+			contenido.setBody(new Text(incidencia.toString()));
+		}
 		JFXDialog dialogo = new JFXDialog();
 		dialogo.setContent(contenido);
 		dialogo.setTransitionType(JFXDialog.DialogTransition.CENTER);

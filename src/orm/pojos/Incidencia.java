@@ -34,7 +34,7 @@ public class Incidencia extends RecursiveTreeObject<Incidencia> implements java.
 	private Estado estado;
 	private Profesor profesorByResponsableSolucion;
 	private Profesor profesorByProfesorIdprofesor;
-	private Tipo tipo;
+	private Tipo tipo; //
 	private Date fechaIncidencia;
 	private Date fechaIntroduccion;
 	private String descripcion;
@@ -222,6 +222,18 @@ public class Incidencia extends RecursiveTreeObject<Incidencia> implements java.
 
 	public void setInfoHardwares(Set<InfoHardware> infoHardwares) {
 		this.infoHardwares = infoHardwares;
+	}
+
+	@Override
+	public String toString() {
+
+		return "\tTipo de incidencia: " + this.tipo.getTipo() + "\n\tProfesor que la creó: "
+				+ this.profesorByProfesorIdprofesor.toString() + "\n\tFecha de creación:  " + this.fechaIncidencia
+				+ "\n\tProfesor encargado de resolverla: " + this.profesorByResponsableSolucion + "\n\tEstado: "
+				+ this.estado.getNombre() + "\n\tDepartamento: " + this.estado.getNombre() + "\n\tAula: "
+				+ this.aula.getDescripcion() + "\n\tDescripción: " + this.descripcion + "\n\tTiempo de resolución: "
+				+ this.tiempoResolucion + "\n\tDescripcion: " + this.descripcion + "\n\t informacion extra: "
+				+ this.informacion;
 	}
 
 }

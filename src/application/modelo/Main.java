@@ -5,7 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,7 +14,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		BorderPane root = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Main.fxml"));
+		StackPane root = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Main.fxml"));
 
 		Scene scene = new Scene(root);
 

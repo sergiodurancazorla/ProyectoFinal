@@ -1,8 +1,5 @@
 package application.controlador;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -10,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 import application.modelo.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -19,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import orm.dao.DaoProfesor;
 
-public class LoginController implements Initializable {
+public class LoginController {
 
 	@FXML
 	private JFXTextField inpName;
@@ -32,11 +28,6 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private JFXButton btnSignIn;
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-	}
 
 	@FXML
 	public void handleSignIn(ActionEvent actionEvent) throws Exception {

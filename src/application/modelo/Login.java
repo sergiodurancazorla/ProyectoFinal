@@ -21,6 +21,7 @@ public class Login extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			// Abrir sesion
+
 			// FALTA AÑADIR QUE PASA SI FALLA LA CONEXION, MOSTRAR MENSAJE
 			UtilesHibernate.openSession();
 			// comenzamos sesion ;
