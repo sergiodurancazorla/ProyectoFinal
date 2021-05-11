@@ -7,9 +7,18 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import orm.pojos.Profesor;
 
 public class Main extends Application {
 	private double xOffset, yOffset;
+	/**
+	 * Variable que guarda el profesor que ha inciado sesión
+	 */
+	static Profesor profesor;
+
+	public Main(Profesor profesor) {
+		Main.profesor = profesor;
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -37,6 +46,14 @@ public class Main extends Application {
 			}
 		});
 
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
 	}
 
 }

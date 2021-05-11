@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import orm.dao.DaoProfesor;
+import orm.pojos.Profesor;
 
 public class LoginController {
 
@@ -38,7 +39,12 @@ public class LoginController {
 
 		if (daoProfesor.login(inpName.getText(), inpPassword.getText())) {
 			System.out.println("Te has conectado");
-			Main principal = new Main();
+
+			Profesor profesor = daoProfesor.obtenerProfesor(inpName.getText());
+			System.out.println("HAS CONSEGUIDO ACCEDER, EL USUARIO ES : " + profesor.toString() + "\n tiene rol de: "
+					+ profesor.getRol().getDescripcion());
+
+			Main principal = new Main(profesor);
 			Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 			principal.start(stage);
 

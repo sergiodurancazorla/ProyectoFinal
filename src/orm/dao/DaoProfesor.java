@@ -14,6 +14,7 @@ import utiles.hibernate.UtilesHibernate;
 public class DaoProfesor extends DaoGenericoHibernate<Profesor, Integer> {
 	private final static Logger LOGGER = Logger.getLogger(Profesor.class.getName());
 
+	@SuppressWarnings("unchecked")
 	public Boolean login(String usuario, String password) {
 
 		Boolean correcto = false;
@@ -37,6 +38,29 @@ public class DaoProfesor extends DaoGenericoHibernate<Profesor, Integer> {
 		}
 
 		return correcto;
+
+	}
+
+	public Profesor obtenerProfesor(String dni) {
+		Profesor resultado = new Profesor();
+
+		// comenzamos sesion
+		Session s = UtilesHibernate.getSessionFactory().getCurrentSession();
+
+		// Obtener usuarios
+		String hql = "SELECT p FROM Profesor p where dni=:dni";
+		Query query = s.createQuery(hql);
+		query.setParameter("dni", dni);
+		List<Profesor> lista;
+
+		lista = query.list();
+		resultado = lista.get(0);
+
+//		for (Profesor profesor : lista) {
+//			System.out.println(profesor);
+//		}
+
+		return resultado;
 
 	}
 
