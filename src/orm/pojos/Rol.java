@@ -74,4 +74,10 @@ public class Rol implements java.io.Serializable {
 		this.rolPermisos = rolPermisos;
 	}
 
+	@Override
+	public String toString() {
+
+		return descripcion;
+	}
+
 }

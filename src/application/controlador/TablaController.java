@@ -14,7 +14,6 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import application.modelo.Alerta;
-import application.modelo.Main;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -93,10 +92,6 @@ public class TablaController implements Initializable {
 		filtroTipo.getSelectionModel().clearSelection();
 		busquedaProfesor.setText("");
 		tablaIncidencias.refresh();
-
-		Alerta alerta = new Alerta((StackPane) idAnchorPane.getParent().getParent(),
-				"Vamos a probar a ver si funciona el usuario con que incias", Main.profesor.toString());
-		alerta.mostrarAlerta();
 
 	}
 

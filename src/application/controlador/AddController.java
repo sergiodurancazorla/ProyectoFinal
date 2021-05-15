@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 
 import application.modelo.Alerta;
+import application.modelo.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -91,6 +92,7 @@ public class AddController implements Initializable {
 	@FXML
 	private JFXButton btnLimpiar;
 
+	private Profesor profesor;
 	private File archivo;
 
 	/***
@@ -218,6 +220,7 @@ public class AddController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		this.profesor = Main.profesor;
 		iniciar();
 	}
 
@@ -246,11 +249,19 @@ public class AddController implements Initializable {
 		fechaIncidencia.setValue(LocalDate.now());
 
 		// RELLENAR
-		comboTipoIncidencia.setItems(listaTipos);
 		comboProfesor.setItems(listaProfesor);
+		comboTipoIncidencia.setItems(listaTipos);
 		comboDepartamento.setItems(listaDepartamento);
 		comboUbicacion.setItems(listaAulas);
 		comboEstado.setItems(listaEstados);
+
+		// si tiene rol diferente a admin no se permite modificar el profesor que la
+		// crea
+		if (profesor.getRol().getIdrol() != 1) {
+			comboProfesor.getSelectionModel().select(profesor);
+			comboProfesor.setDisable(true);
+			comboProfesor.setOpacity(1);
+		}
 
 	}
 

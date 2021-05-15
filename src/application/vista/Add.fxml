@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlador.AddController">
    <children>
       <AnchorPane fx:id="idAnchorPane" prefHeight="635.0" prefWidth="890.0">
@@ -59,16 +58,16 @@
                   <Label text="Tipo de incidencia *" />
                   <Label text="Fecha" GridPane.rowIndex="1" />
                   <JFXDatePicker fx:id="fechaIncidencia" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="comboTipoIncidencia" onAction="#seleccionarItem" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="comboTipoIncidencia" onAction="#seleccionarItem" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="1" />
                   <Label text="Profesor *" GridPane.rowIndex="2" />
                   <Label text="Departamento *" GridPane.rowIndex="3" />
                   <Label text="Ubicación *" GridPane.rowIndex="4" />
                   <Label text="Descripción" GridPane.rowIndex="5" />
                   <Label text="Estado *" GridPane.rowIndex="7" />
-                  <ComboBox fx:id="comboProfesor" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <ComboBox fx:id="comboDepartamento" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <ComboBox fx:id="comboUbicacion" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <ComboBox fx:id="comboEstado" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="comboProfesor" prefHeight="25.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="comboDepartamento" prefHeight="25.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="comboUbicacion" prefHeight="25.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="comboEstado" prefHeight="25.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <JFXButton fx:id="btnSubirArchivo" buttonType="RAISED" onAction="#clickSubirArchivo" ripplerFill="#3246d9" text="Subir archivo" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <Label text="Selecciona un archivo" GridPane.rowIndex="8" />
                </children>

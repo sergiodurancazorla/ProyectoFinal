@@ -2,6 +2,7 @@ package application.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -9,10 +10,14 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +28,9 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import orm.dao.DaoDepartamento;
 import orm.dao.DaoProfesor;
+import orm.dao.DaoRol;
 import orm.pojos.Departamento;
 import orm.pojos.Profesor;
 import orm.pojos.Rol;
@@ -56,6 +63,7 @@ public class UserController implements Initializable {
 	private JFXButton btnLimpiarFiltro;
 
 	private ObservableList<Profesor> data;
+	private FilteredList<Profesor> listaFiltros;
 
 	@FXML
 	void btnEditar(ActionEvent event) {
@@ -64,7 +72,10 @@ public class UserController implements Initializable {
 
 	@FXML
 	void btnLimpiarFiltros(ActionEvent event) {
-
+		filtroDepartamento.getSelectionModel().clearSelection();
+		filtroRol.getSelectionModel().clearSelection();
+		busquedaProfesor.setText("");
+		tablaProfesores.refresh();
 	}
 
 	@FXML
@@ -189,13 +200,57 @@ public class UserController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que inicia los comboboxes de los filtros.
+	 */
+
 	private void inciarCombosFiltros() {
-		// TODO Auto-generated method stub
+		orm.dao.DaoRol daoRol = new DaoRol();
+		orm.dao.DaoDepartamento daoDepartamento = new DaoDepartamento();
+
+		ObservableList<Departamento> listaDepartamento = FXCollections
+				.observableArrayList(daoDepartamento.listadoDepartamentos());
+
+		ObservableList<Rol> listaRol = FXCollections.observableArrayList(daoRol.listadoRol());
+		filtroDepartamento.setItems(listaDepartamento);
+		filtroRol.setItems(listaRol);
 
 	}
 
+	/**
+	 * Método que crea los filtros de la tabla
+	 */
 	private void filtros() {
-		// TODO Auto-generated method stub
+		ObjectProperty<Predicate<Profesor>> nombreFiltro = new SimpleObjectProperty<>();
+		ObjectProperty<Predicate<Profesor>> rolFiltro = new SimpleObjectProperty<>();
+		ObjectProperty<Predicate<Profesor>> departamentoFiltro = new SimpleObjectProperty<>();
+
+		nombreFiltro.bind(Bindings.createObjectBinding(
+				() -> profesor -> profesor.toString().toLowerCase().contains(busquedaProfesor.getText().toLowerCase()),
+				busquedaProfesor.textProperty()
+
+		));
+
+		departamentoFiltro.bind(Bindings.createObjectBinding(
+				() -> profesor -> filtroDepartamento.getValue() == null
+						|| profesor.getDepartamento().equals(filtroDepartamento.getValue()),
+				filtroDepartamento.valueProperty()
+
+		));
+
+		rolFiltro.bind(Bindings.createObjectBinding(
+				() -> profesor -> filtroRol.getValue() == null || profesor.getRol().equals(filtroRol.getValue()),
+				filtroRol.valueProperty()
+
+		));
+
+		listaFiltros = new FilteredList<Profesor>(data);
+		final TreeItem<Profesor> root = new RecursiveTreeItem<Profesor>(listaFiltros, RecursiveTreeObject::getChildren);
+		tablaProfesores.setRoot(root);
+		listaFiltros.predicateProperty()
+				.bind(Bindings.createObjectBinding(
+						() -> nombreFiltro.get().and(departamentoFiltro.get()).and(rolFiltro.get()), nombreFiltro,
+						departamentoFiltro, rolFiltro));
 
 	}
 
