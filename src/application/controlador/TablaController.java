@@ -14,6 +14,7 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import application.modelo.Alerta;
+import application.modelo.Main;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -92,6 +93,11 @@ public class TablaController implements Initializable {
 		filtroTipo.getSelectionModel().clearSelection();
 		busquedaProfesor.setText("");
 		tablaIncidencias.refresh();
+
+		Alerta alerta = new Alerta((StackPane) idAnchorPane.getParent().getParent(),
+				"Vamos a probar a ver si funciona el usuario con que incias", Main.profesor.toString());
+		alerta.mostrarAlerta();
+
 	}
 
 	@FXML
@@ -307,7 +313,7 @@ public class TablaController implements Initializable {
 					public ObservableValue<String> call(CellDataFeatures<Incidencia, String> param) {
 						SimpleStringProperty valor = new SimpleStringProperty();
 						if (param.getValue().getValue().getProfesorByResponsableSolucion() == null) {
-							valor.set("Responsable sin asignar");
+							valor.set("Sin asignar");
 						} else {
 							valor.set(param.getValue().getValue().getProfesorByResponsableSolucion().toString());
 						}

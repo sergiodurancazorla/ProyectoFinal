@@ -1,10 +1,13 @@
 package application.controlador;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import application.modelo.Login;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -15,7 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import utiles.hibernate.UtilesHibernate;
 
-public class MainController {
+public class MainController implements Initializable {
 
 	@FXML
 	private BorderPane borderPane;
@@ -92,7 +95,7 @@ public class MainController {
 	}
 
 	@FXML
-	void clickUsuario(MouseEvent event) {
+	void clickUsuario(MouseEvent event) throws IOException {
 		limpiarEfectos();
 		btnUsuario.setEffect(new DropShadow(30, Color.BLACK));
 
@@ -102,6 +105,8 @@ public class MainController {
 	void clickHome(MouseEvent event) throws IOException {
 		limpiarEfectos();
 		btnHome.setEffect(new DropShadow(30, Color.BLACK));
+		StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Home.fxml"));
+		borderPane.setCenter(pane);
 
 	}
 
@@ -117,6 +122,19 @@ public class MainController {
 		btnAjustes.setEffect(null);
 		btnUsuario.setEffect(null);
 
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		btnHome.setEffect(new DropShadow(30, Color.BLACK));
+		StackPane pane;
+		try {
+			pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Home.fxml"));
+			borderPane.setCenter(pane);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

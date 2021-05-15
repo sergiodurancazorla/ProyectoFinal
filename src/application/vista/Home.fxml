@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlador.HomeController">
+   <children>
+      <AnchorPane fx:id="idAnchorPane" prefHeight="635.0" prefWidth="890.0">
+         <children>
+            <Line endX="719.0" endY="-8.0" layoutX="131.0" layoutY="61.0" startX="-100.5" startY="-8.0" />
+            <Text layoutX="30.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INICIO" wrappingWidth="446.146484375">
+               <font>
+                  <Font name="Calibri" size="28.0" />
+               </font>
+            </Text>
+            <JFXTreeTableView fx:id="tablaIncidencias" layoutX="496.0" layoutY="72.0" prefHeight="554.0" prefWidth="354.0" showRoot="false" tableMenuButtonVisible="true" />
+            <Label fx:id="txtNombreSuperior" alignment="CENTER_RIGHT" layoutX="496.0" layoutY="14.0" prefHeight="32.0" prefWidth="315.0" text="NOMBRE COMPLETO, NOMBRE" />
+            <ImageView fitHeight="32.0" fitWidth="30.0" layoutX="821.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../recursos/iconos/user.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" layoutX="30.0" layoutY="73.0" mouseTransparent="true" prefHeight="76.0" prefWidth="446.0" text="Gestión de incidencias, es un APP que facilita a los centros que la usen el &#10;control, definición y estado de las diferentes incidencias de tipo Hardware &#10;y Software.">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextArea>
+            <VBox layoutX="30.0" layoutY="164.0" prefHeight="179.0" prefWidth="446.0" spacing="10.0">
+               <children>
+                  <Label fx:id="txtNombre" text="Nombre" />
+                  <Label fx:id="txtEmail" text="email" />
+                  <Label fx:id="txtDepartamento" text="departamento" />
+                  <Label fx:id="txtTotalIncidencias" text="Total de incidencias creadas: " />
+               </children>
+            </VBox>
+            <VBox layoutX="30.0" layoutY="318.0" prefHeight="279.0" prefWidth="446.0" spacing="10.0" stylesheets="@../../recursos/css/checkbox.css">
+               <children>
+                  <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="447.0" text="Permisos dentro de la app">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <JFXCheckBox fx:id="checkAdd" disable="true" styleClass="checkbox" text="Añadir incidencias" />
+                  <JFXCheckBox fx:id="checkModificarIncidencia" disable="true" text="Modificar/Borrar incidencias" />
+                  <JFXCheckBox fx:id="checkModificarTipos" disable="true" text="Modificar tipos de hardware" />
+                  <JFXCheckBox fx:id="checkRoles" disable="true" text="Modificación de roles y permisos" />
+                  <JFXCheckBox fx:id="checkImportacion" disable="true" text="Importación/Exportación" />
+                  <JFXCheckBox fx:id="checkInformes" disable="true" text="Informes sobre las incidencias" />
+               </children>
+               <styleClass>
+                  <String fx:value="jfx-check-box" />
+                  <String fx:value="mark" />
+               </styleClass>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

@@ -56,10 +56,6 @@ public class DaoProfesor extends DaoGenericoHibernate<Profesor, Integer> {
 		lista = query.list();
 		resultado = lista.get(0);
 
-//		for (Profesor profesor : lista) {
-//			System.out.println(profesor);
-//		}
-
 		return resultado;
 
 	}

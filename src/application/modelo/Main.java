@@ -14,7 +14,7 @@ public class Main extends Application {
 	/**
 	 * Variable que guarda el profesor que ha inciado sesión
 	 */
-	static Profesor profesor;
+	public static Profesor profesor;
 
 	public Main(Profesor profesor) {
 		Main.profesor = profesor;
@@ -26,7 +26,6 @@ public class Main extends Application {
 		StackPane root = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Main.fxml"));
 
 		Scene scene = new Scene(root);
-
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
