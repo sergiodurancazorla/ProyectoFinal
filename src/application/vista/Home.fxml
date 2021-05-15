@@ -49,7 +49,7 @@
                   <Label fx:id="txtTotalIncidencias" text="Total de incidencias creadas: " />
                </children>
             </VBox>
-            <VBox layoutX="496.0" layoutY="64.0" prefHeight="279.0" prefWidth="354.0" spacing="10.0" stylesheets="@../../recursos/css/checkbox.css">
+            <VBox layoutX="506.0" layoutY="64.0" prefHeight="212.0" prefWidth="343.0" spacing="10.0" stylesheets="@../../recursos/css/checkbox.css">
                <children>
                   <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="447.0" text="Permisos dentro de la app">
                      <font>
