@@ -98,6 +98,8 @@ public class MainController implements Initializable {
 	void clickUsuario(MouseEvent event) throws IOException {
 		limpiarEfectos();
 		btnUsuario.setEffect(new DropShadow(30, Color.BLACK));
+		StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/User.fxml"));
+		borderPane.setCenter(pane);
 
 	}
 

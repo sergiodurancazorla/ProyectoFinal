@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlador.UserController">
+   <children>
+      <AnchorPane fx:id="idAnchorPane" prefHeight="635.0" prefWidth="890.0">
+         <children>
+            <JFXButton fx:id="btnAnyadirProfesor" buttonType="RAISED" layoutX="743.0" layoutY="593.0" onAction="#clickAnyadirIncidencia" prefHeight="28.0" prefWidth="107.0" style="-fx-background-color: #2D5FB8;" text="Añadir usuario" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnEditar" disable="true" layoutX="673.0" layoutY="595.0" onAction="#btnEditar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Editar" textFill="#2e89b8">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Line endX="719.0" endY="-8.0" layoutX="131.0" layoutY="61.0" startX="-100.5" startY="-8.0" />
+            <Text layoutX="30.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIOS" wrappingWidth="446.146484375">
+               <font>
+                  <Font name="Calibri" size="28.0" />
+               </font>
+            </Text>
+            <JFXTreeTableView fx:id="tablaProfesores" layoutX="30.0" layoutY="110.0" prefHeight="468.0" prefWidth="820.0" showRoot="false" tableMenuButtonVisible="true" />
+            <HBox layoutX="30.0" layoutY="68.0" prefHeight="42.0" prefWidth="693.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="busquedaProfesor" prefHeight="29.0" prefWidth="173.0" promptText="Búsqueda por profesor">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <ComboBox fx:id="filtroRol" prefWidth="150.0" promptText="Filtrar por rol" />
+                  <ComboBox fx:id="filtroDepartamento" prefHeight="25.0" prefWidth="197.0" promptText="Filtrar por departamento" />
+               </children>
+            </HBox>
+            <ImageView fitHeight="29.0" fitWidth="33.0" layoutX="821.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../recursos/iconos/search.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="btnLimpiarFiltro" layoutX="722.0" layoutY="68.0" onAction="#btnLimpiarFiltros" prefHeight="25.0" prefWidth="99.0" ripplerFill="#0a5479" text="Limpiar filtros" textFill="#2e89b8">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <padding>
+                  <Insets right="8.0" />
+               </padding>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
