@@ -1,0 +1,12 @@
+.jfx-check-box {
+     -jfx-checked-color:  #21427D;
+     -jfx-unchecked-color: black;
+     -fx-opacity: 1;
+}
+
+/* Styling checkmark */
+.jfx-check-box .mark {
+     -fx-border-color: white;
+}
+
+
