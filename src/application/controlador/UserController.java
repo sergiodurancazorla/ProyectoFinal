@@ -62,6 +62,9 @@ public class UserController implements Initializable {
 	@FXML
 	private JFXButton btnLimpiarFiltro;
 
+	@FXML
+	private JFXButton btnCrearRol;
+
 	private ObservableList<Profesor> data;
 	private FilteredList<Profesor> listaFiltros;
 
@@ -79,7 +82,12 @@ public class UserController implements Initializable {
 	}
 
 	@FXML
-	void clickAnyadirIncidencia(ActionEvent event) {
+	void clickAnyadirProfesor(ActionEvent event) {
+
+	}
+
+	@FXML
+	void clickCrearRol(ActionEvent event) {
 
 	}
 

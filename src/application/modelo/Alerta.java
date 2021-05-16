@@ -16,6 +16,13 @@ public class Alerta {
 	private String cuerpo;
 	private Incidencia incidencia;
 
+	/**
+	 * Crea una alerta simple con titulo y cuerpo
+	 * 
+	 * @param stackPane
+	 * @param titulo
+	 * @param cuerpo
+	 */
 	public Alerta(StackPane stackPane, String titulo, String cuerpo) {
 		super();
 		this.stackPane = stackPane;
@@ -23,6 +30,13 @@ public class Alerta {
 		this.cuerpo = cuerpo;
 	}
 
+	/**
+	 * Crea una alerta personalizada para editar incidencia.
+	 * 
+	 * @param stackPane
+	 * @param titulo
+	 * @param incidencia
+	 */
 	public Alerta(StackPane stackPane, String titulo, Incidencia incidencia) {
 		super();
 		this.stackPane = stackPane;
@@ -31,7 +45,6 @@ public class Alerta {
 	}
 
 	public void mostrarAlerta() {
-
 		JFXDialogLayout contenido = new JFXDialogLayout();
 		contenido.setHeading(new Text(titulo));
 

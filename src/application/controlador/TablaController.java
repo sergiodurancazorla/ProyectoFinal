@@ -14,6 +14,8 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import application.modelo.Alerta;
+import application.modelo.DialogoEditar;
+import application.modelo.Main;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -45,6 +47,7 @@ import orm.dao.DaoTipo;
 import orm.pojos.Departamento;
 import orm.pojos.Estado;
 import orm.pojos.Incidencia;
+import orm.pojos.Profesor;
 import orm.pojos.Tipo;
 import utiles.excepciones.BusinessException;
 
@@ -84,6 +87,8 @@ public class TablaController implements Initializable {
 
 	private FilteredList<Incidencia> listaFiltros;
 
+	private Profesor profesor;
+
 	@FXML
 	void btnLimpiarFiltros(ActionEvent event) {
 
@@ -96,11 +101,23 @@ public class TablaController implements Initializable {
 	}
 
 	@FXML
-	void btnEditar(ActionEvent event) {
+	void btnEditar(ActionEvent event) throws IOException {
+		TreeItem<Incidencia> item = tablaIncidencias.getSelectionModel().getSelectedItem();
 
-		TreeItem item = tablaIncidencias.getSelectionModel().getSelectedItem();
+		if (profesor.getRol().getIdrol() != 1
+				&& item.getValue().getProfesorByProfesorIdprofesor().getDni().equals(profesor.getDni())) {
 
-		System.out.println(((Incidencia) item.getValue()).getIdincidencia());
+			// || item.getValue().getProfesorByResponsableSolucion().equals(profesor)
+
+			Alerta alerta = new Alerta((StackPane) (idAnchorPane.getParent().getParent()),
+					"Información detallada de la incidencia", item.getValue());
+			alerta.mostrarAlerta();
+		} else {
+			DialogoEditar editar = new DialogoEditar(item.getValue());
+			editar.mostrarDialogo((StackPane) (idAnchorPane.getParent().getParent()));
+
+		}
+		tablaIncidencias.refresh();
 	}
 
 	@FXML
@@ -120,6 +137,7 @@ public class TablaController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		try {
+			this.profesor = Main.profesor;
 
 			iniciarTabla();
 
@@ -132,11 +150,8 @@ public class TablaController implements Initializable {
 				@Override
 				public void handle(MouseEvent mouseEvent) {
 					if (mouseEvent.getClickCount() == 2) {
+						btnEditar.fire();
 
-						TreeItem<Incidencia> item = tablaIncidencias.getSelectionModel().getSelectedItem();
-						Alerta alerta = new Alerta((StackPane) (idAnchorPane.getParent().getParent()),
-								"Información detallada de la incidencia", item.getValue());
-						alerta.mostrarAlerta();
 					}
 				}
 			});

@@ -51,15 +51,22 @@ public class DaoGenericoHibernate<T, ID extends Serializable> extends DaoGeneric
 		} catch (ConstraintViolationException cve) {
 			try {
 				s.getTransaction().rollback();
+				cve.printStackTrace();
+
 			} catch (Exception e) {
 				LOGGER.log(Level.WARNING, "Fallo en rollback");
+				e.printStackTrace();
 			}
 
 			throw new BusinessException(cve);
 		} catch (Exception ex) {
 			try {
 				s.getTransaction().rollback();
+				ex.printStackTrace();
+
 			} catch (Exception e) {
+				e.printStackTrace();
+
 				LOGGER.log(Level.WARNING, "Fallo en rollback");
 			}
 			throw ex;

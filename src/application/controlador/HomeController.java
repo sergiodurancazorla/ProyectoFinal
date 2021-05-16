@@ -71,16 +71,16 @@ public class HomeController implements Initializable {
 	@FXML
 	private JFXCheckBox checkInformes;
 
-	// MODIFICAR************************************************************
 	private int totalIncidencias;
 	private Profesor profesor;
 	private ObservableList<Incidencia> data;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		profesor = Main.profesor;
 
 		try {
+			profesor = Main.profesor;
+
 			iniciarTabla();
 
 			txtNombreSuperior.setText(profesor.toString());
@@ -149,6 +149,7 @@ public class HomeController implements Initializable {
 
 		// Lista incidencias por profesor
 		data = FXCollections.observableArrayList(daoIncidencia.getIncidenciasProfesor(profesor));
+
 		// -------COLUMNAS-----------
 
 		// Estado

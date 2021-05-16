@@ -92,6 +92,11 @@ public class AddController implements Initializable {
 	@FXML
 	private JFXButton btnLimpiar;
 
+	// MODIFICAR *****************************************************
+
+//	@FXML
+//	private JFXComboBox<Profesor> jfxComboProfesor;
+
 	private Profesor profesor;
 	private File archivo;
 
@@ -155,7 +160,7 @@ public class AddController implements Initializable {
 			// Crear incidencia
 			Incidencia incidencia = new Incidencia(aula, departamento, estado, profesor, tipo);
 
-			// ELEMENTOS EXTRA, fecha - descripcion - file
+			// ELEMENTOS EXTRA, fecha - descripcion - file - introduccion fecha introduccion
 			if (fechaIncidencia.getValue() != null) {
 				incidencia.setFechaIncidencia(Date.valueOf(fechaIncidencia.getValue()));
 			} else {
@@ -174,6 +179,8 @@ public class AddController implements Initializable {
 					e.printStackTrace();
 				}
 			}
+
+			incidencia.setFechaIntroduccion(Date.valueOf(LocalDate.now()));
 
 			// DAO y guardar incidencia
 			orm.dao.DaoIncidencia daoIncidencia = new DaoIncidencia();
@@ -249,6 +256,9 @@ public class AddController implements Initializable {
 		fechaIncidencia.setValue(LocalDate.now());
 
 		// RELLENAR
+
+		// MODIFICAR ************************************************
+		// jfxComboProfesor.setItems(listaProfesor);
 		comboProfesor.setItems(listaProfesor);
 		comboTipoIncidencia.setItems(listaTipos);
 		comboDepartamento.setItems(listaDepartamento);
@@ -283,6 +293,16 @@ public class AddController implements Initializable {
 
 	private boolean validar() {
 		boolean resultado = true;
+
+		// MODIFICAR *****************************************************
+
+//		if (jfxComboProfesor.getValue() == null) {
+//			resultado = false;
+//			jfxComboProfesor.setStyle("-jfx-unfocus-color: red");
+//			new animatefx.animation.Shake(jfxComboProfesor).play();
+//		} else {
+//			jfxComboProfesor.setStyle(null);
+//		}
 
 		// tipo de incidencia
 

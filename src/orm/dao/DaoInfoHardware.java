@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import orm.pojos.Incidencia;
 import orm.pojos.InfoHardware;
 import orm.pojos.TipoHarware;
 import utiles.dao.DaoGenericoHibernate;
@@ -37,4 +38,19 @@ public class DaoInfoHardware extends DaoGenericoHibernate<InfoHardware, Integer>
 		return lista;
 	}
 
+	public InfoHardware informacionIncidencia(Incidencia i) {
+
+		InfoHardware informacion = new InfoHardware();
+
+		// comenzamos sesion
+		Session s = UtilesHibernate.getSessionFactory().getCurrentSession();
+		String hql = "SELECT i FROM InfoHardware i where id_incidencia=:id";
+		Query query = s.createQuery(hql);
+		query.setParameter("id", i.getIdincidencia());
+
+		informacion = (InfoHardware) query.uniqueResult();
+
+		return informacion;
+
+	}
 }
