@@ -19,10 +19,20 @@ public class DialogoEditar {
 	private Profesor profesor;
 	private static JFXDialog dialogo;
 
+	/**
+	 * Muestra el dialogo de editar incidencia
+	 * 
+	 * @param i
+	 */
 	public DialogoEditar(Incidencia i) {
 		this.incidencia = i;
 	}
 
+	/**
+	 * Muestra el dialogo de editar profesor
+	 * 
+	 * @param profesor
+	 */
 	public DialogoEditar(Profesor profesor) {
 		this.profesor = profesor;
 	}
@@ -38,11 +48,23 @@ public class DialogoEditar {
 			loader.setController(controller);
 
 			Parent panel = loader.load();
+			// MODIFICAR***************************************************************
+
+//			JFXButton button = new JFXButton("PROBANDO");
+//			button.setOnAction(new EventHandler<ActionEvent>() {
+//
+//				@Override
+//				public void handle(ActionEvent event) {
+//					dialogo.close();
+//				}
+//			});
 
 			JFXDialogLayout layout = new JFXDialogLayout();
 
 			layout.setHeading(new Text("Editar incidencia"));
 			layout.setBody(panel);
+			// MODIFICAR***************************************************************
+			// layout.setActions(button);
 
 			dialogo = new JFXDialog(stackPane, layout, JFXDialog.DialogTransition.CENTER);
 			dialogo.show();

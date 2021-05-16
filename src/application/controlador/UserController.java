@@ -1,10 +1,13 @@
 package application.controlador;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -20,13 +23,17 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import orm.dao.DaoDepartamento;
 import orm.dao.DaoProfesor;
@@ -67,6 +74,8 @@ public class UserController implements Initializable {
 
 	private ObservableList<Profesor> data;
 	private FilteredList<Profesor> listaFiltros;
+	private Profesor profesor;
+	private JFXDialog dialogo;
 
 	@FXML
 	void btnEditar(ActionEvent event) {
@@ -82,7 +91,17 @@ public class UserController implements Initializable {
 	}
 
 	@FXML
-	void clickAnyadirProfesor(ActionEvent event) {
+	void clickAnyadirProfesor(ActionEvent event) throws IOException {
+		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/CrearUsuario.fxml");
+		FXMLLoader loader = new FXMLLoader(fxmlLocation);
+		Parent panel = loader.load();
+
+		JFXDialogLayout layout = new JFXDialogLayout();
+		layout.setHeading(new Text("Crear nuevo usuario"));
+		layout.setBody(panel);
+
+		dialogo = new JFXDialog(((StackPane) idAnchorPane.getParent()), layout, JFXDialog.DialogTransition.CENTER);
+		dialogo.show();
 
 	}
 

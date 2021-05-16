@@ -380,16 +380,16 @@ public class EditarIncidenciaController implements Initializable {
 	@FXML
 	void guardarCambios(ActionEvent event) throws BusinessException, IOException {
 		DaoIncidencia daoIncidencia = new DaoIncidencia();
-		boolean cerrar = false;
 		if (incidenciaModificada) {
 			daoIncidencia.actualizar(incidencia);
-			DialogoEditar.cerrarDialogo();
 
 			Alerta alerta = new Alerta(idStackPane, "Incidencia actualizada", "Genial! Has actualizado la incidencia.");
 			alerta.mostrarAlerta();
 
+			DialogoEditar.cerrarDialogo();
+
 		} else {
-			Alerta alerta = new Alerta(idStackPane, "Algo no ha salido como esparaba", "No has modificado nada!");
+			Alerta alerta = new Alerta(idStackPane, "Algo no ha salido como esperaba", "No has modificado nada!");
 			alerta.mostrarAlerta();
 		}
 
