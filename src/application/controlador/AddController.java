@@ -92,6 +92,8 @@ public class AddController implements Initializable {
 	@FXML
 	private JFXButton btnLimpiar;
 
+	private FileChooser fileChooser;
+
 	// MODIFICAR *****************************************************
 
 //	@FXML
@@ -117,33 +119,10 @@ public class AddController implements Initializable {
 
 	}
 
-	/**
-	 * Metodo que limpia los inputs y combobox del formulario
-	 * 
-	 * @param event
-	 */
-	@FXML
-	void btnLimpiar(ActionEvent event) {
-
-		// vaciar
-		txtModelo.setText("");
-		txtNumeroSerie.setText("");
-		comboTipoHardware.setValue(null);
-		fechaIncidencia.setValue(LocalDate.now());
-		comboTipoIncidencia.setValue(null);
-		comboProfesor.setValue(null);
-		comboDepartamento.setValue(null);
-		comboUbicacion.setValue(null);
-		comboEstado.setValue(null);
-		txtDescripcion.setText("");
-
-		// quitar estilo si los tuviera
-		comboTipoIncidencia.setStyle(null);
-		comboProfesor.setStyle(null);
-		comboDepartamento.setStyle(null);
-		comboUbicacion.setStyle(null);
-		comboEstado.setStyle(null);
-
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		this.profesor = Main.profesor;
+		iniciar();
 	}
 
 	@FXML
@@ -216,19 +195,17 @@ public class AddController implements Initializable {
 	@FXML
 	void clickSubirArchivo(ActionEvent event) {
 
-		FileChooser fileChooser = new FileChooser();
+		fileChooser = new FileChooser();
 
 		fileChooser.setTitle("Selecciona un archivo para añadir a la incidencia");
 
 		// Seleccionar y guardar archivo
 		archivo = fileChooser.showOpenDialog(idAnchorPane.getScene().getWindow());
 
-	}
+		if (archivo != null) {
+			btnSubirArchivo.setText(archivo.getName());
+		}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		this.profesor = Main.profesor;
-		iniciar();
 	}
 
 	/***
@@ -272,6 +249,37 @@ public class AddController implements Initializable {
 			comboProfesor.setDisable(true);
 			comboProfesor.setOpacity(1);
 		}
+
+	}
+
+	/**
+	 * Metodo que limpia los inputs y combobox del formulario
+	 * 
+	 * @param event
+	 */
+	@FXML
+	void btnLimpiar(ActionEvent event) {
+
+		// vaciar
+		txtModelo.setText("");
+		txtNumeroSerie.setText("");
+		comboTipoHardware.setValue(null);
+		fechaIncidencia.setValue(LocalDate.now());
+		comboTipoIncidencia.setValue(null);
+		comboProfesor.setValue(null);
+		comboDepartamento.setValue(null);
+		comboUbicacion.setValue(null);
+		comboEstado.setValue(null);
+		txtDescripcion.setText("");
+		fileChooser = null;
+		btnSubirArchivo.setText("Subir archivo");
+
+		// quitar estilo si los tuviera
+		comboTipoIncidencia.setStyle(null);
+		comboProfesor.setStyle(null);
+		comboDepartamento.setStyle(null);
+		comboUbicacion.setStyle(null);
+		comboEstado.setStyle(null);
 
 	}
 
