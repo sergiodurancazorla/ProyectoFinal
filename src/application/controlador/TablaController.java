@@ -104,18 +104,25 @@ public class TablaController implements Initializable {
 	void btnEditar(ActionEvent event) throws IOException {
 		TreeItem<Incidencia> item = tablaIncidencias.getSelectionModel().getSelectedItem();
 
-		if (profesor.getRol().getIdrol() != 1
-				&& item.getValue().getProfesorByProfesorIdprofesor().getDni().equals(profesor.getDni())) {
-
-			// || item.getValue().getProfesorByResponsableSolucion().equals(profesor)
-
-			Alerta alerta = new Alerta((StackPane) (idAnchorPane.getParent().getParent()),
-					"Información detallada de la incidencia", item.getValue());
-			alerta.mostrarAlerta();
-		} else {
+		if (profesor.getRol().getIdrol() == 1) {
+			// Eres admin, abres la incidencia
 			DialogoEditar editar = new DialogoEditar(item.getValue());
 			editar.mostrarDialogo((StackPane) (idAnchorPane.getParent().getParent()));
 
+		} else if (item.getValue().getProfesorByProfesorIdprofesor().getDni().equals(profesor.getDni())
+				|| item.getValue().getProfesorByResponsableSolucion() != null
+						&& item.getValue().getProfesorByResponsableSolucion().getDni().equals(profesor.getDni())) {
+			// Eres creador o responsable de la incidencia
+			DialogoEditar editar = new DialogoEditar(item.getValue());
+			editar.mostrarDialogo((StackPane) (idAnchorPane.getParent().getParent()));
+
+		} else {
+			// no tienes permisos
+
+			Alerta alerta = new Alerta((StackPane) (idAnchorPane.getParent().getParent()),
+					"No puedes editar la incidencia",
+					"No tienes permisos suficientes para poder editar esta incidencia.");
+			alerta.mostrarAlerta();
 		}
 		tablaIncidencias.refresh();
 	}

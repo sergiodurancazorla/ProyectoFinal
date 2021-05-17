@@ -331,11 +331,13 @@ public class EditarIncidenciaController implements Initializable {
 		}
 
 		// si tiene rol diferente a admin no se permite modificar el profesor que la
-		// crea
+		// crea y asignar responsable y SAI bloqueados.
 		if (profesor.getRol().getIdrol() != 1) {
 			comboProfesor.getSelectionModel().select(profesor);
 			comboProfesor.setDisable(true);
 			comboProfesor.setOpacity(1);
+			comboResponsableSolucion.setDisable(true);
+			checkSAI.setDisable(true);
 		}
 
 	}

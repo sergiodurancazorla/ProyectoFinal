@@ -25,7 +25,7 @@
                   <Font name="Calibri" size="28.0" />
                </font>
             </Text>
-            <JFXTreeTableView fx:id="tablaIncidencias" layoutX="35.0" layoutY="287.0" prefHeight="334.0" prefWidth="820.0" showRoot="false" tableMenuButtonVisible="true" />
+            <JFXTreeTableView fx:id="tablaIncidencias" layoutX="35.0" layoutY="276.0" prefHeight="334.0" prefWidth="820.0" showRoot="false" tableMenuButtonVisible="true" />
             <Label fx:id="txtNombreSuperior" alignment="CENTER_RIGHT" layoutX="496.0" layoutY="14.0" prefHeight="32.0" prefWidth="315.0" text="NOMBRE COMPLETO, NOMBRE" />
             <ImageView fitHeight="32.0" fitWidth="30.0" layoutX="821.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>

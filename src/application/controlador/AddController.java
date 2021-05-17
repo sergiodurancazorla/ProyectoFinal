@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 
 import application.modelo.Alerta;
+import application.modelo.CorreoElectronico;
 import application.modelo.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -175,10 +176,15 @@ public class AddController implements Initializable {
 
 				}
 
-				// PRUEBA DE ALERTA
-
+				// mostra alerta
 				Alerta alerta = new Alerta(stackPane, "Incidencia creada", "La incidencia se ha creado con éxito");
 				alerta.mostrarAlerta();
+
+				// Enviar correo
+				CorreoElectronico correo = new CorreoElectronico("sergiodurancazorla@gmail.com",
+						"Creación de nueva incidencia",
+						"El usuario " + profesor.toString() + " ha creado una nueva incidencia. ");
+				correo.start();
 
 			} catch (BusinessException e) {
 				// Mostrar error al guardar incidencia
