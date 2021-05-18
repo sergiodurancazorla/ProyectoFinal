@@ -17,6 +17,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,7 +76,7 @@ public class UserController implements Initializable {
 	private ObservableList<Profesor> data;
 	private FilteredList<Profesor> listaFiltros;
 	private Profesor profesor;
-	private JFXDialog dialogo;
+	static JFXDialog dialogo;
 
 	@FXML
 	void btnEditar(ActionEvent event) {
@@ -92,6 +93,7 @@ public class UserController implements Initializable {
 
 	@FXML
 	void clickAnyadirProfesor(ActionEvent event) throws IOException {
+
 		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/CrearUsuario.fxml");
 		FXMLLoader loader = new FXMLLoader(fxmlLocation);
 		Parent panel = loader.load();
@@ -224,6 +226,19 @@ public class UserController implements Initializable {
 		// Caracteristicas de las tablas
 		tablaProfesores.setRoot(root);
 		tablaProfesores.setShowRoot(false);
+
+		// Listener de seleccion, cuando un elemento de la lista es pulsado se habilita
+		// el boton
+		tablaProfesores.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+				btnEditar.setDisable(false);
+
+			}
+
+		});
 
 	}
 

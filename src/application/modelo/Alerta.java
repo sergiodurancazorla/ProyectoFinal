@@ -24,7 +24,6 @@ public class Alerta {
 	 * @param cuerpo
 	 */
 	public Alerta(StackPane stackPane, String titulo, String cuerpo) {
-		super();
 		this.stackPane = stackPane;
 		this.titulo = titulo;
 		this.cuerpo = cuerpo;
@@ -38,7 +37,6 @@ public class Alerta {
 	 * @param incidencia
 	 */
 	public Alerta(StackPane stackPane, String titulo, Incidencia incidencia) {
-		super();
 		this.stackPane = stackPane;
 		this.titulo = titulo;
 		this.incidencia = incidencia;

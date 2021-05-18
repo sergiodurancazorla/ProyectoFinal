@@ -385,9 +385,6 @@ public class EditarIncidenciaController implements Initializable {
 		if (incidenciaModificada) {
 			daoIncidencia.actualizar(incidencia);
 
-			Alerta alerta = new Alerta(idStackPane, "Incidencia actualizada", "Genial! Has actualizado la incidencia.");
-			alerta.mostrarAlerta();
-
 			DialogoEditar.cerrarDialogo();
 
 		} else {

@@ -10,7 +10,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class CorreoElectronico extends Thread {
-	private String usuario = "proyectofinalcoordinador";
+	private String remitente = "proyectofinalcoordinador";
 	private String pass = "123456789A_";
 
 	private String destinatario;
@@ -25,9 +25,6 @@ public class CorreoElectronico extends Thread {
 
 	@Override
 	public void run() {
-		// Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el
-		// remitente también.
-		String remitente = usuario; // Para la dirección nomcuenta@gmail.com
 
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
@@ -42,9 +39,7 @@ public class CorreoElectronico extends Thread {
 
 		try {
 			message.setFrom(new InternetAddress(remitente));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario)); // Se podrían añadir
-																								// varios de la misma
-																								// manera
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
 			message.setSubject(asunto);
 			message.setText(cuerpo);
 			Transport transport = session.getTransport("smtp");

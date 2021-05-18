@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.modelo.Alerta;
 import application.modelo.Login;
+import application.modelo.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +21,9 @@ import javafx.stage.Stage;
 import utiles.hibernate.UtilesHibernate;
 
 public class MainController implements Initializable {
+
+	@FXML
+	private StackPane idStackPane;
 
 	@FXML
 	private BorderPane borderPane;
@@ -96,11 +101,18 @@ public class MainController implements Initializable {
 
 	@FXML
 	void clickUsuario(MouseEvent event) throws IOException {
-		limpiarEfectos();
-		btnUsuario.setEffect(new DropShadow(30, Color.BLACK));
-		StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/User.fxml"));
-		borderPane.setCenter(pane);
+		if (Main.profesor.getRol().getIdrol() == 1) {
+			limpiarEfectos();
+			btnUsuario.setEffect(new DropShadow(30, Color.BLACK));
+			StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/User.fxml"));
+			borderPane.setCenter(pane);
+		} else {
+			// si no es admin mostramos alerta
+			Alerta alerta = new Alerta(idStackPane, "No se puede acceder",
+					"No tienes permisos suficientes para acceder a la sección");
+			alerta.mostrarAlerta();
 
+		}
 	}
 
 	@FXML
