@@ -227,13 +227,12 @@ public class Incidencia extends RecursiveTreeObject<Incidencia> implements java.
 	@Override
 	public String toString() {
 
-		return "\tTipo de incidencia: " + this.tipo.getTipo() + "\n\tProfesor que la creó: "
+		return "\n\tTipo de incidencia: " + this.tipo.getTipo() + "\n\tProfesor que la creó: "
 				+ this.profesorByProfesorIdprofesor.toString() + "\n\tFecha de creación:  " + this.fechaIncidencia
 				+ "\n\tProfesor encargado de resolverla: " + this.profesorByResponsableSolucion + "\n\tEstado: "
-				+ this.estado.getNombre() + "\n\tDepartamento: " + this.estado.getNombre() + "\n\tAula: "
+				+ this.estado.getNombre() + "\n\tDepartamento: " + this.departamento.getNombre() + "\n\tAula: "
 				+ this.aula.getDescripcion() + "\n\tDescripción: " + this.descripcion + "\n\tTiempo de resolución: "
-				+ this.tiempoResolucion + "\n\tDescripcion: " + this.descripcion + "\n\t informacion extra: "
-				+ this.informacion;
+				+ this.tiempoResolucion;
 	}
 
 }

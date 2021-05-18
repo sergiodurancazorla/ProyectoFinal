@@ -102,6 +102,9 @@ public class TablaController implements Initializable {
 
 	@FXML
 	void btnEditar(ActionEvent event) throws IOException {
+
+		tablaIncidencias.refresh();
+
 		TreeItem<Incidencia> item = tablaIncidencias.getSelectionModel().getSelectedItem();
 
 		if (profesor.getRol().getIdrol() == 1) {

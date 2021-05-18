@@ -9,8 +9,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import application.VariablesEstaticas;
+
 public class CorreoElectronico extends Thread {
-	private String remitente = "proyectofinalcoordinador";
 	private String pass = "123456789A_";
 
 	private String destinatario;
@@ -28,7 +29,7 @@ public class CorreoElectronico extends Thread {
 
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
-		props.put("mail.smtp.user", remitente);
+		props.put("mail.smtp.user", VariablesEstaticas.EMAIL_APLICACION);
 		props.put("mail.smtp.clave", pass); // La clave de la cuenta
 		props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
 		props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
@@ -38,12 +39,12 @@ public class CorreoElectronico extends Thread {
 		MimeMessage message = new MimeMessage(session);
 
 		try {
-			message.setFrom(new InternetAddress(remitente));
+			message.setFrom(new InternetAddress(VariablesEstaticas.EMAIL_APLICACION));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
 			message.setSubject(asunto);
 			message.setText(cuerpo);
 			Transport transport = session.getTransport("smtp");
-			transport.connect("smtp.gmail.com", remitente, pass);
+			transport.connect("smtp.gmail.com", VariablesEstaticas.EMAIL_APLICACION, pass);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 		} catch (MessagingException me) {

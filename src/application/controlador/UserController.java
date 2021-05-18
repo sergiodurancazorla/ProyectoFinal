@@ -23,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,6 +33,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -79,12 +81,12 @@ public class UserController implements Initializable {
 	static JFXDialog dialogo;
 
 	@FXML
-	void btnEditar(ActionEvent event) {
+	void clickEditar(ActionEvent event) {
 
 	}
 
 	@FXML
-	void btnLimpiarFiltros(ActionEvent event) {
+	void clickLimpiarFiltros(ActionEvent event) {
 		filtroDepartamento.getSelectionModel().clearSelection();
 		filtroRol.getSelectionModel().clearSelection();
 		busquedaProfesor.setText("");
@@ -119,6 +121,17 @@ public class UserController implements Initializable {
 			iniciarTabla();
 			inciarCombosFiltros();
 			filtros();
+
+			// controlador doble click
+			tablaProfesores.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent mouseEvent) {
+					if (mouseEvent.getClickCount() == 2) {
+						btnEditar.fire();
+
+					}
+				}
+			});
 
 		} catch (BusinessException e) {
 			e.printStackTrace();

@@ -25,7 +25,6 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 		Query query = s.createQuery(hql);
 		query.setParameter("dni", p.getDni());
 		lista = (ArrayList<Incidencia>) query.list();
-
 		return lista;
 	}
 

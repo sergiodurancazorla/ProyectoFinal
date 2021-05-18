@@ -42,6 +42,7 @@ import orm.pojos.Profesor;
 import orm.pojos.Tipo;
 import orm.pojos.TipoHarware;
 import utiles.excepciones.BusinessException;
+import utiles.fechas.Fechas;
 
 public class EditarIncidenciaController implements Initializable {
 
@@ -279,8 +280,7 @@ public class EditarIncidenciaController implements Initializable {
 
 		// PONER FECHA INCIDENCIA
 		Date date = incidencia.getFechaIncidencia();
-		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		fechaIncidencia.setValue(localDate);
+		fechaIncidencia.setValue(Fechas.convertDateObject(date));
 
 		// RELLENAR combos
 		comboProfesor.setItems(listaProfesor);

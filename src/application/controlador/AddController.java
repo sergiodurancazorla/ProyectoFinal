@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 
+import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import application.modelo.CorreoElectronico;
 import application.modelo.Main;
@@ -176,14 +177,27 @@ public class AddController implements Initializable {
 
 				}
 
+				// Refrescar sesion de base de datos
+
 				// mostra alerta
 				Alerta alerta = new Alerta(stackPane, "Incidencia creada", "La incidencia se ha creado con éxito");
 				alerta.mostrarAlerta();
 
-				// Enviar correo
-				CorreoElectronico correo = new CorreoElectronico("sergiodurancazorla@gmail.com",
-						"Creación de nueva incidencia",
-						"El usuario " + profesor.toString() + " ha creado una nueva incidencia. ");
+				// Enviar correo al propietario si tiene email y no es el coordinador TIC
+				if (profesor.getEmail() != null && !profesor.getNombre().equals("TIC")) {
+					CorreoElectronico correo = new CorreoElectronico(profesor.getEmail(),
+							"Creación de nueva incidencia",
+							"Has creado una nueva incidencia, se ha avisado al coordinador TIC para que la gestione en el menor tiempo posible.\n"
+									+ incidencia.toString() + "\n\nGracias!");
+					correo.start();
+				}
+
+				// enviar correo a coordinador TIC informando de la incidencia.
+
+				CorreoElectronico correo = new CorreoElectronico(VariablesEstaticas.EMAIL_COORDINADOR_TIC,
+						"Han creado una nueva incidencia",
+						"El usuario " + profesor.getNombre() + " " + profesor.getApellido1()
+								+ " ha creado una nueva incidencia: \n \n" + incidencia.toString() + "\n\nGracias!");
 				correo.start();
 
 			} catch (BusinessException e) {

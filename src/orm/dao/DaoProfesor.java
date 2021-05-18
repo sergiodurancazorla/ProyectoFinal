@@ -21,7 +21,6 @@ public class DaoProfesor extends DaoGenericoHibernate<Profesor, Integer> {
 
 		// comenzamos sesion
 		Session s = UtilesHibernate.getSessionFactory().getCurrentSession();
-
 		// Obtener usuarios
 		String hql = "SELECT p.dni, p.password FROM Profesor p";
 		Query query = s.createQuery(hql);

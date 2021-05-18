@@ -82,6 +82,7 @@ public class CreacionUsuarioController implements Initializable {
 		// COMBO
 		comboDepartamento.setItems(listaDepartamento);
 		comboRol.setItems(listadoRol);
+
 	}
 
 	@FXML

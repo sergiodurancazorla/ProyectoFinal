@@ -22,6 +22,7 @@ public class DaoGenericoHibernate<T, ID extends Serializable> extends DaoGeneric
 		try {
 			s.beginTransaction();
 			s.save(objeto);
+			s.flush();
 			s.getTransaction().commit();
 		} catch (ConstraintViolationException cve) {
 			try {

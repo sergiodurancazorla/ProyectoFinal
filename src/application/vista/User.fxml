@@ -24,7 +24,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnEditar" disable="true" layoutX="673.0" layoutY="595.0" onAction="#btnEditar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Editar" textFill="#2e89b8">
+            <JFXButton fx:id="btnEditar" disable="true" layoutX="673.0" layoutY="595.0" onAction="#clickEditar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Editar" textFill="#2e89b8">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -52,7 +52,7 @@
                   <Image url="@../../recursos/iconos/search.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btnLimpiarFiltro" layoutX="722.0" layoutY="68.0" onAction="#btnLimpiarFiltros" prefHeight="25.0" prefWidth="99.0" ripplerFill="#0a5479" text="Limpiar filtros" textFill="#2e89b8">
+            <JFXButton fx:id="btnLimpiarFiltro" layoutX="722.0" layoutY="68.0" onAction="#clickLimpiarFiltros" prefHeight="25.0" prefWidth="99.0" ripplerFill="#0a5479" text="Limpiar filtros" textFill="#2e89b8">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
