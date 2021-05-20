@@ -101,11 +101,11 @@ public class CreacionUsuarioController implements Initializable {
 			Departamento departamento = comboDepartamento.getValue();
 			Rol rol = comboRol.getValue();
 
-			// Cuando se registra un usuario se le pone pass "primerapass" y en el primer
+			// Cuando se registra un usuario se le pone de pass su dni y en el primer
 			// acceso la tiene que cambiar
 
 			Profesor nuevoProfesor = new Profesor(dni, departamento, rol, nombre, apellido1);
-			nuevoProfesor.setPassword("primerapass");
+			nuevoProfesor.setPassword(dni);
 
 			// DAO
 			orm.dao.DaoProfesor daoProfesor = new DaoProfesor();
