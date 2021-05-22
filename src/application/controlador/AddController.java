@@ -14,7 +14,6 @@ import com.jfoenix.controls.JFXDatePicker;
 import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import application.modelo.CorreoElectronico;
-import application.modelo.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -123,7 +122,7 @@ public class AddController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.profesor = Main.profesor;
+		this.profesor = VariablesEstaticas.profesor;
 		iniciar();
 	}
 

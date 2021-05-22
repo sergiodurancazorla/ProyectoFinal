@@ -13,9 +13,9 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
+import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import application.modelo.DialogoEditar;
-import application.modelo.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -109,7 +109,7 @@ public class EditarIncidenciaController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			this.profesor = Main.profesor;
+			this.profesor = VariablesEstaticas.profesor;
 			incidenciaModificada = false;
 
 			iniciar();

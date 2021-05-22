@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import application.modelo.Login;
-import application.modelo.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -101,7 +101,7 @@ public class MainController implements Initializable {
 
 	@FXML
 	void clickUsuario(MouseEvent event) throws IOException {
-		if (Main.profesor.getRol().getIdrol() == 1) {
+		if (VariablesEstaticas.profesor.getRol().getIdrol() == 1) {
 			limpiarEfectos();
 			btnUsuario.setEffect(new DropShadow(30, Color.BLACK));
 			StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/User.fxml"));

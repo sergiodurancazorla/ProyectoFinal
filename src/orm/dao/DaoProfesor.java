@@ -14,6 +14,13 @@ import utiles.hibernate.UtilesHibernate;
 public class DaoProfesor extends DaoGenericoHibernate<Profesor, Integer> {
 	private final static Logger LOGGER = Logger.getLogger(Profesor.class.getName());
 
+	/**
+	 * Si el usuario y password es correcto, da acceso a la aplicacion
+	 * 
+	 * @param usuario
+	 * @param password
+	 * @return true o false
+	 */
 	@SuppressWarnings("unchecked")
 	public Boolean login(String usuario, String password) {
 
@@ -40,6 +47,12 @@ public class DaoProfesor extends DaoGenericoHibernate<Profesor, Integer> {
 
 	}
 
+	/***
+	 * Metodo que devuelve un profesor segun su dni
+	 * 
+	 * @param dni a buscar
+	 * @return el profesor
+	 */
 	public Profesor obtenerProfesor(String dni) {
 		Profesor resultado = new Profesor();
 
@@ -59,6 +72,11 @@ public class DaoProfesor extends DaoGenericoHibernate<Profesor, Integer> {
 
 	}
 
+	/**
+	 * Lista todos los profesores de la app
+	 * 
+	 * @return
+	 */
 	public ArrayList<Profesor> listadoProfesores() {
 
 		// comenzamos sesion

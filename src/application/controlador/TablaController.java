@@ -13,9 +13,9 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import application.modelo.DialogoEditar;
-import application.modelo.Main;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -147,7 +147,7 @@ public class TablaController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		try {
-			this.profesor = Main.profesor;
+			this.profesor = VariablesEstaticas.profesor;
 
 			iniciarTabla();
 

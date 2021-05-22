@@ -11,7 +11,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import application.modelo.Main;
+import application.VariablesEstaticas;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -79,7 +79,7 @@ public class HomeController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		try {
-			profesor = Main.profesor;
+			profesor = VariablesEstaticas.profesor;
 
 			iniciarTabla();
 

@@ -1,5 +1,6 @@
 package application.modelo;
 
+import application.VariablesEstaticas;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -11,13 +12,9 @@ import orm.pojos.Profesor;
 
 public class Main extends Application {
 	private double xOffset, yOffset;
-	/**
-	 * Variable que guarda el profesor que ha inciado sesión
-	 */
-	public static Profesor profesor;
 
 	public Main(Profesor profesor) {
-		Main.profesor = profesor;
+		VariablesEstaticas.profesor = profesor;
 	}
 
 	@Override
@@ -45,14 +42,6 @@ public class Main extends Application {
 			}
 		});
 
-	}
-
-	public Profesor getProfesor() {
-		return profesor;
-	}
-
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
 	}
 
 }

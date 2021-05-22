@@ -77,7 +77,6 @@ public class UserController implements Initializable {
 
 	private ObservableList<Profesor> data;
 	private FilteredList<Profesor> listaFiltros;
-	private Profesor profesor;
 	static JFXDialog dialogo;
 
 	@FXML
@@ -137,6 +136,18 @@ public class UserController implements Initializable {
 			e.printStackTrace();
 		}
 
+	}
+
+	@FXML
+	void clickRefresh(MouseEvent event) {
+		try {
+			btnLimpiarFiltro.fire();
+			iniciarTabla();
+			inciarCombosFiltros();
+			filtros();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@SuppressWarnings("unchecked")

@@ -84,6 +84,10 @@ public class LoginController {
 
 	}
 
+	/**
+	 * Metodo que se lanza si tu pass coincide con tu dni, que casualmente suele ser
+	 * el primer acceso.
+	 */
 	private void cambioDePass() {
 
 		JFXAlert<String> alert = new JFXAlert<>((Stage) btnSignIn.getScene().getWindow());
