@@ -122,7 +122,8 @@ public class LoginController {
 		addButton.setDefaultButton(true);
 		addButton.setOnAction(addEvent -> {
 			// Cuando se pulse el boton comprobar que pass y repetirPass sean iguales
-			if (pass.getText() == null || !pass.getText().equals(repetirPass.getText())) {
+			if (pass.getText() == null || pass.getText().trim().length() <= 0
+					|| !pass.getText().equals(repetirPass.getText())) {
 				label.setVisible(true);
 				pass.setText("");
 				repetirPass.setText("");
