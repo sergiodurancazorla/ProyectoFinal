@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXAlert;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialogLayout;
+
 import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import application.modelo.Login;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
@@ -17,7 +22,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utiles.hibernate.UtilesHibernate;
 
@@ -71,17 +78,48 @@ public class MainController implements Initializable {
 	@FXML
 	void clickCerrar(MouseEvent event) {
 		limpiarEfectos();
+		// Preguntar si quiere cerrar sesión
+		alertaCierreSesion();
 
-		UtilesHibernate.closeSession();
+	}
 
-		Stage cerrar = (Stage) borderPane.getScene().getWindow();
-		cerrar.close();
+	private void alertaCierreSesion() {
 
-		Login login = new Login();
-		Stage stage = new Stage();
+		JFXAlert<String> alert = new JFXAlert<>((Stage) btnAdd.getScene().getWindow());
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.setOverlayClose(false);
+		alert.setResultConverter(buttonType -> {
+			return null;
+		});
 
-		login.start(stage);
+		// Create the content of the JFXAlert with JFXDialogLayout
+		JFXDialogLayout layout = new JFXDialogLayout();
+		layout.setHeading(new Label("Cierre de sesión"));
+		layout.setBody(new VBox(new Label("Va a cerrar sesión, ¿estás seguro?")));
 
+		JFXButton addButton = new JFXButton("CONFIRMAR");
+		addButton.setDefaultButton(true);
+		addButton.setOnAction(addEvent -> {
+
+			UtilesHibernate.closeSession();
+
+			Stage cerrar = (Stage) borderPane.getScene().getWindow();
+			cerrar.close();
+
+			Login login = new Login();
+			Stage stage = new Stage();
+
+			login.start(stage);
+
+		});
+
+		JFXButton cancelButton = new JFXButton("CANCELAR");
+		cancelButton.setCancelButton(true);
+		cancelButton.setOnAction(closeEvent -> alert.hideWithAnimation());
+
+		layout.setActions(addButton, cancelButton);
+		alert.setContent(layout);
+		alert.showAndWait();
 	}
 
 	@FXML
