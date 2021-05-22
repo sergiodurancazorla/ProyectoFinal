@@ -13,7 +13,7 @@
          <left>
             <AnchorPane prefHeight="640.0" prefWidth="92.0" style="-fx-background-color: #21427D;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="btnHome" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="45.0" onMouseClicked="#clickHome" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="45.0">
+                  <ImageView fx:id="btnHome" accessibleHelp="Home" accessibleText="Home" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="45.0" onMouseClicked="#clickHome" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="45.0">
                      <image>
                         <Image url="@../../recursos/iconos/home.png" />
                      </image>

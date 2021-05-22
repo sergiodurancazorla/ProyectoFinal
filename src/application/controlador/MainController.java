@@ -10,6 +10,7 @@ import application.modelo.Login;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -149,6 +150,15 @@ public class MainController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// Añadir texto al hacer over
+		Tooltip.install(btnHome, new Tooltip("Home"));
+		Tooltip.install(btnAdd, new Tooltip("Añadir incidencia"));
+		Tooltip.install(btnGraficos, new Tooltip("Graficos e informes"));
+		Tooltip.install(btnDocumentos, new Tooltip("Listado de incidencias"));
+		Tooltip.install(btnUsuario, new Tooltip("Listado de usuarios"));
+		Tooltip.install(btnAjustes, new Tooltip("Ajustes"));
+		Tooltip.install(btnCerrar, new Tooltip("Cerrar sesión"));
+
 	}
 
 }
