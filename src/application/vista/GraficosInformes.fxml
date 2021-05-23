@@ -55,7 +55,7 @@
                         </Label>
                         <Label fx:id="txtTiempoMedio" text="100" textFill="#0296e0" wrapText="true">
                            <font>
-                              <Font name="Calibri" size="22.0" />
+                              <Font name="Calibri" size="14.0" />
                            </font>
                            <VBox.margin>
                               <Insets top="10.0" />

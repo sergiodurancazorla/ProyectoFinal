@@ -2,10 +2,17 @@ package application.controlador;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Minutes;
+import org.joda.time.Seconds;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -395,6 +402,18 @@ public class EditarIncidenciaController implements Initializable {
 	void guardarCambios(ActionEvent event) throws BusinessException, IOException {
 		DaoIncidencia daoIncidencia = new DaoIncidencia();
 		if (incidenciaModificada) {
+
+			// Si la incidencia tiene el estado "Solucionada" o "Solucion inviable"
+			if (incidencia.getEstado().getNombre().toUpperCase().equals("SOLUCIONADA")
+					|| incidencia.getEstado().getNombre().toUpperCase().equals("SOLUCION INVIABLE")) {
+				incidencia.setFechaResolucion(Date.from(Instant.now()));
+				incidencia.setTiempoResolucion(calcularTiempoResolucion());
+
+			} else {
+				incidencia.setFechaResolucion(null);
+				incidencia.setTiempoResolucion(null);
+			}
+
 			daoIncidencia.actualizar(incidencia);
 
 			enviarEmails();
@@ -406,6 +425,24 @@ public class EditarIncidenciaController implements Initializable {
 			alerta.mostrarAlerta();
 		}
 
+	}
+
+	private Integer calcularTiempoResolucion() {
+		Integer respuesta = 0;
+
+		Date dateInicio = incidencia.getFechaIncidencia();
+		Date dateFin = incidencia.getFechaResolucion();
+
+		DateTime dt1 = new DateTime(dateInicio);
+		DateTime dt2 = new DateTime(dateFin);
+
+		int dias = Days.daysBetween(dt1, dt2).getDays();
+		int horas = Hours.hoursBetween(dt1, dt2).getHours() % 24;
+		int minutos = Minutes.minutesBetween(dt1, dt2).getMinutes() % 60;
+		int segundos = Seconds.secondsBetween(dt1, dt2).getSeconds() % 60;
+		respuesta = (dias * 86400) + (horas * 3600) + (minutos * 60) + segundos;
+		System.out.println("Tiempo de resolucion en segundos: " + respuesta);
+		return respuesta;
 	}
 
 	private void enviarEmails() {

@@ -42,7 +42,8 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 		Query query = s.createQuery(hql);
 
 		if (query.list() != null) {
-			// segundos = (int) query.list().get(0);
+			double dSegundos = (double) query.list().get(0);
+			segundos = (int) dSegundos;
 		}
 
 		return segundos;

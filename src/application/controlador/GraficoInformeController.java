@@ -4,6 +4,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.joda.time.Period;
+import org.joda.time.Seconds;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
 import application.VariablesEstaticas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -162,18 +167,24 @@ public class GraficoInformeController implements Initializable {
 	}
 
 	private String transformarTiempoMedio(int segundosTiempoMedioIncidencias) {
-		String texto = "";
+		String texto = " ";
 
 		if (segundosTiempoMedioIncidencias == 0) {
 			texto = "Incidencias\nsin\nresolver";
 			txtTiempoMedio.autosize();
 
 		} else {
-			// Calcular string en funcion de los segundos***********************
-			int resto = 0;
-			if (segundosTiempoMedioIncidencias % 60 != 0) {
 
-			}
+			// Calcular string en funcion de los segundos***********************
+			PeriodFormatter dhm = new PeriodFormatterBuilder().appendDays().appendSuffix(" dia", " dias")
+					.appendSeparator("\n").appendHours().appendSuffix(" hora", " horas").appendSeparator("\n")
+					.appendMinutes().appendSuffix(" minuto", " minutos").appendSeparator("\n").appendSeconds()
+					.appendSuffix(" segundo", " segundos").toFormatter();
+
+			Seconds segundos = Seconds.seconds(segundosTiempoMedioIncidencias);
+			Period p1 = new Period(segundos);
+
+			texto = dhm.print(p1.normalizedStandard());
 
 		}
 		return texto;

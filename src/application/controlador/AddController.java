@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.sql.Date;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -123,6 +124,7 @@ public class AddController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.profesor = VariablesEstaticas.profesor;
+
 		try {
 			iniciar();
 		} catch (BusinessException e) {
@@ -132,7 +134,6 @@ public class AddController implements Initializable {
 
 	@FXML
 	void clickAnyadirIncidencia(ActionEvent event) {
-		// VALIDACIÓN
 
 		if (validar()) {
 			Estado estado = comboEstado.getValue();
@@ -148,7 +149,7 @@ public class AddController implements Initializable {
 			if (fechaIncidencia.getValue() != null) {
 				incidencia.setFechaIncidencia(Date.valueOf(fechaIncidencia.getValue()));
 			} else {
-				incidencia.setFechaIncidencia(Date.valueOf(LocalDate.now()));
+				incidencia.setFechaIncidencia(Date.from(Instant.now()));
 
 			}
 
@@ -164,7 +165,7 @@ public class AddController implements Initializable {
 				}
 			}
 
-			incidencia.setFechaIntroduccion(Date.valueOf(LocalDate.now()));
+			incidencia.setFechaIntroduccion(Date.from(Instant.now()));
 
 			// DAO y guardar incidencia
 			orm.dao.DaoIncidencia daoIncidencia = new DaoIncidencia();
@@ -348,6 +349,7 @@ public class AddController implements Initializable {
 
 		} else {
 			comboTipoIncidencia.setStyle(null);
+
 			// Incidencia tipo hardware
 			if (comboTipoIncidencia.getValue().toString().equals("Hardware") && comboTipoHardware.getValue() == null) {
 				resultado = false;
