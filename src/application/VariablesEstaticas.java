@@ -17,6 +17,8 @@ public class VariablesEstaticas {
 
 	public static Profesor SAI;
 
+	public static Profesor editarProfesor;
+
 	/**
 	 * Variable que guarda todas las incidencias de la app.
 	 */

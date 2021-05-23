@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import application.VariablesEstaticas;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -80,8 +81,23 @@ public class UserController implements Initializable {
 	static JFXDialog dialogo;
 
 	@FXML
-	void clickEditar(ActionEvent event) {
+	void clickEditar(ActionEvent event) throws IOException {
 
+		tablaProfesores.refresh();
+
+		TreeItem<Profesor> item = tablaProfesores.getSelectionModel().getSelectedItem();
+		VariablesEstaticas.editarProfesor = item.getValue();
+
+		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/EditarUsuario.fxml");
+		FXMLLoader loader = new FXMLLoader(fxmlLocation);
+		Parent panel = loader.load();
+
+		JFXDialogLayout layout = new JFXDialogLayout();
+		layout.setHeading(new Text("Editar usuario"));
+		layout.setBody(panel);
+
+		dialogo = new JFXDialog(((StackPane) idAnchorPane.getParent()), layout, JFXDialog.DialogTransition.CENTER);
+		dialogo.show();
 	}
 
 	@FXML
