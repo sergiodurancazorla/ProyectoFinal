@@ -123,7 +123,11 @@ public class AddController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.profesor = VariablesEstaticas.profesor;
-		iniciar();
+		try {
+			iniciar();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -229,9 +233,11 @@ public class AddController implements Initializable {
 
 	/***
 	 * Metodo que inicia y rellena los combos del formulario
+	 * 
+	 * @throws BusinessException
 	 */
 
-	private void iniciar() {
+	private void iniciar() throws BusinessException {
 
 		// DAOS
 		orm.dao.DaoTipo daoTipo = new DaoTipo();
@@ -259,7 +265,9 @@ public class AddController implements Initializable {
 		comboTipoIncidencia.setItems(listaTipos);
 		comboDepartamento.setItems(listaDepartamento);
 		comboUbicacion.setItems(listaAulas);
-		comboEstado.setItems(listaEstados);
+		// comboEstado.setItems(listaEstados);
+		comboEstado.setValue(daoEstado.buscarPorId(1));
+		comboEstado.setDisable(true);
 
 		// si tiene rol diferente a admin no se permite modificar el profesor que la
 		// crea

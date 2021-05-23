@@ -216,7 +216,7 @@ public class EdicionUsuarioController implements Initializable {
 				e.printStackTrace();
 			}
 
-		} else {
+		} else if (!profesorModificado) {
 			Alerta alerta = new Alerta(idStackPane, "Algo no ha salido como esperaba", "No has modificado nada!");
 			alerta.mostrarAlerta();
 		}
