@@ -95,7 +95,7 @@ public class CreacionUsuarioController implements Initializable {
 		if (validar()) {
 
 			// Datos
-			String dni = txtDni.getText();
+			String dni = txtDni.getText().toUpperCase();
 			String nombre = txtNombre.getText();
 			String apellido1 = txtApellido1.getText();
 			Departamento departamento = comboDepartamento.getValue();
@@ -106,6 +106,15 @@ public class CreacionUsuarioController implements Initializable {
 
 			Profesor nuevoProfesor = new Profesor(dni, departamento, rol, nombre, apellido1);
 			nuevoProfesor.setPassword(dni);
+
+			// Datos no obligatorios
+			if (txtAoellido2.getText() != null) {
+				nuevoProfesor.setApellido2(txtAoellido2.getText());
+			}
+
+			if (txtEmail.getText() != null) {
+				nuevoProfesor.setEmail(txtEmail.getText());
+			}
 
 			// DAO
 			orm.dao.DaoProfesor daoProfesor = new DaoProfesor();

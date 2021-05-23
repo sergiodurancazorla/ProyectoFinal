@@ -50,7 +50,7 @@ public class LoginController {
 
 		daoProfesor = new DaoProfesor();
 
-		if (daoProfesor.login(inpName.getText(), inpPassword.getText())) {
+		if (daoProfesor.login(inpName.getText().toUpperCase(), inpPassword.getText())) {
 			profesor = daoProfesor.obtenerProfesor(inpName.getText());
 
 			if (inpName.getText().equals(inpPassword.getText())) {

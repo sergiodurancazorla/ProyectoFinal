@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import application.VariablesEstaticas;
 import application.modelo.Alerta;
+import application.modelo.CorreoElectronico;
 import application.modelo.DialogoEditar;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -384,6 +385,20 @@ public class EditarIncidenciaController implements Initializable {
 		DaoIncidencia daoIncidencia = new DaoIncidencia();
 		if (incidenciaModificada) {
 			daoIncidencia.actualizar(incidencia);
+
+			// Enviar correo electronico a responsable
+			String emailResponsable = incidencia.getProfesorByResponsableSolucion().getEmail();
+			String asunto = "Modificación incidencia";
+			String cuerpo = "Actualizaciones de la incidencia " + incidencia.getIdincidencia() + ". \n"
+					+ incidencia.toString();
+			CorreoElectronico correoElectronico = new CorreoElectronico(emailResponsable, asunto, cuerpo);
+			correoElectronico.start();
+
+			// Enviar correo electronico a Coordinador TIC
+
+			CorreoElectronico correoElectronicoTIC = new CorreoElectronico(VariablesEstaticas.EMAIL_COORDINADOR_TIC,
+					asunto, cuerpo);
+			correoElectronicoTIC.start();
 
 			DialogoEditar.cerrarDialogo();
 
