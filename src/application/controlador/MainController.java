@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import application.modelo.Login;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +27,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import orm.dao.DaoIncidencia;
+import utiles.excepciones.BusinessException;
 import utiles.hibernate.UtilesHibernate;
 
 public class MainController implements Initializable {
@@ -132,9 +135,12 @@ public class MainController implements Initializable {
 	}
 
 	@FXML
-	void clickGraficos(MouseEvent event) {
+	void clickGraficos(MouseEvent event) throws IOException {
 		limpiarEfectos();
 		btnGraficos.setEffect(new DropShadow(30, Color.BLACK));
+		StackPane pane = FXMLLoader
+				.load(getClass().getClassLoader().getResource("application/vista/GraficosInformes.fxml"));
+		borderPane.setCenter(pane);
 
 	}
 
@@ -196,6 +202,14 @@ public class MainController implements Initializable {
 		Tooltip.install(btnUsuario, new Tooltip("Listado de usuarios"));
 		Tooltip.install(btnAjustes, new Tooltip("Ajustes"));
 		Tooltip.install(btnCerrar, new Tooltip("Cerrar sesión"));
+
+		// Rellenar variables estaticas
+		DaoIncidencia daoIncidencia = new DaoIncidencia();
+		try {
+			VariablesEstaticas.data = FXCollections.observableArrayList(daoIncidencia.buscarTodos());
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 
 	}
 
