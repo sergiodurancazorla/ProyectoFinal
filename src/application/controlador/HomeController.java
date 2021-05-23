@@ -71,6 +71,9 @@ public class HomeController implements Initializable {
 	@FXML
 	private JFXCheckBox checkInformes;
 
+	@FXML
+	private Label txtPermisosDentroApp;
+
 	private int totalIncidencias;
 	private Profesor profesor;
 	private ObservableList<Incidencia> data;
@@ -89,6 +92,7 @@ public class HomeController implements Initializable {
 			txtDepartamento.setText(profesor.getDepartamento().getNombre());
 			totalIncidencias = tablaIncidencias.getExpandedItemCount();
 			txtTotalIncidencias.setText("Total de incidencias creadas: " + totalIncidencias);
+			txtPermisosDentroApp.setText("Permisos dentro de la app: " + profesor.getRol().getDescripcion());
 
 			rellenarChecks();
 

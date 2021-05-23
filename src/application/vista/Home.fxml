@@ -50,7 +50,7 @@
             </VBox>
             <VBox layoutX="506.0" layoutY="64.0" prefHeight="212.0" prefWidth="343.0" spacing="10.0" stylesheets="@../../recursos/css/checkbox.css">
                <children>
-                  <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="447.0" text="Permisos dentro de la app">
+                  <Label fx:id="txtPermisosDentroApp" alignment="TOP_CENTER" prefHeight="17.0" prefWidth="447.0" text="Permisos dentro de la app">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

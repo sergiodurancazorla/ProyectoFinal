@@ -53,7 +53,7 @@ public class LoginController {
 		if (daoProfesor.login(inpName.getText().toUpperCase(), inpPassword.getText())) {
 			profesor = daoProfesor.obtenerProfesor(inpName.getText());
 
-			if (inpName.getText().equals(inpPassword.getText())) {
+			if (inpName.getText().toUpperCase().equals(inpPassword.getText().toUpperCase())) {
 				cambioDePass();
 			}
 

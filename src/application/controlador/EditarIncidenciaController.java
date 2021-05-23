@@ -231,6 +231,7 @@ public class EditarIncidenciaController implements Initializable {
 					comboResponsableSolucion.setEditable(false);
 					comboResponsableSolucion.setDisable(true);
 					comboResponsableSolucion.setPromptText("SAI");
+					comboResponsableSolucion.setValue(VariablesEstaticas.SAI);
 				} else {
 					comboResponsableSolucion.setDisable(false);
 					comboResponsableSolucion.getSelectionModel().clearSelection();
@@ -331,6 +332,16 @@ public class EditarIncidenciaController implements Initializable {
 			btnSubirArchivo.setText("TIENE ARCHIVO");
 		}
 
+		// Si el responsable es el SAI checkear el checkbox
+		if (incidencia.getProfesorByResponsableSolucion() != null
+				&& incidencia.getProfesorByResponsableSolucion().equals(VariablesEstaticas.SAI)) {
+
+			checkSAI.fire();
+			comboResponsableSolucion.setEditable(false);
+			comboResponsableSolucion.setDisable(true);
+
+		}
+
 		// si tiene rol diferente a admin no se permite modificar el profesor que la
 		// crea y asignar responsable y SAI bloqueados.
 		if (profesor.getRol().getIdrol() != 1) {
@@ -386,25 +397,54 @@ public class EditarIncidenciaController implements Initializable {
 		if (incidenciaModificada) {
 			daoIncidencia.actualizar(incidencia);
 
-			// Enviar correo electronico a responsable
-			String emailResponsable = incidencia.getProfesorByResponsableSolucion().getEmail();
-			String asunto = "Modificación incidencia";
-			String cuerpo = "Actualizaciones de la incidencia " + incidencia.getIdincidencia() + ". \n"
-					+ incidencia.toString();
-			CorreoElectronico correoElectronico = new CorreoElectronico(emailResponsable, asunto, cuerpo);
-			correoElectronico.start();
-
-			// Enviar correo electronico a Coordinador TIC
-
-			CorreoElectronico correoElectronicoTIC = new CorreoElectronico(VariablesEstaticas.EMAIL_COORDINADOR_TIC,
-					asunto, cuerpo);
-			correoElectronicoTIC.start();
+			enviarEmails();
 
 			DialogoEditar.cerrarDialogo();
 
 		} else {
 			Alerta alerta = new Alerta(idStackPane, "Algo no ha salido como esperaba", "No has modificado nada!");
 			alerta.mostrarAlerta();
+		}
+
+	}
+
+	private void enviarEmails() {
+
+		// Mensaje
+		String asunto = "Modificación incidencia";
+		String cuerpo = "Actualizaciones de la incidencia " + incidencia.getIdincidencia() + ". \n"
+				+ incidencia.toString();
+
+		// Enviar correo electronico a Coordinador TIC
+
+		CorreoElectronico correoElectronicoTIC = new CorreoElectronico(VariablesEstaticas.EMAIL_COORDINADOR_TIC, asunto,
+				cuerpo);
+		correoElectronicoTIC.start();
+
+		// Si el responsable y el creador es el mismo, enviar solo un correo:
+
+		Boolean repetido = false;
+
+		// enviar al que la ha creado (si tiene email).
+		if (incidencia.getProfesorByProfesorIdprofesor().getEmail() != null) {
+			CorreoElectronico correoElectronicoCreador = new CorreoElectronico(
+					incidencia.getProfesorByProfesorIdprofesor().getEmail(), asunto, cuerpo);
+			correoElectronicoCreador.start();
+
+			// Si son la misma persona
+			if (incidencia.getProfesorByResponsableSolucion() != null && incidencia.getProfesorByResponsableSolucion()
+					.equals(incidencia.getProfesorByProfesorIdprofesor())) {
+				repetido = true;
+			}
+
+		}
+
+		// si tiene responsable y no esta repetido
+		if (!repetido && incidencia.getProfesorByResponsableSolucion() != null) {
+			String emailResponsable = incidencia.getProfesorByResponsableSolucion().getEmail();
+
+			CorreoElectronico correoElectronico = new CorreoElectronico(emailResponsable, asunto, cuerpo);
+			correoElectronico.start();
 		}
 
 	}
