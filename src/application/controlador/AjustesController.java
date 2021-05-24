@@ -1,5 +1,6 @@
 package application.controlador;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -8,6 +9,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 
 import application.VariablesEstaticas;
+import application.modelo.PDFGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class AjustesController {
 
@@ -54,8 +58,15 @@ public class AjustesController {
 	}
 
 	@FXML
-	void clickInformeMensual(ActionEvent event) {
+	void clickInformeMensual(ActionEvent event) throws IOException {
 
+		FileChooser chooser = new FileChooser();
+		chooser.getExtensionFilters().add(new ExtensionFilter("pdf", ".pdf"));
+		chooser.setTitle("¿Donde quieres guardar el informe?");
+		File fichero = chooser.showSaveDialog(btnDatosPersonales.getScene().getWindow());
+
+		PDFGenerator pdf = new PDFGenerator(fichero);
+		pdf.start();
 	}
 
 	@FXML
