@@ -73,9 +73,11 @@ public class MainController implements Initializable {
 	}
 
 	@FXML
-	void clickAjustes(MouseEvent event) {
+	void clickAjustes(MouseEvent event) throws IOException {
 		limpiarEfectos();
 		btnAjustes.setEffect(new DropShadow(30, Color.BLACK));
+		StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Ajustes.fxml"));
+		borderPane.setCenter(pane);
 
 	}
 

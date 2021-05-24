@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlador.AjustesController">
+   <children>
+      <AnchorPane fx:id="idAnchorPane" prefHeight="635.0" prefWidth="890.0">
+         <children>
+            <Text layoutX="30.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AJUSTES" wrappingWidth="446.146484375">
+               <font>
+                  <Font name="Calibri" size="28.0" />
+               </font>
+            </Text>
+            <Line endX="719.0" endY="-8.0" layoutX="131.0" layoutY="61.0" startX="-100.5" startY="-8.0" />
+            <VBox layoutX="30.0" layoutY="79.0" prefHeight="477.0" prefWidth="821.0">
+               <children>
+                  <Label text="Informacion personal">
+                     <font>
+                        <Font name="Calibri" size="20.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="btnDatosPersonales" buttonType="RAISED" onAction="#clickDatosPersonales" ripplerFill="#0673bb" text="Cambiar datos personales">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnPass" buttonType="RAISED" onAction="#clickPass" ripplerFill="#0673bb" text="Modificar contraseña">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <Line endX="719.0" endY="-8.0" opacity="0.2" startX="-100.5" startY="-8.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Line>
+                  <Label text="Informes">
+                     <font>
+                        <Font name="Calibri" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXButton fx:id="btnInformeMensual" buttonType="RAISED" onAction="#clickInformeMensual" prefWidth="200.0" ripplerFill="#0673bb" text="Generar informe resumen mensual">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <Line endX="719.0" endY="-8.0" opacity="0.2" startX="-100.5" startY="-8.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Line>
+                  <Label text="Datos de la aplicacion">
+                     <font>
+                        <Font name="Calibri" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXButton fx:id="btnRol" alignment="TOP_LEFT" buttonType="RAISED" onAction="#clickRol" prefHeight="25.0" prefWidth="129.0" ripplerFill="#0673bb" text="Crear / Modificar Rol">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnTiposHardware" alignment="TOP_LEFT" buttonType="RAISED" onAction="#clickTiposHardware" prefHeight="25.0" prefWidth="210.0" ripplerFill="#0673bb" text="Crear / Modificar Tipos de Hardware">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

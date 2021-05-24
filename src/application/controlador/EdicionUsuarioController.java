@@ -192,11 +192,27 @@ public class EdicionUsuarioController implements Initializable {
 		comboDepartamento.setItems(listaDepartamento);
 		comboRol.setItems(listadoRol);
 
+		// Si no tienes rol de administrador no se puede modificar el rol
+		if (VariablesEstaticas.profesor.getRol().getIdrol() != 1) {
+			comboRol.setDisable(true);
+		}
+
 	}
 
 	@FXML
 	void btnCancelar(ActionEvent event) {
-		UserController.dialogo.close();
+		VariablesEstaticas.editarProfesor = null;
+
+		// cerrar
+		try {
+			UserController.dialogo.close();
+		} catch (NullPointerException e) {
+		}
+
+		try {
+			AjustesController.dialogo.close();
+		} catch (NullPointerException e) {
+		}
 	}
 
 	@FXML
@@ -210,10 +226,22 @@ public class EdicionUsuarioController implements Initializable {
 				// Grabar
 				daoProfesor.actualizar(editarProfesor);
 
-				UserController.dialogo.close();
+				// Cerrar
+				try {
+					UserController.dialogo.close();
+				} catch (NullPointerException e) {
+				}
+
+				try {
+					AjustesController.dialogo.close();
+				} catch (NullPointerException e) {
+				}
 
 			} catch (BusinessException e) {
 				e.printStackTrace();
+			} finally {
+				VariablesEstaticas.editarProfesor = null;
+
 			}
 
 		} else if (!profesorModificado) {
