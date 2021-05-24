@@ -59,8 +59,17 @@ public class AjustesController {
 	}
 
 	@FXML
-	void clickPass(ActionEvent event) {
+	void clickPass(ActionEvent event) throws IOException {
+		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/EditarPass.fxml");
+		FXMLLoader loader = new FXMLLoader(fxmlLocation);
+		Parent panel = loader.load();
 
+		JFXDialogLayout layout = new JFXDialogLayout();
+		layout.setHeading(new Text("Cambiar contraseña"));
+		layout.setBody(panel);
+
+		dialogo = new JFXDialog(((StackPane) idAnchorPane.getParent()), layout, JFXDialog.DialogTransition.CENTER);
+		dialogo.show();
 	}
 
 	@FXML

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,10 +27,10 @@
                <children>
                   <Label text="Antigua contraseña" />
                   <Label text="Nueva contraseña" GridPane.rowIndex="1" />
-                  <Label text="Repite nueva contraseña" GridPane.rowIndex="2" />
-                  <JFXTextField fx:id="txtAntiguaPass" GridPane.columnIndex="1" />
-                  <JFXTextField fx:id="txtNuevaPass" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXTextField fx:id="txtRepiteNuevaPass" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Repite nueva" GridPane.rowIndex="2" />
+                  <JFXPasswordField fx:id="txtAntiguaPass" GridPane.columnIndex="1" />
+                  <JFXPasswordField fx:id="txtNuevaPass" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXPasswordField fx:id="txtRepiteNuevaPass" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <JFXButton fx:id="btnConfirmar" buttonType="RAISED" defaultButton="true" layoutX="205.0" layoutY="199.0" onAction="#guardarCambios" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #2D5FB8;" text="Confirmar" textFill="WHITE">

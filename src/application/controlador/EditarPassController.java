@@ -1,0 +1,124 @@
+package application.controlador;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+
+import application.VariablesEstaticas;
+import application.modelo.Alerta;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import orm.dao.DaoProfesor;
+import orm.pojos.Profesor;
+import utiles.excepciones.BusinessException;
+
+public class EditarPassController {
+
+	@FXML
+	private StackPane idStackPane;
+
+	@FXML
+	private AnchorPane idAnchorPane;
+
+	@FXML
+	private JFXPasswordField txtAntiguaPass;
+
+	@FXML
+	private JFXPasswordField txtNuevaPass;
+
+	@FXML
+	private JFXPasswordField txtRepiteNuevaPass;
+
+	@FXML
+	private JFXButton btnConfirmar;
+
+	@FXML
+	private JFXButton btnCancelar;
+
+	@FXML
+	void btnCancelar(ActionEvent event) {
+		AjustesController.dialogo.close();
+
+	}
+
+	@FXML
+	void guardarCambios(ActionEvent event) throws BusinessException {
+
+		if (validar()) {
+
+			// las nuevas pass coinciden?
+
+			if (txtNuevaPass.getText().equals(txtRepiteNuevaPass.getText())) {
+
+				Profesor profesor = VariablesEstaticas.profesor;
+				// Sí coinciden,
+				if (txtAntiguaPass.getText().equals(profesor.getPassword())) {
+					// contraseña antigua correcto: se cambia la pass
+					DaoProfesor daoProfesor = new DaoProfesor();
+					profesor.setPassword(txtNuevaPass.getText());
+					daoProfesor.actualizar(profesor);
+					Alerta alerta = new Alerta(idStackPane, "ERROR", "No se ha podido modificar la contraseña.");
+					alerta.mostrarAlerta();
+					AjustesController.dialogo.close();
+
+				} else {
+					// Contraseña antigua mal: se muestra error al modificar pass
+					Alerta alerta = new Alerta(idStackPane, "ERROR", "No se ha podido modificar la contraseña.");
+					alerta.mostrarAlerta();
+				}
+
+			} else {
+
+				// mostrar alerta de que las contraseñas no coinciden
+				Alerta alerta = new Alerta(idStackPane, "ERROR", "Las nuevas contraseñas no coinciden.");
+				alerta.mostrarAlerta();
+				txtNuevaPass.setText("");
+				txtRepiteNuevaPass.setText("");
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Metodo que comprueba si ha rellena todos los textField del formulario
+	 *
+	 * @return true si esta todo rellenado, else false
+	 */
+	private boolean validar() {
+		boolean resultado = true;
+
+		// que rellene todos los inputs
+		if (txtAntiguaPass.getText().isEmpty()) {
+			resultado = false;
+			txtAntiguaPass.setStyle("-jfx-unfocus-color: red");
+			new animatefx.animation.Shake(txtAntiguaPass).play();
+
+		} else {
+			txtAntiguaPass.setStyle(null);
+		}
+
+		if (txtNuevaPass.getText().isEmpty()) {
+			resultado = false;
+			txtNuevaPass.setStyle("-jfx-unfocus-color: red");
+			new animatefx.animation.Shake(txtNuevaPass).play();
+
+		} else {
+			txtNuevaPass.setStyle(null);
+		}
+
+		if (txtRepiteNuevaPass.getText().isEmpty()) {
+			resultado = false;
+			txtRepiteNuevaPass.setStyle("-jfx-unfocus-color: red");
+			new animatefx.animation.Shake(txtRepiteNuevaPass).play();
+
+		} else {
+			txtRepiteNuevaPass.setStyle(null);
+		}
+
+		return resultado;
+	}
+
+}
