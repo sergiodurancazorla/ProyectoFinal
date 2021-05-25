@@ -49,6 +49,7 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 		return segundos;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<Incidencia> getIncidenciasProfesorSinResolver(Profesor p) {
 		ArrayList<Incidencia> lista = new ArrayList<Incidencia>();
 		// comenzamos sesion
@@ -96,5 +97,24 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 		resultado = Integer.valueOf(txtResultado);
 
 		return resultado;
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<Incidencia> getIncidenciasMes(int mes) {
+
+		ArrayList<Incidencia> lista = new ArrayList<Incidencia>();
+
+		// obtenemos sesion
+		Session s = UtilesHibernate.getSessionFactory().getCurrentSession();
+
+		// Obtener incidencias dentro de ese mes
+		String hql = "SELECT i FROM Incidencia i where month(fecha_incidencia) =:mes";
+
+		Query query = s.createQuery(hql);
+		query.setParameter("mes", mes);
+
+		lista = (ArrayList<Incidencia>) query.list();
+
+		return lista;
 	}
 }

@@ -3,30 +3,34 @@ package application.modelo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import application.VariablesEstaticas;
 import orm.pojos.Incidencia;
 
 public class PDFGenerator extends Thread {
 
 	private Incidencia incidencia;
 	private File fichero;
+	ArrayList<Incidencia> listadoIncidencias;
 
 	/**
-	 * PDF de todas las incidencias
+	 * PDF de las incidencias de un mes en concreto.
 	 * 
-	 * @param url
+	 * @param fichero
+	 * @param listadoIncidencias
 	 */
-	public PDFGenerator(File fichero) {
+	public PDFGenerator(File fichero, ArrayList<Incidencia> listadoIncidencias) {
 		this.fichero = fichero;
+		this.listadoIncidencias = listadoIncidencias;
 	}
 
 	/**
@@ -43,7 +47,7 @@ public class PDFGenerator extends Thread {
 	@Override
 	public void run() {
 
-		if (fichero != null) {
+		if (fichero != null && incidencia == null) {
 
 			try {
 				// Se crea el documento
@@ -58,18 +62,22 @@ public class PDFGenerator extends Thread {
 				// Se abre el documento
 				documento.open();
 
-				// Parrafo
-				Paragraph titulo = new Paragraph("Lista de incidencias \n\n",
+				// Parrafo titulo
+				Paragraph titulo = new Paragraph("Listado de incidencias \n",
 						FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLUE));
+				titulo.setAlignment(Element.ALIGN_CENTER);
 
 				// Añadimos el titulo al documento
 				documento.add(titulo);
 
 				// bucle que añade parrafos por incidencia
 
-				for (int i = 0; i < VariablesEstaticas.data.size(); i++) {
-					Paragraph parrafo = new Paragraph(VariablesEstaticas.data.get(i).toString());
+				for (int i = 0; i < listadoIncidencias.size(); i++) {
+					Paragraph parrafo = new Paragraph(listadoIncidencias.get(i).toString());
 					documento.add(parrafo);
+					Paragraph separador = new Paragraph(
+							"--------------------------------------------------------------------------------------------------------------------------------");
+					documento.add(separador);
 				}
 
 				documento.close();
@@ -78,6 +86,8 @@ public class PDFGenerator extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+
 		}
 
 	}

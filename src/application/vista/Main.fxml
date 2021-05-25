@@ -21,7 +21,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fx:id="btnAdd" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="99.0" onMouseClicked="#clickAdd" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnAdd" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="106.0" onMouseClicked="#clickAdd" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../recursos/iconos/add.png" />
                      </image>
@@ -29,7 +29,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fx:id="btnGraficos" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="150.0" onMouseClicked="#clickGraficos" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnGraficos" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="161.0" onMouseClicked="#clickGraficos" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../recursos/iconos/chart.png" />
                      </image>
@@ -37,7 +37,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fx:id="btnDocumentos" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="207.0" onMouseClicked="#clickDocumentos" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnDocumentos" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="223.0" onMouseClicked="#clickDocumentos" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../recursos/iconos/informes.png" />
                      </image>
@@ -45,7 +45,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fx:id="btnUsuario" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="265.0" onMouseClicked="#clickUsuario" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnUsuario" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="280.0" onMouseClicked="#clickUsuario" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../recursos/iconos/usuario.png" />
                      </image>
@@ -61,7 +61,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fx:id="btnAjustes" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="525.0" onMouseClicked="#clickAjustes" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="75.0">
+                  <ImageView fx:id="btnAjustes" fitHeight="40.0" fitWidth="40.0" layoutX="26.0" layoutY="513.0" onMouseClicked="#clickAjustes" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="87.0">
                      <image>
                         <Image url="@../../recursos/iconos/ajustes.png" />
                      </image>
