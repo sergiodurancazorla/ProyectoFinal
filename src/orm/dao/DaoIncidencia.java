@@ -1,6 +1,7 @@
 package orm.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Logger;
 
 import org.hibernate.Session;
@@ -99,6 +100,13 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 		return resultado;
 	}
 
+	/***
+	 * Metodo que devuelve dado un mes el listado de incidencias creadas en ese mes
+	 * en el anyo actual.
+	 * 
+	 * @param mes
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<Incidencia> getIncidenciasMes(int mes) {
 
@@ -108,10 +116,11 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 		Session s = UtilesHibernate.getSessionFactory().getCurrentSession();
 
 		// Obtener incidencias dentro de ese mes
-		String hql = "SELECT i FROM Incidencia i where month(fecha_incidencia) =:mes";
+		String hql = "SELECT i FROM Incidencia i where month(fecha_incidencia) =:mes and year(fecha_incidencia) =:anyo";
 
 		Query query = s.createQuery(hql);
 		query.setParameter("mes", mes);
+		query.setParameter("anyo", Calendar.getInstance().get(Calendar.YEAR));
 
 		lista = (ArrayList<Incidencia>) query.list();
 
