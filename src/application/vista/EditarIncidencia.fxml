@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -44,7 +45,10 @@
                   <Label text="Ubicación *" GridPane.rowIndex="4" />
                   <Label text="Descripción" GridPane.rowIndex="5" />
                   <Label text="Estado *" GridPane.rowIndex="7" />
-                  <JFXButton fx:id="btnSubirArchivo" buttonType="RAISED" ripplerFill="#3246d9" text="Subir archivo" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <JFXButton fx:id="btnSubirArchivo" buttonType="RAISED" ripplerFill="#3246d9" text="Subir archivo" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
                   <Label text="Selecciona un archivo" GridPane.rowIndex="8" />
                   <JFXComboBox fx:id="comboTipoIncidencia" onAction="#seleccionarItem" prefHeight="25.0" prefWidth="133.0" GridPane.columnIndex="1" />
                   <JFXComboBox fx:id="comboProfesor" prefHeight="25.0" prefWidth="137.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -90,9 +94,18 @@
                </children>
             </GridPane>
             <TextArea fx:id="txtObservaciones" layoutX="178.0" layoutY="434.0" prefHeight="99.0" prefWidth="348.0" style="-fx-wrap-text: true;" />
-            <JFXButton fx:id="btnConfirmar" buttonType="RAISED" defaultButton="true" layoutX="564.0" layoutY="543.0" onAction="#guardarCambios" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #2D5FB8;" text="Confirmar" textFill="WHITE" />
-            <JFXCheckBox fx:id="checkSAI" layoutX="375.0" layoutY="381.0" text="Resolver por el SAI" />
-            <JFXButton fx:id="btnCancelar" cancelButton="true" layoutX="495.0" layoutY="547.0" onAction="#btnCancelar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Cancelar" textFill="#2e89b8" />
+            <JFXButton fx:id="btnConfirmar" buttonType="RAISED" defaultButton="true" layoutX="564.0" layoutY="543.0" onAction="#guardarCambios" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #2D5FB8;" text="Confirmar" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <JFXCheckBox fx:id="checkSAI" layoutX="375.0" layoutY="381.0" text="Resolver por el SAI">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXCheckBox>
+            <JFXButton fx:id="btnCancelar" cancelButton="true" layoutX="495.0" layoutY="547.0" onAction="#btnCancelar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Cancelar" textFill="#2e89b8">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
          </children>
       </AnchorPane>
    </children>

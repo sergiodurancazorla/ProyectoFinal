@@ -151,7 +151,7 @@ public class HomeController implements Initializable {
 		// DAO NECESARIO
 		orm.dao.DaoIncidencia daoIncidencia = new DaoIncidencia();
 
-		// Lista incidencias por profesor
+		// Lista incidencias profesor
 		data = FXCollections.observableArrayList(daoIncidencia.getIncidenciasProfesor(profesor));
 
 		// -------COLUMNAS-----------

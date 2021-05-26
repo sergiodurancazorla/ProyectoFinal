@@ -73,9 +73,6 @@ public class UserController implements Initializable {
 	@FXML
 	private JFXButton btnLimpiarFiltro;
 
-	@FXML
-	private JFXButton btnCrearRol;
-
 	private ObservableList<Profesor> data;
 	private FilteredList<Profesor> listaFiltros;
 	static JFXDialog dialogo;
@@ -121,11 +118,6 @@ public class UserController implements Initializable {
 
 		dialogo = new JFXDialog(((StackPane) idAnchorPane.getParent()), layout, JFXDialog.DialogTransition.CENTER);
 		dialogo.show();
-
-	}
-
-	@FXML
-	void clickCrearRol(ActionEvent event) {
 
 	}
 

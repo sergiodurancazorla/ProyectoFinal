@@ -11,7 +11,6 @@ import com.jfoenix.controls.JFXDialogLayout;
 import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import application.modelo.Login;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,9 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import orm.dao.DaoIncidencia;
 import orm.dao.DaoProfesor;
-import utiles.excepciones.BusinessException;
 import utiles.hibernate.UtilesHibernate;
 
 public class MainController implements Initializable {
@@ -207,19 +204,10 @@ public class MainController implements Initializable {
 		Tooltip.install(btnCerrar, new Tooltip("Cerrar sesión"));
 
 		// Rellenar variables estaticas
-		DaoIncidencia daoIncidencia = new DaoIncidencia();
 		DaoProfesor daoProfesor = new DaoProfesor();
-		try {
 
-			// listado incidencias
-			VariablesEstaticas.data = FXCollections.observableArrayList(daoIncidencia.buscarTodos());
-
-			// SAI
-			VariablesEstaticas.SAI = daoProfesor.obtenerProfesor("SAI");
-
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		}
+		// SAI
+		VariablesEstaticas.SAI = daoProfesor.obtenerProfesor("SAI");
 
 	}
 

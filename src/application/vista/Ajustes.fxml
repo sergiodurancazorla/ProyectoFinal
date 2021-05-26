@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -36,6 +37,9 @@
                      <font>
                         <Font name="Calibri" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <JFXButton fx:id="btnPass" buttonType="RAISED" onAction="#clickPass" ripplerFill="#0673bb" text="Modificar contraseña">
                      <VBox.margin>
@@ -44,6 +48,9 @@
                      <font>
                         <Font name="Calibri" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <Line endX="719.0" endY="-8.0" opacity="0.2" startX="-100.5" startY="-8.0">
                      <VBox.margin>
@@ -70,6 +77,9 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </JFXButton>
                         <JFXComboBox fx:id="comboMes" onAction="#seleccionarMes" prefHeight="25.0" prefWidth="121.0" promptText="Seleccionar mes" />
                      </children>
@@ -97,6 +107,9 @@
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <JFXButton fx:id="btnTiposHardware" alignment="TOP_LEFT" buttonType="RAISED" onAction="#clickTiposHardware" prefHeight="25.0" prefWidth="245.0" ripplerFill="#0673bb" text="Crear / Modificar Tipos de Hardware">
                      <VBox.margin>
@@ -105,6 +118,9 @@
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                </children>
             </VBox>

@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -73,8 +74,14 @@
                </children>
             </GridPane>
             <TextArea fx:id="txtDescripcion" layoutX="205.0" layoutY="357.0" prefHeight="99.0" prefWidth="384.0" style="-fx-wrap-text: true;" />
-            <JFXButton fx:id="btnAnyadirIncidencia" buttonType="RAISED" layoutX="730.0" layoutY="584.0" onAction="#clickAnyadirIncidencia" prefHeight="38.0" prefWidth="121.0" style="-fx-background-color: #2D5FB8;" text="Añadir incidencia" textFill="WHITE" />
-            <JFXButton fx:id="btnLimpiar" layoutX="654.0" layoutY="591.0" onAction="#btnLimpiar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Limpiar" textFill="#2e89b8" />
+            <JFXButton fx:id="btnAnyadirIncidencia" buttonType="RAISED" layoutX="730.0" layoutY="584.0" onAction="#clickAnyadirIncidencia" prefHeight="38.0" prefWidth="121.0" style="-fx-background-color: #2D5FB8;" text="Añadir incidencia" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <JFXButton fx:id="btnLimpiar" layoutX="654.0" layoutY="591.0" onAction="#btnLimpiar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Limpiar" textFill="#2e89b8">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
             <Line endX="719.0" endY="-8.0" layoutX="131.0" layoutY="61.0" startX="-100.5" startY="-8.0" />
             <Text layoutX="30.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AÑADIR INCIDENCIA" wrappingWidth="257.146484375">
                <font>

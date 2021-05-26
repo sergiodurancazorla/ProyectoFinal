@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -24,7 +25,10 @@
 						</Label>
 						<JFXTextField fx:id="inpName" focusColor="#4ffbca" labelFloat="true" layoutX="56.0" layoutY="108.0" prefHeight="40.0" prefWidth="217.0" promptText="Nombre" unFocusColor="BLACK" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="19.0" />
 						<JFXPasswordField fx:id="inpPassword" focusColor="#4ffbca" layoutX="56.0" layoutY="186.0" prefHeight="40.0" prefWidth="217.0" promptText="Contraseña" unFocusColor="BLACK" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="19.0" />
-						<JFXButton fx:id="btnSignIn" buttonType="RAISED" defaultButton="true" layoutX="56.0" layoutY="281.0" onAction="#handleSignIn" prefHeight="40.0" prefWidth="90.0" ripplerFill="WHITE" style="-fx-background-color: orange; -fx-background-radius: 1em;" text="Entrar" />
+						<JFXButton fx:id="btnSignIn" buttonType="RAISED" defaultButton="true" layoutX="56.0" layoutY="281.0" onAction="#handleSignIn" prefHeight="40.0" prefWidth="90.0" ripplerFill="WHITE" style="-fx-background-color: orange; -fx-background-radius: 1em;" text="Entrar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
                   <ImageView fx:id="imgExit" fitHeight="40.0" fitWidth="34.0" layoutX="239.0" layoutY="14.0" onMouseClicked="#imgExitClick" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../recursos/iconos/x_cancel.png" />

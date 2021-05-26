@@ -62,7 +62,9 @@ public class GraficoInformeController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		try {
-			this.data = VariablesEstaticas.data;
+			DaoIncidencia daoIncidencia = new DaoIncidencia();
+			this.data = FXCollections.observableArrayList(daoIncidencia.buscarTodos());
+
 			this.profesor = VariablesEstaticas.profesor;
 			dataEstado = FXCollections.observableArrayList();
 			dataDepartamento = FXCollections.observableArrayList();

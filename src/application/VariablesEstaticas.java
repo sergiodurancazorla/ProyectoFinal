@@ -1,7 +1,5 @@
 package application;
 
-import javafx.collections.ObservableList;
-import orm.pojos.Incidencia;
 import orm.pojos.Profesor;
 
 public class VariablesEstaticas {
@@ -18,10 +16,5 @@ public class VariablesEstaticas {
 	public static Profesor SAI;
 
 	public static Profesor editarProfesor;
-
-	/**
-	 * Variable que guarda todas las incidencias de la app.
-	 */
-	public static ObservableList<Incidencia> data;
 
 }
