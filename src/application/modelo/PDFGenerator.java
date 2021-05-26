@@ -46,21 +46,20 @@ public class PDFGenerator extends Thread {
 
 	@Override
 	public void run() {
+		try {
+			// Se crea el documento
+			Document documento = new Document();
 
-		if (fichero != null && incidencia == null) {
+			// El OutPutStream para el fichero donde crearemos el PDF
+			FileOutputStream ficheroPDF = new FileOutputStream(fichero.getAbsolutePath());
+			// Se asocia el documento de OutPutStream
+			PdfWriter.getInstance(documento, ficheroPDF);
 
-			try {
-				// Se crea el documento
-				Document documento = new Document();
+			// Se abre el documento
+			documento.open();
 
-				// El OutPutStream para el fichero donde crearemos el PDF
-				FileOutputStream ficheroPDF = new FileOutputStream(fichero.getAbsolutePath());
-
-				// Se asocia el documento de OutPutStream
-				PdfWriter.getInstance(documento, ficheroPDF);
-
-				// Se abre el documento
-				documento.open();
+			if (fichero != null && incidencia == null) {
+				// LISTADO MENSUAL
 
 				// Parrafo titulo
 				Paragraph titulo = new Paragraph("Listado de incidencias \n",
@@ -80,14 +79,27 @@ public class PDFGenerator extends Thread {
 					documento.add(separador);
 				}
 
-				documento.close();
+			} else if (fichero != null && incidencia != null) {
 
-			} catch (FileNotFoundException | DocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// INCIDENCIA INDIVIDUAL
+
+				// Parrafo titulo
+				Paragraph titulo = new Paragraph("Informacion de la incidencia\n",
+						FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLUE));
+				titulo.setAlignment(Element.ALIGN_CENTER);
+
+				// Añadimos el titulo al documento
+				documento.add(titulo);
+
+				Paragraph parrafo = new Paragraph(incidencia.toString());
+				documento.add(parrafo);
 			}
-		} else {
 
+			documento.close();
+
+		} catch (FileNotFoundException | DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

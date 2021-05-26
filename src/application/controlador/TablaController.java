@@ -1,6 +1,7 @@
 
 package application.controlador;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import application.modelo.DialogoEditar;
+import application.modelo.PDFGenerator;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -31,6 +33,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -39,6 +43,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Callback;
 import orm.dao.DaoDepartamento;
 import orm.dao.DaoEstado;
@@ -149,6 +155,8 @@ public class TablaController implements Initializable {
 		try {
 			this.profesor = VariablesEstaticas.profesor;
 
+			menuContextual();
+
 			iniciarTabla();
 
 			inciarCombosFiltros();
@@ -161,7 +169,6 @@ public class TablaController implements Initializable {
 				public void handle(MouseEvent mouseEvent) {
 					if (mouseEvent.getClickCount() == 2) {
 						btnEditar.fire();
-
 					}
 				}
 			});
@@ -170,6 +177,39 @@ public class TablaController implements Initializable {
 			e.printStackTrace();
 		}
 
+	}
+
+	private void menuContextual() {
+		ContextMenu contextMenu = new ContextMenu();
+		MenuItem menuItem1 = new MenuItem("Editar");
+		MenuItem menuItem2 = new MenuItem("Generar informe");
+		menuItem1.setOnAction((event) -> {
+			btnEditar.fire();
+			;
+		});
+
+		menuItem2.setOnAction((event) -> {
+			generarInforme(event);
+		});
+
+		contextMenu.getItems().addAll(menuItem1, menuItem2);
+		tablaIncidencias.contextMenuProperty().set(contextMenu);
+	}
+
+	private void generarInforme(ActionEvent event) {
+		// Coger incidencia clickada
+		TreeItem<Incidencia> item = tablaIncidencias.getSelectionModel().getSelectedItem();
+
+		// Filechooser, donde se va a guardar?
+		FileChooser chooser = new FileChooser();
+		chooser.getExtensionFilters().add(new ExtensionFilter("pdf", "*.pdf"));
+		chooser.setTitle("¿Donde quieres guardar el informe?");
+		File fichero = chooser.showSaveDialog(btnEditar.getScene().getWindow());
+
+		// Generar fichero pasando la incidencia
+
+		PDFGenerator pdf = new PDFGenerator(fichero, item.getValue());
+		pdf.start();
 	}
 
 	/**

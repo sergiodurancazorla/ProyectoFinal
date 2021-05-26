@@ -96,13 +96,19 @@ public class AddController implements Initializable {
 
 	private FileChooser fileChooser;
 
-	// MODIFICAR *****************************************************
-
-//	@FXML
-//	private JFXComboBox<Profesor> jfxComboProfesor;
-
 	private Profesor profesor;
 	private File archivo;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		this.profesor = VariablesEstaticas.profesor;
+
+		try {
+			iniciar();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/***
 	 * Metodo que hace visible/oculta el grid de hardware
@@ -119,17 +125,6 @@ public class AddController implements Initializable {
 			gridHardware.setVisible(false);
 		}
 
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		this.profesor = VariablesEstaticas.profesor;
-
-		try {
-			iniciar();
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@FXML
