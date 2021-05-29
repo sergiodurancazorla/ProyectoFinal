@@ -1,5 +1,6 @@
 package application;
 
+import application.modelo.LogIncidencia;
 import orm.pojos.Profesor;
 
 public class VariablesEstaticas {
@@ -16,5 +17,7 @@ public class VariablesEstaticas {
 	public static Profesor SAI;
 
 	public static Profesor editarProfesor;
+
+	public static LogIncidencia log;
 
 }

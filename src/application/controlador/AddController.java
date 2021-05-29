@@ -176,6 +176,15 @@ public class AddController implements Initializable {
 
 				}
 
+				// Guardar en log
+
+				try {
+					VariablesEstaticas.log.logIncidencia(incidencia);
+
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
 				// Refrescar sesion de base de datos
 
 				// mostra alerta
@@ -292,7 +301,6 @@ public class AddController implements Initializable {
 		comboProfesor.setValue(null);
 		comboDepartamento.setValue(null);
 		comboUbicacion.setValue(null);
-		comboEstado.setValue(null);
 		txtDescripcion.setText("");
 		fileChooser = null;
 		btnSubirArchivo.setText("Subir archivo");

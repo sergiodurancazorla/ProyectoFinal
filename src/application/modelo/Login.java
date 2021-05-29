@@ -2,6 +2,7 @@ package application.modelo;
 
 import org.hibernate.Session;
 
+import application.VariablesEstaticas;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,9 @@ public class Login extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			// al inicio de todo, iniciar el log.
+			VariablesEstaticas.log = new LogIncidencia();
+
 			// Abrir sesion
 
 			// FALTA AÑADIR QUE PASA SI FALLA LA CONEXION, MOSTRAR MENSAJE

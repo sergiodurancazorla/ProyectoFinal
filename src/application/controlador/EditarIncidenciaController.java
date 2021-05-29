@@ -414,10 +414,16 @@ public class EditarIncidenciaController implements Initializable {
 				incidencia.setTiempoResolucion(null);
 			}
 
+			// ACTUALIZAR
 			daoIncidencia.actualizar(incidencia);
 
+			// GUARDAR LOGS
+			VariablesEstaticas.log.logIncidencia(incidencia);
+
+			// COMUNICAR EMAIL
 			enviarEmails();
 
+			// CERRAR
 			DialogoEditar.cerrarDialogo();
 
 		} else {

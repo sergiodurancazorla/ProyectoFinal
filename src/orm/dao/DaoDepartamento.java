@@ -27,7 +27,7 @@ public class DaoDepartamento extends DaoGenericoHibernate<Departamento, Integer>
 
 			Query q = s.createQuery(hql);
 
-			lista = new ArrayList(q.list());
+			lista = (ArrayList) q.list();
 
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
