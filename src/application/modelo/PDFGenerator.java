@@ -110,9 +110,8 @@ public class PDFGenerator extends Thread {
 			// al finalizar cerramos el documento.
 			documento.close();
 
-		} catch (FileNotFoundException | DocumentException e) {
-			VariablesEstaticas.log.logGeneral("[ERROR] No se ha podido generar PDF" + e.getMessage());
-		} finally {
+		} catch (FileNotFoundException | DocumentException | NullPointerException e) {
+			VariablesEstaticas.log.logGeneral("[ERROR] No se ha podido generar PDF \n" + e.getMessage());
 		}
 
 	}

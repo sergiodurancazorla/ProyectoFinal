@@ -43,10 +43,13 @@
             <ComboBox fx:id="filtroDepartamento" prefHeight="25.0" prefWidth="197.0" promptText="Filtrar por departamento" />
          </children>
       </HBox>
-      <ImageView fitHeight="29.0" fitWidth="33.0" layoutX="821.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnRefresg" fitHeight="29.0" fitWidth="33.0" layoutX="821.0" layoutY="66.0" onMouseClicked="#clickRefresh" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../recursos/iconos/search.png" />
+            <Image url="@../../recursos/iconos/refresh.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <JFXButton fx:id="btnLimpiarFiltro" layoutX="722.0" layoutY="68.0" onAction="#btnLimpiarFiltros" prefHeight="25.0" prefWidth="99.0" ripplerFill="#0a5479" text="Limpiar filtros" textFill="#2e89b8">
          <cursor>

@@ -450,4 +450,18 @@ public class TablaController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que refresca la tabla y la recarga.
+	 * 
+	 * @param event
+	 * @throws BusinessException
+	 */
+	@FXML
+	void clickRefresh(MouseEvent event) throws BusinessException {
+		btnLimpiarFiltro.fire();
+		iniciarTabla();
+		inciarCombosFiltros();
+		filtros();
+	}
+
 }

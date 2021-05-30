@@ -52,10 +52,16 @@ import orm.pojos.TipoHarware;
 import utiles.excepciones.BusinessException;
 import utiles.fechas.Fechas;
 
+/**
+ * Controlador de la vista editar incidencia. En esta clase se implementa el
+ * código para editar una incidencia.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class EditarIncidenciaController implements Initializable {
 
-	private Incidencia incidencia;
-
+	// FXML
 	@FXML
 	private JFXDatePicker fechaIncidencia;
 
@@ -110,13 +116,15 @@ public class EditarIncidenciaController implements Initializable {
 	@FXML
 	private StackPane idStackPane;
 
+	// ATRIBUTOS PRIVADOS
+	private Incidencia incidencia;
 	private Profesor profesor;
-
 	private Boolean incidenciaModificada;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			// se guarda el profesor en una variable privada
 			this.profesor = VariablesEstaticas.profesor;
 			incidenciaModificada = false;
 
@@ -125,6 +133,7 @@ public class EditarIncidenciaController implements Initializable {
 
 		} catch (BusinessException e) {
 			e.printStackTrace();
+			VariablesEstaticas.log.logGeneral("[ERROR] No se ha podido iniciar editar incidencia\n\t " + e.toString());
 		}
 
 	}
@@ -146,7 +155,7 @@ public class EditarIncidenciaController implements Initializable {
 
 		});
 
-		// fecha ********************************************************************
+		// fecha
 		fechaIncidencia.valueProperty().addListener(new ChangeListener<LocalDate>() {
 
 			@Override
@@ -398,12 +407,20 @@ public class EditarIncidenciaController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que guarda la incidencia modificada si se ha modificado algo
+	 * 
+	 * @param event
+	 * @throws BusinessException
+	 * @throws IOException
+	 */
 	@FXML
 	void guardarCambios(ActionEvent event) throws BusinessException, IOException {
 		DaoIncidencia daoIncidencia = new DaoIncidencia();
 		if (incidenciaModificada) {
 
-			// Si la incidencia tiene el estado "Solucionada" o "Solucion inviable"
+			// Si la incidencia tiene el estado "Solucionada" o "Solucion inviable" se le
+			// pone fecha de resolucion y se calcula su tiempo de resolucion
 			if (incidencia.getEstado().getNombre().toUpperCase().equals("SOLUCIONADA")
 					|| incidencia.getEstado().getNombre().toUpperCase().equals("SOLUCION INVIABLE")) {
 				incidencia.setFechaResolucion(Date.from(Instant.now()));
@@ -427,30 +444,45 @@ public class EditarIncidenciaController implements Initializable {
 			DialogoEditar.cerrarDialogo();
 
 		} else {
+			// Si no se ha modificado nada se muestra alerta
 			Alerta alerta = new Alerta(idStackPane, "Algo no ha salido como esperaba", "No has modificado nada!");
 			alerta.mostrarAlerta();
 		}
 
 	}
 
+	/**
+	 * Metodo que calcula el tiempo en SEGUNDOS que ha llevado resolver una
+	 * incidencia
+	 * 
+	 * @return el tiempo en segundos
+	 */
 	private Integer calcularTiempoResolucion() {
 		Integer respuesta = 0;
 
+		// se obtiene la fecha
 		Date dateInicio = incidencia.getFechaIncidencia();
 		Date dateFin = incidencia.getFechaResolucion();
 
+		// se pasa a dateTime
 		DateTime dt1 = new DateTime(dateInicio);
 		DateTime dt2 = new DateTime(dateFin);
 
+		// Se usa libreria JodaTime para calcular los dias horas minutos y segundos
 		int dias = Days.daysBetween(dt1, dt2).getDays();
 		int horas = Hours.hoursBetween(dt1, dt2).getHours() % 24;
 		int minutos = Minutes.minutesBetween(dt1, dt2).getMinutes() % 60;
 		int segundos = Seconds.secondsBetween(dt1, dt2).getSeconds() % 60;
+
+		// se pasa a segundos
 		respuesta = (dias * 86400) + (horas * 3600) + (minutos * 60) + segundos;
-		System.out.println("Tiempo de resolucion en segundos: " + respuesta);
 		return respuesta;
 	}
 
+	/**
+	 * Metodo que envia los emails correspondientes cuando la incidencia se ha
+	 * modificado
+	 */
 	private void enviarEmails() {
 
 		// Mensaje
@@ -492,6 +524,11 @@ public class EditarIncidenciaController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que cierra el dialogo
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void btnCancelar(ActionEvent event) {
 		DialogoEditar.cerrarDialogo();

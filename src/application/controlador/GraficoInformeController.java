@@ -27,8 +27,16 @@ import orm.pojos.Incidencia;
 import orm.pojos.Profesor;
 import utiles.excepciones.BusinessException;
 
+/**
+ * Controlador de la vista Graficos. En esta clase se implementa el código para
+ * que se muestren los graficos.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class GraficoInformeController implements Initializable {
 
+	// FXML
 	@FXML
 	private AnchorPane idAnchorPane;
 
@@ -53,6 +61,7 @@ public class GraficoInformeController implements Initializable {
 	@FXML
 	private Label txtCantidadGrafico;
 
+	// ATRIBUTOS PRIVADOS
 	private ObservableList<Incidencia> data;
 	private Profesor profesor;
 	private ObservableList<PieChart.Data> dataEstado;
@@ -62,12 +71,12 @@ public class GraficoInformeController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		try {
+			// Se obtienen todos las incidencias de la app
 			DaoIncidencia daoIncidencia = new DaoIncidencia();
 			this.data = FXCollections.observableArrayList(daoIncidencia.buscarTodos());
 
+			// Se obtienne informacion del profesor logueado
 			this.profesor = VariablesEstaticas.profesor;
-			dataEstado = FXCollections.observableArrayList();
-			dataDepartamento = FXCollections.observableArrayList();
 			cargarTextos();
 			cargarPieChart();
 		} catch (BusinessException e) {
@@ -77,7 +86,8 @@ public class GraficoInformeController implements Initializable {
 	}
 
 	private void cargarPieChart() throws BusinessException {
-		// ESTADOS*********************************
+		// ******************ESTADOS*********************************
+		dataEstado = FXCollections.observableArrayList();
 
 		// ¿Cuantos estados hay?
 		DaoEstado daoEstado = new DaoEstado();
@@ -113,7 +123,8 @@ public class GraficoInformeController implements Initializable {
 					});
 
 		}
-		// DEPARTAMENTOS*************************
+		// ***************** DEPARTAMENTOS*************************
+		dataDepartamento = FXCollections.observableArrayList();
 
 		// ¿Cuantos departamentos hay?
 		DaoDepartamento daoDepartamento = new DaoDepartamento();
@@ -150,6 +161,10 @@ public class GraficoInformeController implements Initializable {
 		}
 	}
 
+	/**
+	 * Metodo que rellena los textos de las diferentes pestañas relativas a
+	 * incidencias totales, mis incidencias, resueltas, tiempo medio.
+	 */
 	private void cargarTextos() {
 		DaoIncidencia daoIncidencia = new DaoIncidencia();
 
@@ -168,16 +183,24 @@ public class GraficoInformeController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que dado un tiempo medio en segundos calcula los dias, horas, minutos
+	 * y segundos.
+	 * 
+	 * @param segundosTiempoMedioIncidencias
+	 * @return
+	 */
 	private String transformarTiempoMedio(int segundosTiempoMedioIncidencias) {
 		String texto = " ";
 
+		// Si no hay ninguna incidencia resuelta
 		if (segundosTiempoMedioIncidencias == 0) {
 			texto = "Incidencias\nsin\nresolver";
 			txtTiempoMedio.autosize();
 
 		} else {
 
-			// Calcular string en funcion de los segundos***********************
+			// Calcular string en funcion de los segundos
 			PeriodFormatter dhm = new PeriodFormatterBuilder().appendDays().appendSuffix(" dia", " dias")
 					.appendSeparator("\n").appendHours().appendSuffix(" hora", " horas").appendSeparator("\n")
 					.appendMinutes().appendSuffix(" minuto", " minutos").appendSeparator("\n").appendSeconds()

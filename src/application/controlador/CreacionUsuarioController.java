@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
+import application.VariablesEstaticas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,8 +23,16 @@ import orm.pojos.Profesor;
 import orm.pojos.Rol;
 import utiles.excepciones.BusinessException;
 
+/**
+ * Controlador de la vista crear usuario. En esta clase se implementa el código
+ * para crear un nuevo usuario
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class CreacionUsuarioController implements Initializable {
 
+	// FXML
 	@FXML
 	private StackPane idStackPane;
 
@@ -68,6 +77,11 @@ public class CreacionUsuarioController implements Initializable {
 		}
 	}
 
+	/**
+	 * Metodo que rellena los combos del formulario
+	 * 
+	 * @throws BusinessException
+	 */
 	private void rellenarCombos() throws BusinessException {
 
 		// DAO
@@ -85,10 +99,22 @@ public class CreacionUsuarioController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que controla cuando se pulsa en el boton cancelar
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void btnCancelar(ActionEvent event) {
+		UserController.dialogo.close();
 	}
 
+	/**
+	 * Metodo que controla cuando un usuario pulsa en guardar. Si el metodo valida y
+	 * es correcto guarda los cambios
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void guardarCambios(ActionEvent event) {
 
@@ -123,10 +149,15 @@ public class CreacionUsuarioController implements Initializable {
 				// Grabar
 				daoProfesor.grabar(nuevoProfesor);
 
-				UserController.dialogo.close();
+				// log
+				VariablesEstaticas.log.logGeneral("Ha creado un nuevo profesor: " + nuevoProfesor.toString());
 
 			} catch (BusinessException e) {
 				e.printStackTrace();
+				VariablesEstaticas.log.logGeneral("[ERROR] Al crear un nuevo usuario\n\t" + e.toString());
+			} finally {
+				// Cerrar
+				UserController.dialogo.close();
 			}
 
 		}

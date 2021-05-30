@@ -13,6 +13,13 @@ import orm.dao.DaoProfesor;
 import orm.pojos.Profesor;
 import utiles.excepciones.BusinessException;
 
+/**
+ * Controlador de la vista editar pass. En esta clase se implementa el código
+ * para editar la pass del usuario.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class EditarPassController {
 
 	@FXML
@@ -36,12 +43,23 @@ public class EditarPassController {
 	@FXML
 	private JFXButton btnCancelar;
 
+	/**
+	 * Metodo para cerra dialogo
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void btnCancelar(ActionEvent event) {
 		AjustesController.dialogo.close();
 
 	}
 
+	/**
+	 * Metodo que guarda los cambios de la pass si se valida correctamente
+	 * 
+	 * @param event
+	 * @throws BusinessException
+	 */
 	@FXML
 	void guardarCambios(ActionEvent event) throws BusinessException {
 
@@ -50,9 +68,9 @@ public class EditarPassController {
 			// las nuevas pass coinciden?
 
 			if (txtNuevaPass.getText().equals(txtRepiteNuevaPass.getText())) {
+				// Sí coinciden,
 
 				Profesor profesor = VariablesEstaticas.profesor;
-				// Sí coinciden,
 				if (txtAntiguaPass.getText().equals(profesor.getPassword())) {
 					// contraseña antigua correcto: se cambia la pass
 					DaoProfesor daoProfesor = new DaoProfesor();
@@ -83,7 +101,7 @@ public class EditarPassController {
 	}
 
 	/**
-	 * Metodo que comprueba si ha rellena todos los textField del formulario
+	 * Metodo que comprueba si ha rellenado todos los textField del formulario
 	 *
 	 * @return true si esta todo rellenado, else false
 	 */

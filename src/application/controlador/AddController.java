@@ -194,6 +194,7 @@ public class AddController implements Initializable {
 				// Guardar en log
 
 				VariablesEstaticas.log.logIncidencia(incidencia);
+				VariablesEstaticas.log.logGeneral("Ha creado una nueva incidencia");
 
 				// mostra alerta
 				Alerta alerta = new Alerta(stackPane, "Incidencia creada", "La incidencia se ha creado con éxito");

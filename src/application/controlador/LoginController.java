@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import application.VariablesEstaticas;
 import application.modelo.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,10 +58,9 @@ public class LoginController {
 				cambioDePass();
 			}
 
-			System.out.println("Te has conectado");
-
-			System.out.println("HAS CONSEGUIDO ACCEDER, EL USUARIO ES : " + profesor.toString() + "\n tiene rol de: "
-					+ profesor.getRol().getDescripcion());
+			// LOG
+			VariablesEstaticas.log.logGeneral("[INICIO DE SESION] El usuario " + profesor.toString() + " con ROL: "
+					+ profesor.getRol().getDescripcion() + " ha iniciado sesión.");
 
 			Main principal = new Main(profesor);
 			Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -69,7 +69,8 @@ public class LoginController {
 		} else
 
 		{
-			System.out.println("ERROR, AQUI MOSTRAR ERROR DE CONEXION");
+
+			VariablesEstaticas.log.logGeneral("[ERROR INICIO SESION]");
 			Alert alerta = new Alert(AlertType.ERROR);
 			alerta.setTitle("ERROR AL INICIAR SESION");
 			alerta.setHeaderText(null);
@@ -147,8 +148,12 @@ public class LoginController {
 			profesor.setPassword(resultado.get());
 			try {
 				daoProfesor.actualizar(profesor);
+				VariablesEstaticas.log
+						.logGeneral("[CAMBIO DE PASS] El usuario " + profesor.toString() + " ha cambiado su pass");
 			} catch (BusinessException e) {
 				e.printStackTrace();
+				VariablesEstaticas.log.logGeneral("[ERROR] El usuario " + profesor.toString()
+						+ " no ha podido modificar su pass " + e.toString());
 			}
 			alert.setResult(null);
 		}

@@ -146,6 +146,13 @@ public class UserController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que refresca la tabla y la recarga.
+	 * 
+	 * @param event
+	 * @throws BusinessException
+	 */
+
 	@FXML
 	void clickRefresh(MouseEvent event) {
 		try {

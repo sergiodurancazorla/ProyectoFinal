@@ -26,8 +26,16 @@ import orm.pojos.Profesor;
 import orm.pojos.Rol;
 import utiles.excepciones.BusinessException;
 
+/**
+ * Controlador de la vista editar usuario. En esta clase se implementa el código
+ * para editar un usuario
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class EdicionUsuarioController implements Initializable {
 
+	// FXML
 	@FXML
 	private StackPane idStackPane;
 
@@ -61,6 +69,7 @@ public class EdicionUsuarioController implements Initializable {
 	@FXML
 	private JFXButton btnCancelar;
 
+	// ATRIBUTOS PRIVADOS
 	private Profesor editarProfesor;
 	private Boolean profesorModificado;
 
@@ -76,9 +85,15 @@ public class EdicionUsuarioController implements Initializable {
 
 		} catch (BusinessException e) {
 			e.printStackTrace();
+			VariablesEstaticas.log.logGeneral("[ERROR] No se ha podido iniciar edicion usuario \n\t" + e.toString());
 		}
 	}
 
+	/**
+	 * Metodo que genera listener para cada input del formulario. Si algo se
+	 * modifica el listener lo detecta y pone variable boolean profesorModificado a
+	 * true.
+	 */
 	private void addListenerProfesor() {
 
 		// dni
@@ -160,6 +175,10 @@ public class EdicionUsuarioController implements Initializable {
 		});
 	}
 
+	/**
+	 * Metodo que rellena el formulario con la informacion del usuario que se quiere
+	 * modificar
+	 */
 	private void rellenarInfo() {
 		txtDni.setText(editarProfesor.getDni());
 		txtApellido1.setText(editarProfesor.getApellido1());
@@ -177,6 +196,11 @@ public class EdicionUsuarioController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que rellena los combos del formulario
+	 * 
+	 * @throws BusinessException
+	 */
 	private void rellenarCombos() throws BusinessException {
 
 		// DAO
@@ -199,8 +223,16 @@ public class EdicionUsuarioController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que se lanza cuando el usuario pulsa el boton cancelar. Como este
+	 * dialogo se puede lanzar desde dos pantallas diferentes se necesita saber
+	 * desde donde estamos viniendo, para solucionar esto se fuerza la excepcion.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void btnCancelar(ActionEvent event) {
+		// Se pone variable estatica editarProfesor a null.
 		VariablesEstaticas.editarProfesor = null;
 
 		// cerrar
@@ -215,6 +247,10 @@ public class EdicionUsuarioController implements Initializable {
 		}
 	}
 
+	/**
+	 * Metodo que guarda los cambios. Si valida y se ha modificado algun dato estos
+	 * se guardan en el profesor que le corresponda
+	 */
 	@FXML
 	void guardarCambios(ActionEvent event) {
 
@@ -226,25 +262,20 @@ public class EdicionUsuarioController implements Initializable {
 				// Grabar
 				daoProfesor.actualizar(editarProfesor);
 
-				// Cerrar
-				try {
-					UserController.dialogo.close();
-				} catch (NullPointerException e) {
-				}
+				// log
+				VariablesEstaticas.log.logGeneral("Ha editado el profesor: " + editarProfesor.toString());
 
-				try {
-					AjustesController.dialogo.close();
-				} catch (NullPointerException e) {
-				}
+				// Se cierra simulando que el usuario pulsar el boton cancelar.
+				btnCancelar.fire();
 
 			} catch (BusinessException e) {
 				e.printStackTrace();
-			} finally {
-				VariablesEstaticas.editarProfesor = null;
+				VariablesEstaticas.log.logGeneral("[ERROR] No se ha podido editar el profesor\n\t" + e.getMessage());
 
 			}
 
 		} else if (!profesorModificado) {
+			// No se ha modificado nada
 			Alerta alerta = new Alerta(idStackPane, "Algo no ha salido como esperaba", "No has modificado nada!");
 			alerta.mostrarAlerta();
 		}

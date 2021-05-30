@@ -23,7 +23,7 @@ public class VariablesEstaticas {
 	public static Profesor SAI;
 
 	/**
-	 * Variable que guarda el profeoSr del cual se quiere modiicar cualquier dato.
+	 * Variable que guarda el profesor del cual se quiere modiicar cualquier dato.
 	 */
 	public static Profesor editarProfesor;
 
