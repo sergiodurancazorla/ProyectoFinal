@@ -28,6 +28,13 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import orm.dao.DaoIncidencia;
 import orm.pojos.Incidencia;
 
+/**
+ * Controlador de la vista Ajustes. En esta clase se implementa el código para
+ * controlar los ajustes de usuario
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class AjustesController implements Initializable {
 
 	// FXML
@@ -136,55 +143,61 @@ public class AjustesController implements Initializable {
 		pdf.start();
 	}
 
+	/**
+	 * Metodo que dado un mes en formato string devuelve su entero equivalente
+	 * 
+	 * @param stringMes
+	 * @return
+	 */
 	private int transformarMes(String stringMes) {
 		int mes = 0;
 
-		switch (stringMes) {
-		case "Enero":
+		switch (stringMes.toUpperCase()) {
+		case "ENERO":
 			mes = 1;
 
 			break;
-		case "Febrero":
+		case "FEBRERO":
 			mes = 2;
 
 			break;
-		case "Marzo":
+		case "MARZO":
 			mes = 3;
 
 			break;
-		case "Abril":
+		case "ABRIL":
 			mes = 4;
 
 			break;
-		case "Mayo":
+		case "MAYO":
 			mes = 5;
 
 			break;
-		case "Junio":
+		case "JUNIO":
 			mes = 6;
 
 			break;
-		case "Julio":
+		case "JULIO":
 			mes = 7;
 
 			break;
-		case "Agosto":
+		case "AGOSTO":
 			mes = 8;
 
 			break;
-		case "Septiembre":
+		case "SEPTIEMBRE":
 			mes = 9;
 
 			break;
-		case "Octubre":
+		case "OCTUBRE":
 			mes = 10;
 
 			break;
-		case "Noviembre":
+		case "NOVIEMBRE":
 			mes = 11;
 
 			break;
-		case "Diciembre":
+		case "DICIEMBRE":
 			mes = 12;
 
 			break;
@@ -194,8 +207,15 @@ public class AjustesController implements Initializable {
 		return mes;
 	}
 
+	/**
+	 * Metodo que genera dialogo para cambiar de pass
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void clickPass(ActionEvent event) throws IOException {
+		// Dialogo
 		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/EditarPass.fxml");
 		FXMLLoader loader = new FXMLLoader(fxmlLocation);
 		Parent panel = loader.load();

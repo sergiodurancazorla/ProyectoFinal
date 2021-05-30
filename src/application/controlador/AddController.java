@@ -19,11 +19,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -221,7 +223,27 @@ public class AddController implements Initializable {
 
 			// una vez guardado limpiamos el formulario
 			btnLimpiar.fire();
+
+			// Abrimos listado de incidencias
+
+			abrirListadoIincidencias();
 		}
+	}
+
+	/**
+	 * Metodo que abre el listado de incindencias cuando el usuario añade una
+	 * incidencia.
+	 */
+	private void abrirListadoIincidencias() {
+
+		try {
+			AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Tabla.fxml"));
+			((BorderPane) idAnchorPane.getParent().getParent()).setCenter(pane);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
