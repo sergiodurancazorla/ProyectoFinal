@@ -9,16 +9,16 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import application.VariablesEstaticas;
+import application.modelo.Alerta;
 import application.modelo.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
@@ -28,6 +28,10 @@ import orm.pojos.Profesor;
 import utiles.excepciones.BusinessException;
 
 public class LoginController {
+
+	// FXML
+	@FXML
+	private StackPane idStackPane;
 
 	@FXML
 	private JFXTextField inpName;
@@ -39,16 +43,14 @@ public class LoginController {
 	private ImageView imgExit;
 
 	@FXML
-	private JFXButton btnSignIn;
+	private JFXButton btnEntrar;
 
+	// ATRIBUTOS PRIVADOS
 	private Profesor profesor;
 	private DaoProfesor daoProfesor;
 
 	@FXML
-	public void handleSignIn(ActionEvent actionEvent) throws Exception {
-		System.out.println(inpName.getText());
-		System.out.println(inpPassword.getText());
-
+	public void clickEntrar(ActionEvent actionEvent) throws Exception {
 		daoProfesor = new DaoProfesor();
 
 		if (daoProfesor.login(inpName.getText().toUpperCase(), inpPassword.getText())) {
@@ -58,25 +60,28 @@ public class LoginController {
 				cambioDePass();
 			}
 
-			// LOG
-			VariablesEstaticas.log.logGeneral("[INICIO DE SESION] El usuario " + profesor.toString() + " con ROL: "
-					+ profesor.getRol().getDescripcion() + " ha iniciado sesión.");
-
+			// Creamos ventana principal y le asignamos el profesor que va a usar la
+			// aplicación.
 			Main principal = new Main(profesor);
 			Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 			principal.start(stage);
+
+			// LOG
+			VariablesEstaticas.log.logGeneral("[INICIO DE SESION] El usuario " + profesor.getDni() + " con ROL: "
+					+ profesor.getRol().getDescripcion() + " ha iniciado sesión.");
 
 		} else
 
 		{
 
-			VariablesEstaticas.log.logGeneral("[ERROR INICIO SESION]");
-			Alert alerta = new Alert(AlertType.ERROR);
-			alerta.setTitle("ERROR AL INICIAR SESION");
-			alerta.setHeaderText(null);
-			alerta.setContentText("Usuario y/o contraseña incorrectas");
-			alerta.setGraphic(new ImageView("/recursos/iconos/warning.png"));
-			alerta.showAndWait();
+			Alerta alerta = new Alerta(idStackPane, "ERROR AL INICIAR SESION", "Usuario y/o contraseña incorrectas");
+			alerta.mostrarAlerta();
+//			Alert alerta = new Alert(AlertType.ERROR);
+//			alerta.setTitle("ERROR AL INICIAR SESION");
+//			alerta.setHeaderText(null);
+//			alerta.setContentText("Usuario y/o contraseña incorrectas");
+//			alerta.setGraphic(new ImageView("/recursos/iconos/warning.png"));
+//			alerta.showAndWait();
 
 			inpName.setText("");
 			inpPassword.setText("");
@@ -91,7 +96,7 @@ public class LoginController {
 	 */
 	private void cambioDePass() {
 
-		JFXAlert<String> alert = new JFXAlert<>((Stage) btnSignIn.getScene().getWindow());
+		JFXAlert<String> alert = new JFXAlert<>((Stage) btnEntrar.getScene().getWindow());
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.setOverlayClose(false);
 		alert.setResultConverter(buttonType -> {
@@ -160,9 +165,13 @@ public class LoginController {
 
 	}
 
+	/**
+	 * Metodo que cierra la app.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void imgExitClick(MouseEvent event) {
-		System.out.println("Aplicacion cerrada");
 		System.exit(0);
 	}
 

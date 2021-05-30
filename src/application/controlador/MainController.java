@@ -114,6 +114,10 @@ public class MainController implements Initializable {
 
 			login.start(stage);
 
+			// LOG
+			VariablesEstaticas.log.logGeneral("[CIERRE DE SESION] " + "El usuario "
+					+ VariablesEstaticas.profesor.toString() + " ha cerrado sesion.");
+
 		});
 
 		JFXButton cancelButton = new JFXButton("CANCELAR");
