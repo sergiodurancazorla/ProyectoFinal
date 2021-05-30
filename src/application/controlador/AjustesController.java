@@ -30,6 +30,7 @@ import orm.pojos.Incidencia;
 
 public class AjustesController implements Initializable {
 
+	// FXML
 	@FXML
 	private AnchorPane idAnchorPane;
 
@@ -51,6 +52,7 @@ public class AjustesController implements Initializable {
 	@FXML
 	private JFXComboBox<String> comboMes;
 
+	// ATRIBUTOS PRIVADOS
 	static JFXDialog dialogo;
 
 	@Override
@@ -58,6 +60,9 @@ public class AjustesController implements Initializable {
 		rellenarCombo();
 	}
 
+	/**
+	 * Metodo que rellena el combo de los meses.
+	 */
 	private void rellenarCombo() {
 
 		ObservableList<String> listaMes = FXCollections.observableArrayList("Enero", "Febrero", "Marzo", "Abril",
@@ -66,9 +71,18 @@ public class AjustesController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que genera un dialogo para modificar datos personales.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void clickDatosPersonales(ActionEvent event) throws IOException {
+		// obtenemos profesor y se añade a variable estatica de editar profesor
 		VariablesEstaticas.editarProfesor = VariablesEstaticas.profesor;
+
+		// DIALOGO:
 		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/EditarUsuario.fxml");
 		FXMLLoader loader = new FXMLLoader(fxmlLocation);
 		Parent panel = loader.load();
@@ -81,6 +95,12 @@ public class AjustesController implements Initializable {
 		dialogo.show();
 	}
 
+	/**
+	 * Metodo que controla cuando seleccionas un mes y activa el boton para generar
+	 * el informe mensual
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void seleccionarMes(ActionEvent event) {
 		if (!comboMes.getSelectionModel().isEmpty()) {
@@ -88,6 +108,12 @@ public class AjustesController implements Initializable {
 		}
 	}
 
+	/**
+	 * Metodo que controla cuando se hace click en el boton de informe mensual.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void clickInformeMensual(ActionEvent event) throws IOException {
 
@@ -99,13 +125,13 @@ public class AjustesController implements Initializable {
 		DaoIncidencia daoIncidencia = new DaoIncidencia();
 		ArrayList<Incidencia> listadoIncidencias = daoIncidencia.getIncidenciasMes(mes);
 
-		// Pasar listado de incidencias en forma de lista?
-
+		// Donde se quiere guardar y el nommbre: (Solo tipo pdf)
 		FileChooser chooser = new FileChooser();
 		chooser.getExtensionFilters().add(new ExtensionFilter("pdf", "*.pdf"));
 		chooser.setTitle("¿Donde quieres guardar el informe?");
 		File fichero = chooser.showSaveDialog(btnDatosPersonales.getScene().getWindow());
 
+		// Generar pdf en la ruta indicada
 		PDFGenerator pdf = new PDFGenerator(fichero, listadoIncidencias);
 		pdf.start();
 	}

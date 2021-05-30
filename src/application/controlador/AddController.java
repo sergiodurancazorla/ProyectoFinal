@@ -44,8 +44,16 @@ import orm.pojos.Tipo;
 import orm.pojos.TipoHarware;
 import utiles.excepciones.BusinessException;
 
+/**
+ * Controlador de la vista Add. En esta clase se implementa el código para
+ * guardar una nueva incidencia.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class AddController implements Initializable {
 
+	// FXML
 	@FXML
 	private StackPane stackPane;
 
@@ -94,8 +102,8 @@ public class AddController implements Initializable {
 	@FXML
 	private JFXButton btnLimpiar;
 
+	// ATRIBUTOS PRIVADOS
 	private FileChooser fileChooser;
-
 	private Profesor profesor;
 	private File archivo;
 
@@ -127,6 +135,11 @@ public class AddController implements Initializable {
 
 	}
 
+	/**
+	 * Método que guarda, si es todo correcto, la incidenccia en la BBDD
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void clickAnyadirIncidencia(ActionEvent event) {
 
@@ -178,14 +191,7 @@ public class AddController implements Initializable {
 
 				// Guardar en log
 
-				try {
-					VariablesEstaticas.log.logIncidencia(incidencia);
-
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-
-				// Refrescar sesion de base de datos
+				VariablesEstaticas.log.logIncidencia(incidencia);
 
 				// mostra alerta
 				Alerta alerta = new Alerta(stackPane, "Incidencia creada", "La incidencia se ha creado con éxito");
@@ -215,11 +221,14 @@ public class AddController implements Initializable {
 
 			// una vez guardado limpiamos el formulario
 			btnLimpiar.fire();
-
-			// MOSTRAR SI SE HA GUARDADO ALGO
 		}
 	}
 
+	/**
+	 * Método que controla el "Seleccionar un archivo" de la vista.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void clickSubirArchivo(ActionEvent event) {
 
@@ -332,16 +341,6 @@ public class AddController implements Initializable {
 
 	private boolean validar() {
 		boolean resultado = true;
-
-		// MODIFICAR *****************************************************
-
-//		if (jfxComboProfesor.getValue() == null) {
-//			resultado = false;
-//			jfxComboProfesor.setStyle("-jfx-unfocus-color: red");
-//			new animatefx.animation.Shake(jfxComboProfesor).play();
-//		} else {
-//			jfxComboProfesor.setStyle(null);
-//		}
 
 		// tipo de incidencia
 

@@ -14,8 +14,17 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import application.VariablesEstaticas;
 import orm.pojos.Incidencia;
 
+/**
+ * Clase que se usa para generar PDF de listados de incidencias o de una
+ * incidencia sola. Al tratarse de un hilo no basta con instanciarlo hay que
+ * start().
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class PDFGenerator extends Thread {
 
 	private Incidencia incidencia;
@@ -23,7 +32,7 @@ public class PDFGenerator extends Thread {
 	ArrayList<Incidencia> listadoIncidencias;
 
 	/**
-	 * PDF de las incidencias de un mes en concreto.
+	 * PDF de un listado de incidencias.
 	 * 
 	 * @param fichero
 	 * @param listadoIncidencias
@@ -47,6 +56,9 @@ public class PDFGenerator extends Thread {
 	@Override
 	public void run() {
 		try {
+			// LOG
+			VariablesEstaticas.log.logGeneral(" Se ha solicitado generar un pdf");
+
 			// Se crea el documento
 			Document documento = new Document();
 
@@ -59,7 +71,7 @@ public class PDFGenerator extends Thread {
 			documento.open();
 
 			if (fichero != null && incidencia == null) {
-				// LISTADO MENSUAL
+				// *******LISTADO MENSUAL******
 
 				// Parrafo titulo
 				Paragraph titulo = new Paragraph("Listado de incidencias \n",
@@ -81,7 +93,7 @@ public class PDFGenerator extends Thread {
 
 			} else if (fichero != null && incidencia != null) {
 
-				// INCIDENCIA INDIVIDUAL
+				// *******INCIDENCIA INDIVIDUAL**********
 
 				// Parrafo titulo
 				Paragraph titulo = new Paragraph("Informacion de la incidencia\n",
@@ -95,11 +107,12 @@ public class PDFGenerator extends Thread {
 				documento.add(parrafo);
 			}
 
+			// al finalizar cerramos el documento.
 			documento.close();
 
 		} catch (FileNotFoundException | DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			VariablesEstaticas.log.logGeneral("[ERROR] No se ha podido generar PDF" + e.getMessage());
+		} finally {
 		}
 
 	}
