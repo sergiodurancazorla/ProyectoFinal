@@ -94,7 +94,7 @@
                </children>
             </GridPane>
             <TextArea fx:id="txtObservaciones" layoutX="178.0" layoutY="434.0" prefHeight="99.0" prefWidth="348.0" style="-fx-wrap-text: true;" />
-            <JFXButton fx:id="btnConfirmar" buttonType="RAISED" layoutX="564.0" layoutY="543.0" onAction="#guardarCambios" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #2D5FB8;" text="Confirmar" textFill="WHITE">
+            <JFXButton fx:id="btnConfirmar" buttonType="RAISED" defaultButton="true" layoutX="564.0" layoutY="543.0" onAction="#guardarCambios" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #2D5FB8;" text="Confirmar" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
@@ -102,7 +102,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXCheckBox>
-            <JFXButton fx:id="btnCancelar" layoutX="495.0" layoutY="547.0" onAction="#btnCancelar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Cancelar" textFill="#2e89b8">
+            <JFXButton fx:id="btnCancelar" cancelButton="true" layoutX="495.0" layoutY="547.0" onAction="#btnCancelar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Cancelar" textFill="#2e89b8">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>

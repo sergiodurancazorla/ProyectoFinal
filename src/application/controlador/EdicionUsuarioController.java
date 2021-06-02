@@ -75,6 +75,22 @@ public class EdicionUsuarioController implements Initializable {
 	private Profesor editarProfesor;
 	private Boolean profesorModificado;
 
+	// Atributos modificacion
+	private boolean booleanDNI;
+	private String modificadoDNI;
+	private boolean booleanNombre;
+	private String modificadoNombre;
+	private boolean booleanApellido1;
+	private String modificadoApellido1;
+	private boolean booleanApellido2;
+	private String modificadoApellido2;
+	private boolean booleanEmail;
+	private String modificadoEmail;
+	private boolean booleanDepartamento;
+	private Departamento modificadoDepartamento;
+	private boolean booleanRol;
+	private Rol modificadoRol;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -105,8 +121,8 @@ public class EdicionUsuarioController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				profesorModificado = true;
-				editarProfesor.setDni(newValue);
-
+				booleanDNI = true;
+				modificadoDNI = newValue;
 			}
 		});
 
@@ -116,8 +132,8 @@ public class EdicionUsuarioController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				profesorModificado = true;
-				editarProfesor.setNombre(newValue);
-
+				booleanNombre = true;
+				modificadoNombre = newValue;
 			}
 		});
 
@@ -127,8 +143,8 @@ public class EdicionUsuarioController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				profesorModificado = true;
-				editarProfesor.setApellido1(newValue);
-
+				booleanApellido1 = true;
+				modificadoApellido1 = newValue;
 			}
 		});
 
@@ -138,8 +154,8 @@ public class EdicionUsuarioController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				profesorModificado = true;
-				editarProfesor.setApellido2(newValue);
-
+				booleanApellido2 = true;
+				modificadoApellido2 = newValue;
 			}
 		});
 
@@ -149,8 +165,9 @@ public class EdicionUsuarioController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Departamento> observable, Departamento oldValue,
 					Departamento newValue) {
-				editarProfesor.setDepartamento(newValue);
 				profesorModificado = true;
+				booleanDepartamento = true;
+				modificadoDepartamento = newValue;
 			}
 
 		});
@@ -161,8 +178,8 @@ public class EdicionUsuarioController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				profesorModificado = true;
-				editarProfesor.setEmail(newValue);
-
+				booleanEmail = true;
+				modificadoEmail = newValue;
 			}
 		});
 
@@ -171,8 +188,9 @@ public class EdicionUsuarioController implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends Rol> observable, Rol oldValue, Rol newValue) {
-				editarProfesor.setRol(newValue);
 				profesorModificado = true;
+				booleanRol = true;
+				modificadoRol = newValue;
 			}
 
 		});
@@ -363,7 +381,7 @@ public class EdicionUsuarioController implements Initializable {
 	/**
 	 * Metodo que controla caracteres máximos permitidos en un text field
 	 * 
-	 * @param i
+	 * @param i cantidad maxima de caracteres
 	 * @return
 	 */
 	private EventHandler<KeyEvent> maxLength(Integer i) {
