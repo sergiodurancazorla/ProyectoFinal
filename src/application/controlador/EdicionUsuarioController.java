@@ -14,8 +14,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import orm.dao.DaoDepartamento;
@@ -82,6 +84,7 @@ public class EdicionUsuarioController implements Initializable {
 			rellenarInfo();
 			rellenarCombos();
 			addListenerProfesor();
+			addListenerLength();
 
 		} catch (BusinessException e) {
 			e.printStackTrace();
@@ -173,6 +176,18 @@ public class EdicionUsuarioController implements Initializable {
 			}
 
 		});
+	}
+
+	/**
+	 * Metodo que crea listener para controlar caracteres máximos
+	 */
+	private void addListenerLength() {
+		txtDni.addEventFilter(KeyEvent.KEY_TYPED, maxLength(24));
+		txtNombre.addEventFilter(KeyEvent.KEY_TYPED, maxLength(44));
+		txtApellido1.addEventFilter(KeyEvent.KEY_TYPED, maxLength(44));
+		txtAoellido2.addEventFilter(KeyEvent.KEY_TYPED, maxLength(44));
+		txtEmail.addEventFilter(KeyEvent.KEY_TYPED, maxLength(44));
+
 	}
 
 	/**
@@ -343,6 +358,29 @@ public class EdicionUsuarioController implements Initializable {
 		}
 
 		return resultado;
+	}
+
+	/**
+	 * Metodo que controla caracteres máximos permitidos en un text field
+	 * 
+	 * @param i
+	 * @return
+	 */
+	private EventHandler<KeyEvent> maxLength(Integer i) {
+		return new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent arg0) {
+
+				JFXTextField tx = (JFXTextField) arg0.getSource();
+				if (tx.getText().length() >= i) {
+					arg0.consume();
+				}
+
+			}
+
+		};
+
 	}
 
 }

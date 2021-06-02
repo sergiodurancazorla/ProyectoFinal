@@ -2,11 +2,14 @@ package application.controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 
 import application.VariablesEstaticas;
 import application.modelo.Alerta;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import orm.dao.DaoProfesor;
@@ -137,6 +140,29 @@ public class EditarPassController {
 		}
 
 		return resultado;
+	}
+
+	/**
+	 * Metodo que controla caracteres máximos permitidos en un text field
+	 * 
+	 * @param i
+	 * @return
+	 */
+	private EventHandler<KeyEvent> maxLength(Integer i) {
+		return new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent arg0) {
+
+				JFXTextField tx = (JFXTextField) arg0.getSource();
+				if (tx.getText().length() >= i) {
+					arg0.consume();
+				}
+
+			}
+
+		};
+
 	}
 
 }

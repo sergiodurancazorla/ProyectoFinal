@@ -205,7 +205,8 @@ public class AddController implements Initializable {
 					CorreoElectronico correo = new CorreoElectronico(profesor.getEmail(),
 							"Creación de nueva incidencia",
 							"Has creado una nueva incidencia, se ha avisado al coordinador TIC para que la gestione en el menor tiempo posible.\n"
-									+ incidencia.toString() + "\n\nGracias!");
+									+ "ID incidencia: " + incidencia.getIdincidencia() + "\n" + incidencia.toString()
+									+ "\n\nGracias!");
 					correo.start();
 				}
 

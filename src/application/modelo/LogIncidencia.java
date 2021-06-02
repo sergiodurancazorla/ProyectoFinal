@@ -30,7 +30,7 @@ public class LogIncidencia {
 	public void logGeneral(String linea) {
 		try {
 			this.bufferedWriter = new BufferedWriter(new FileWriter(ruta + "/logsGenerales.txt", true));
-			this.bufferedWriter.write("\n[" + Date.from(Instant.now()) + "] " + "usuario: "
+			this.bufferedWriter.write("\n\n[" + Date.from(Instant.now()) + "] " + "usuario: "
 					+ VariablesEstaticas.profesor.toString() + "\n\t" + linea);
 			this.close();
 
