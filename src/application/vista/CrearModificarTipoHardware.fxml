@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="idStackPane" prefHeight="232.0" prefWidth="348.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controlador.CrearModificarTipoHardwareController">
+   <children>
+      <AnchorPane fx:id="idAnchorPane" prefHeight="232.0" prefWidth="518.0">
+         <children>
+            <GridPane layoutX="15.0" layoutY="44.0" prefHeight="90.0" prefWidth="309.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="136.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="215.0" minWidth="10.0" prefWidth="158.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="0.0" prefWidth="15.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="17.0" prefWidth="207.0" text="¿Modificar?" />
+                  <Label text="Nombre*" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXComboBox fx:id="comboTipoHardware" prefHeight="25.0" prefWidth="164.0" GridPane.columnIndex="1" />
+                  <ImageView fx:id="btnInfo" onMouseClicked="#clickInfo" GridPane.columnIndex="2">
+                     <image>
+                        <Image url="@../../recursos/iconos/icons8_info_30px_1.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </GridPane>
+            <JFXButton fx:id="btnConfirmar" buttonType="RAISED" defaultButton="true" layoutX="209.0" layoutY="180.0" onAction="#guardarCambios" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #2D5FB8;" text="Crear nuevo" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <JFXButton fx:id="btnCancelar" cancelButton="true" layoutX="139.0" layoutY="183.0" onAction="#btnCancelar" prefHeight="17.0" prefWidth="62.0" ripplerFill="#0a5479" text="Cancelar" textFill="#2e89b8">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <JFXButton fx:id="btnEliminar" buttonType="RAISED" layoutX="15.0" layoutY="183.0" onAction="#clickEliminar" ripplerFill="WHITE" style="-fx-background-color: #d60202;" text="Eliminar" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

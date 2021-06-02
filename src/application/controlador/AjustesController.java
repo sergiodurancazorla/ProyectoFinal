@@ -234,8 +234,19 @@ public class AjustesController implements Initializable {
 	}
 
 	@FXML
-	void clickTiposHardware(ActionEvent event) {
+	void clickTiposHardware(ActionEvent event) throws IOException {
+		// Dialogo
+		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/CrearModificarTipoHardware.fxml");
+		FXMLLoader loader = new FXMLLoader(fxmlLocation);
+		Parent panel = loader.load();
 
+		JFXDialogLayout layout = new JFXDialogLayout();
+		layout.setHeading(new Text("Modificar/Añadir Tipo Hardware"));
+		layout.setBody(panel);
+		layout.setPrefSize(348, 200);
+
+		dialogo = new JFXDialog(((StackPane) idAnchorPane.getParent()), layout, JFXDialog.DialogTransition.CENTER);
+		dialogo.show();
 	}
 
 }
