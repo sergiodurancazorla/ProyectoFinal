@@ -1,13 +1,15 @@
 package application.modelo;
 
+import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import orm.pojos.Incidencia;
 
 public class Alerta {
@@ -43,6 +45,10 @@ public class Alerta {
 	}
 
 	public void mostrarAlerta() {
+
+		JFXAlert<String> alert = new JFXAlert<>((Stage) stackPane.getScene().getWindow());
+		alert.initModality(Modality.APPLICATION_MODAL);
+
 		JFXDialogLayout contenido = new JFXDialogLayout();
 		contenido.setHeading(new Text(titulo));
 
@@ -52,20 +58,18 @@ public class Alerta {
 
 			contenido.setBody(new Text(incidencia.toString()));
 		}
-		JFXDialog dialogo = new JFXDialog();
-		dialogo.setContent(contenido);
-		dialogo.setTransitionType(JFXDialog.DialogTransition.CENTER);
-		dialogo.setDialogContainer(stackPane);
 
 		JFXButton boton = new JFXButton("Aceptar");
+		boton.setDefaultButton(true);
 		boton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				dialogo.close();
+				alert.hideWithAnimation();
 			}
 		});
 		contenido.setActions(boton);
-		dialogo.show();
+		alert.setContent(contenido);
+		alert.showAndWait();
 
 	}
 

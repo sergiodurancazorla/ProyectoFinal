@@ -233,6 +233,12 @@ public class AjustesController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que genera dialogo para crear/modificar tipo hardware
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void clickTiposHardware(ActionEvent event) throws IOException {
 		// Dialogo
