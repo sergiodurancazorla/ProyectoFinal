@@ -116,7 +116,7 @@ public class MainController implements Initializable {
 
 			// LOG
 			VariablesEstaticas.log.logGeneral("[CIERRE DE SESION] " + "El usuario "
-					+ VariablesEstaticas.profesor.toString() + " ha cerrado sesion.");
+					+ VariablesEstaticas.profesor.getDni() + " ha cerrado sesion.");
 
 		});
 

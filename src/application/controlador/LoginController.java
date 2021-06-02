@@ -76,12 +76,6 @@ public class LoginController {
 
 			Alerta alerta = new Alerta(idStackPane, "ERROR AL INICIAR SESION", "Usuario y/o contraseña incorrectas");
 			alerta.mostrarAlerta();
-//			Alert alerta = new Alert(AlertType.ERROR);
-//			alerta.setTitle("ERROR AL INICIAR SESION");
-//			alerta.setHeaderText(null);
-//			alerta.setContentText("Usuario y/o contraseña incorrectas");
-//			alerta.setGraphic(new ImageView("/recursos/iconos/warning.png"));
-//			alerta.showAndWait();
 
 			inpName.setText("");
 			inpPassword.setText("");

@@ -121,6 +121,26 @@ public class EditarIncidenciaController implements Initializable {
 	private Profesor profesor;
 	private Boolean incidenciaModificada;
 
+	// atributos modificacion
+	private boolean booleanTipo;
+	private Tipo modificadoTipo;
+	private boolean booleanFecha;
+	private Date modificadoFecha;
+	private boolean booleanProfesor;
+	private Profesor modificadoProfesor;
+	private boolean booleanDepartamento;
+	private Departamento modificadoDepartamento;
+	private boolean booleanAula;
+	private Aula modificadoAula;
+	private boolean booleanDescripcion;
+	private String modificadoDescripcion;
+	private boolean booleanEstado;
+	private Estado modificadoEstado;
+	private boolean booleanResponsableSolucion;
+	private Profesor modificadoResponsableSolucion;
+	private boolean booleanObservaciones;
+	private String modificadoObservaciones;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
@@ -149,7 +169,8 @@ public class EditarIncidenciaController implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends Tipo> observable, Tipo oldValue, Tipo newValue) {
-				incidencia.setTipo(newValue);
+				booleanTipo = true;
+				modificadoTipo = newValue;
 				incidenciaModificada = true;
 			}
 
@@ -161,8 +182,8 @@ public class EditarIncidenciaController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue,
 					LocalDate newValue) {
-				Date date = Date.from(newValue.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-				incidencia.setFechaIncidencia(date);
+				booleanFecha = true;
+				modificadoFecha = Date.from(newValue.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 				incidenciaModificada = true;
 			}
 
@@ -173,7 +194,8 @@ public class EditarIncidenciaController implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends Profesor> observable, Profesor oldValue, Profesor newValue) {
-				incidencia.setProfesorByProfesorIdprofesor(newValue);
+				booleanProfesor = true;
+				modificadoProfesor = newValue;
 				incidenciaModificada = true;
 			}
 		});
@@ -184,8 +206,9 @@ public class EditarIncidenciaController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Departamento> observable, Departamento oldValue,
 					Departamento newValue) {
-				incidencia.setDepartamento(newValue);
 				incidenciaModificada = true;
+				booleanDepartamento = true;
+				modificadoDepartamento = newValue;
 
 			}
 		});
@@ -194,9 +217,9 @@ public class EditarIncidenciaController implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends Aula> observable, Aula oldValue, Aula newValue) {
-				incidencia.setAula(newValue);
 				incidenciaModificada = true;
-
+				booleanAula = true;
+				modificadoAula = newValue;
 			}
 		});
 
@@ -206,8 +229,8 @@ public class EditarIncidenciaController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				incidenciaModificada = true;
-				incidencia.setDescripcion(newValue);
-
+				booleanDescripcion = true;
+				modificadoDescripcion = newValue;
 			}
 		});
 
@@ -216,14 +239,12 @@ public class EditarIncidenciaController implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends Estado> observable, Estado oldValue, Estado newValue) {
-				incidencia.setEstado(newValue);
 				incidenciaModificada = true;
-
+				booleanEstado = true;
+				modificadoEstado = newValue;
 			}
 
 		});
-
-		// archivo *****************************
 
 		// Responsable Solucion
 		comboResponsableSolucion.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Profesor>() {
@@ -231,8 +252,8 @@ public class EditarIncidenciaController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Profesor> observable, Profesor oldValue, Profesor newValue) {
 				incidenciaModificada = true;
-				incidencia.setProfesorByResponsableSolucion(newValue);
-				System.out.println(newValue);
+				booleanResponsableSolucion = true;
+				modificadoResponsableSolucion = newValue;
 			}
 
 		});
@@ -262,8 +283,9 @@ public class EditarIncidenciaController implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				System.out.println(newValue);
 				incidenciaModificada = true;
+				booleanObservaciones = true;
+				modificadoObservaciones = newValue;
 
 			}
 		});
@@ -429,6 +451,35 @@ public class EditarIncidenciaController implements Initializable {
 			} else {
 				incidencia.setFechaResolucion(null);
 				incidencia.setTiempoResolucion(null);
+			}
+
+			// setear datos modificados, si se ha modificado.
+			if (booleanTipo) {
+				incidencia.setTipo(modificadoTipo);
+			}
+			if (booleanFecha) {
+				incidencia.setFechaIncidencia(modificadoFecha);
+			}
+			if (booleanAula) {
+				incidencia.setAula(modificadoAula);
+			}
+			if (booleanDepartamento) {
+				incidencia.setDepartamento(modificadoDepartamento);
+			}
+			if (booleanDescripcion) {
+				incidencia.setDescripcion(modificadoDescripcion);
+			}
+			if (booleanEstado) {
+				incidencia.setEstado(modificadoEstado);
+			}
+			if (booleanObservaciones) {
+				incidencia.setObservaciones(modificadoObservaciones);
+			}
+			if (booleanProfesor) {
+				incidencia.setProfesorByProfesorIdprofesor(modificadoProfesor);
+			}
+			if (booleanResponsableSolucion) {
+				incidencia.setProfesorByResponsableSolucion(modificadoResponsableSolucion);
 			}
 
 			// ACTUALIZAR
