@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -134,6 +135,21 @@ public class AddController implements Initializable {
 		} else {
 			gridHardware.setVisible(false);
 		}
+
+	}
+
+	/**
+	 * Cuando el usuario pincha en la X cierra add incidencia y vuelve al home.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	void imgExitClick(MouseEvent event) throws IOException {
+
+		StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Home.fxml"));
+
+		((BorderPane) idAnchorPane.getParent().getParent()).setCenter(pane);
 
 	}
 

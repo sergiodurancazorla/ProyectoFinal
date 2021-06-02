@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -69,7 +71,10 @@
                   <ComboBox fx:id="comboDepartamento" prefHeight="25.0" prefWidth="194.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <ComboBox fx:id="comboUbicacion" prefHeight="25.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <ComboBox fx:id="comboEstado" prefHeight="25.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <JFXButton fx:id="btnSubirArchivo" buttonType="RAISED" onAction="#clickSubirArchivo" ripplerFill="#3246d9" text="Subir archivo" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <JFXButton fx:id="btnSubirArchivo" buttonType="RAISED" onAction="#clickSubirArchivo" ripplerFill="#3246d9" text="Subir archivo" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
                   <Label text="Selecciona un archivo" GridPane.rowIndex="8" />
                </children>
             </GridPane>
@@ -88,6 +93,14 @@
                   <Font name="Calibri" size="28.0" />
                </font>
             </Text>
+            <ImageView fx:id="imgExit" fitHeight="40.0" fitWidth="34.0" layoutX="817.0" layoutY="65.0" onMouseClicked="#imgExitClick" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../recursos/iconos/x_cancel.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>
