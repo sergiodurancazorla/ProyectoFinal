@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 import application.VariablesEstaticas;
+import application.modelo.CorreoElectronico;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -167,6 +168,16 @@ public class CreacionUsuarioController implements Initializable {
 				// log
 				VariablesEstaticas.log.logGeneral("Ha creado un nuevo profesor: " + nuevoProfesor.toString());
 
+				// enviar email
+				if (nuevoProfesor.getEmail() != null) {
+					CorreoElectronico correo = new CorreoElectronico(nuevoProfesor.getEmail(),
+							"Alta nuevo usuario en Gestion de Incidencias",
+							"Muy buenas!\nHas sido registrado en la app Gestion de Incidencias. Ahora puedes crear, modificar"
+									+ " y ver las incidencias de tu centro. \n\nPara poder entrar a la aplicacion el usuario es su dni y la contraseña"
+									+ " el mismo dni. \n\nPara mayor seguridad se recomienda cambiar contraseña.\n\nUn saludo!");
+
+					correo.start();
+				}
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				VariablesEstaticas.log.logGeneral("[ERROR] Al crear un nuevo usuario\n\t" + e.toString());
