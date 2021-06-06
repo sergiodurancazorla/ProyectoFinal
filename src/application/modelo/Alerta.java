@@ -67,6 +67,7 @@ public class Alerta {
 				alert.hideWithAnimation();
 			}
 		});
+
 		contenido.setActions(boton);
 		alert.setContent(contenido);
 		alert.showAndWait();

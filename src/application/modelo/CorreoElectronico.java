@@ -48,9 +48,9 @@ public class CorreoElectronico extends Thread {
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 		} catch (MessagingException me) {
-			me.printStackTrace(); // Si se produce un error
+			VariablesEstaticas.log.logGeneral("[ERROR]No se ha podido enviar el email\n\t" + me.toString());
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			VariablesEstaticas.log.logGeneral("[ERROR]No se ha podido enviar el email\n\t" + e.toString());
 		}
 	}
 

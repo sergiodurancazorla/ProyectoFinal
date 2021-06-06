@@ -21,7 +21,15 @@ import javafx.scene.layout.StackPane;
 import orm.dao.DaoInfoHardware;
 import orm.pojos.TipoHarware;
 
+/**
+ * Controlador del dialogo de crear o modificar un tipo de Hardware.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class CrearModificarTipoHardwareController implements Initializable {
+
+	// FXML
 
 	@FXML
 	private StackPane idStackPane;
@@ -72,7 +80,7 @@ public class CrearModificarTipoHardwareController implements Initializable {
 					btnConfirmar.setText("Crear nuevo");
 
 				} else {
-					// se ha seleccionado un
+					// se ha seleccionado un TIPO
 					btnEliminar.setVisible(true);
 					txtNombre.setText(newValue.getNombre());
 					btnConfirmar.setText("Modificar");
@@ -86,6 +94,7 @@ public class CrearModificarTipoHardwareController implements Initializable {
 
 	@FXML
 	void btnCancelar(ActionEvent event) {
+		AjustesController.dialogo.close();
 
 	}
 

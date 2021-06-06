@@ -179,7 +179,6 @@ public class CreacionUsuarioController implements Initializable {
 					correo.start();
 				}
 			} catch (BusinessException e) {
-				e.printStackTrace();
 				VariablesEstaticas.log.logGeneral("[ERROR] Al crear un nuevo usuario\n\t" + e.toString());
 			} finally {
 				// Cerrar

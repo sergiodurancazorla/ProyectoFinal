@@ -292,6 +292,30 @@ public class EdicionUsuarioController implements Initializable {
 			orm.dao.DaoProfesor daoProfesor = new DaoProfesor();
 
 			try {
+
+				// setear datos modificados, si se ha modificado.
+				if (booleanApellido1) {
+					editarProfesor.setApellido1(modificadoApellido1);
+				}
+				if (booleanApellido2) {
+					editarProfesor.setApellido2(modificadoApellido2);
+				}
+				if (booleanDepartamento) {
+					editarProfesor.setDepartamento(modificadoDepartamento);
+				}
+				if (booleanDNI) {
+					editarProfesor.setDni(modificadoDNI);
+				}
+				if (booleanEmail) {
+					editarProfesor.setEmail(modificadoEmail);
+				}
+				if (booleanNombre) {
+					editarProfesor.setNombre(modificadoNombre);
+				}
+				if (booleanRol) {
+					editarProfesor.setRol(modificadoRol);
+				}
+
 				// Grabar
 				daoProfesor.actualizar(editarProfesor);
 
@@ -304,6 +328,16 @@ public class EdicionUsuarioController implements Initializable {
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				VariablesEstaticas.log.logGeneral("[ERROR] No se ha podido editar el profesor\n\t" + e.getMessage());
+
+			} catch (javax.persistence.PersistenceException e) {
+				// Error de hiberntate al actualizar
+				VariablesEstaticas.log
+						.logGeneral("[ERROR HIBERNATE] No se ha podido editar el profesor\n\t" + e.getMessage());
+
+				// Mostrar alerta
+				Alerta alerta = new Alerta(idStackPane, "ERROR AL MODIFICAR",
+						"El DNI del profesor no se puede modificar, si hay algo incorrecto pongase en contacto con el administrador");
+				alerta.mostrarAlerta();
 
 			}
 
