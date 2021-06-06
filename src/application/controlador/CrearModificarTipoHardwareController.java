@@ -95,12 +95,22 @@ public class CrearModificarTipoHardwareController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que cierra el dialogo
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void btnCancelar(ActionEvent event) {
 		AjustesController.dialogo.close();
 
 	}
 
+	/**
+	 * Metodo que elimina un tipo de hardware (si se puede eliminar).
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void clickEliminar(ActionEvent event) {
 
@@ -127,11 +137,20 @@ public class CrearModificarTipoHardwareController implements Initializable {
 			Alerta alerta = new Alerta(idStackPane, "ERROR AL ELIMINAR",
 					"Si el tipo de harware está asignado a alguna incidencia no se puede eliminar");
 			alerta.mostrarAlerta();
+
 		}
 	}
 
+	/**
+	 * Metodo que muestra alerta al pulsar sobre icono informacion
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void clickInfo(MouseEvent event) {
+		Alerta alerta = new Alerta(idStackPane, "Informacion",
+				"Para modificar/eliminar seleccione un tipo de hardware. Si quiere crear uno nuevo no seleccione ninguna opción.");
+		alerta.mostrarAlerta();
 
 	}
 
