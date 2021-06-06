@@ -14,15 +14,18 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import orm.dao.DaoInfoHardware;
 import orm.pojos.TipoHarware;
 import utiles.dao.DaoGenericoHibernate;
+import utiles.excepciones.BusinessException;
 
 /**
  * Controlador del dialogo de crear o modificar un tipo de Hardware.
@@ -57,6 +60,9 @@ public class CrearModificarTipoHardwareController implements Initializable {
 
 	@FXML
 	private ImageView btnInfo;
+
+	// DAO
+	DaoGenericoHibernate<TipoHarware, Integer> daoTipoHardware;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -93,6 +99,12 @@ public class CrearModificarTipoHardwareController implements Initializable {
 
 		});
 
+		// añadir listener de length maximo
+		txtNombre.addEventFilter(KeyEvent.KEY_TYPED, maxLength(44));
+
+		// iniciar dao
+		daoTipoHardware = new DaoGenericoHibernate<TipoHarware, Integer>();
+
 	}
 
 	/**
@@ -118,7 +130,6 @@ public class CrearModificarTipoHardwareController implements Initializable {
 		TipoHarware eliminar = comboTipoHardware.valueProperty().getValue();
 
 		try {
-			DaoGenericoHibernate<TipoHarware, Integer> daoTipoHardware = new DaoGenericoHibernate<TipoHarware, Integer>();
 			daoTipoHardware.borrar(eliminar);
 
 			// Mostrar alerta
@@ -154,8 +165,84 @@ public class CrearModificarTipoHardwareController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que guarda/modifica un tipo de hardware si validar()
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void guardarCambios(ActionEvent event) {
+
+		if (validar()) {
+
+			TipoHarware nuevo;
+
+			if (comboTipoHardware.getSelectionModel().getSelectedItem() == null
+					|| comboTipoHardware.getSelectionModel().getSelectedItem().getNombre().equals("")) {
+				nuevo = new TipoHarware();
+			} else {
+				nuevo = comboTipoHardware.getSelectionModel().getSelectedItem();
+			}
+			nuevo.setNombre(txtNombre.getText());
+			try {
+				daoTipoHardware.grabarOActualizar(nuevo);
+
+				// Mostrar alerta
+				Alerta alerta = new Alerta(idStackPane, "CREACION NUEVO TIPO",
+						"Se ha creado un nuevo tipo de hardware");
+				alerta.mostrarAlerta();
+
+				// cerrar dialogo
+				AjustesController.dialogo.close();
+
+			} catch (BusinessException e) {
+				VariablesEstaticas.log.logGeneral("[ERROR CREAR TIPO HARDWARE] No se ha podido CREAR: "
+						+ nuevo.getNombre() + " \n\t" + e.getMessage());
+			}
+		}
+
+	}
+
+	/**
+	 * Metodo que valida que el txt no esté vacio.
+	 * 
+	 * @return true si es todo correcto
+	 */
+	private boolean validar() {
+		boolean resultado = true;
+
+		// dni
+		if (txtNombre.getText().isEmpty()) {
+			resultado = false;
+			txtNombre.setStyle("-jfx-unfocus-color: red");
+			new animatefx.animation.Shake(txtNombre).play();
+
+		} else {
+			txtNombre.setStyle(null);
+		}
+		return resultado;
+	}
+
+	/**
+	 * Metodo que controla caracteres máximos permitidos en un text field
+	 * 
+	 * @param i cantidad maxima de caracteres
+	 * @return
+	 */
+	private EventHandler<KeyEvent> maxLength(Integer i) {
+		return new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent arg0) {
+
+				JFXTextField tx = (JFXTextField) arg0.getSource();
+				if (tx.getText().length() >= i) {
+					arg0.consume();
+				}
+
+			}
+
+		};
 
 	}
 
