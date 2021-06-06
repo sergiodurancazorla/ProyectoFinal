@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
 <StackPane fx:id="idStackPane" prefHeight="691.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -106,6 +107,14 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
+            <JFXButton fx:id="btnEliminar" buttonType="RAISED" layoutX="41.0" layoutY="547.0" onAction="#clickEliminar" prefHeight="32.0" prefWidth="80.0" ripplerFill="WHITE" style="-fx-background-color: #d60202;" text="Eliminar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </AnchorPane>
    </children>

@@ -179,13 +179,16 @@ public class TablaController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que genera el menu al clicar boton derecha sobre una incidencia.
+	 */
 	private void menuContextual() {
 		ContextMenu contextMenu = new ContextMenu();
 		MenuItem menuItem1 = new MenuItem("Editar");
 		MenuItem menuItem2 = new MenuItem("Generar informe");
 		menuItem1.setOnAction((event) -> {
 			btnEditar.fire();
-			;
+
 		});
 
 		menuItem2.setOnAction((event) -> {

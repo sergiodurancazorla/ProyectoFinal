@@ -30,6 +30,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -125,6 +127,7 @@ public class UserController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		try {
+			menuContextual();
 			iniciarTabla();
 			inciarCombosFiltros();
 			filtros();
@@ -144,6 +147,21 @@ public class UserController implements Initializable {
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * Metodo que controla click derecho sobre un usuario
+	 */
+	private void menuContextual() {
+		ContextMenu contextMenu = new ContextMenu();
+		MenuItem menuItem1 = new MenuItem("Editar");
+		menuItem1.setOnAction((event) -> {
+			btnEditar.fire();
+
+		});
+
+		contextMenu.getItems().addAll(menuItem1);
+		tablaProfesores.contextMenuProperty().set(contextMenu);
 	}
 
 	/**

@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 import application.VariablesEstaticas;
+import application.modelo.Alerta;
 import application.modelo.CorreoElectronico;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -180,6 +181,9 @@ public class CreacionUsuarioController implements Initializable {
 				}
 			} catch (BusinessException e) {
 				VariablesEstaticas.log.logGeneral("[ERROR] Al crear un nuevo usuario\n\t" + e.toString());
+			} catch (org.hibernate.NonUniqueObjectException e) {
+				Alerta alerta = new Alerta(idStackPane, "ERROR", "DNI repetido");
+				alerta.mostrarAlerta();
 			} finally {
 				// Cerrar
 				UserController.dialogo.close();

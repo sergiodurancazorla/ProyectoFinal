@@ -71,6 +71,9 @@ public class EdicionUsuarioController implements Initializable {
 	@FXML
 	private JFXButton btnCancelar;
 
+	@FXML
+	private JFXButton btnEliminar;
+
 	// ATRIBUTOS PRIVADOS
 	private Profesor editarProfesor;
 	private Boolean profesorModificado;
@@ -345,6 +348,39 @@ public class EdicionUsuarioController implements Initializable {
 			// No se ha modificado nada
 			Alerta alerta = new Alerta(idStackPane, "Algo no ha salido como esperaba", "No has modificado nada!");
 			alerta.mostrarAlerta();
+		}
+
+	}
+
+	/**
+	 * Metodo que elimina un usuario si no tiene incidencias creadas/asignadas.
+	 * 
+	 * @param event
+	 */
+	@FXML
+	void clickEliminar(ActionEvent event) {
+		DaoProfesor daoProfesor = new DaoProfesor();
+		try {
+			daoProfesor.borrar(editarProfesor);
+
+			// Mostrar alerta
+			Alerta alerta = new Alerta(idStackPane, "ELIMINADO ", "Profesor eliminado correctamente");
+			alerta.mostrarAlerta();
+			// Se cierra simulando que el usuario pulsar el boton cancelar.
+			btnCancelar.fire();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		} catch (javax.persistence.PersistenceException e) {
+			// error al eliminar
+
+			VariablesEstaticas.log.logGeneral(
+					"[ERROR ELIMINAR PROFESOR] No se puede eliminar un profesor con incidencias asignadas\n\t"
+							+ e.getMessage());
+			// Mostrar alerta
+			Alerta alerta = new Alerta(idStackPane, "ERROR ",
+					"No se puede eliminar un profesor con incidencias asignadas");
+			alerta.mostrarAlerta();
+
 		}
 
 	}

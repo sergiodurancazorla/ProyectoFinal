@@ -313,8 +313,6 @@ public class AddController implements Initializable {
 
 		// RELLENAR
 
-		// MODIFICAR ************************************************
-		// jfxComboProfesor.setItems(listaProfesor);
 		comboProfesor.setItems(listaProfesor);
 		comboTipoIncidencia.setItems(listaTipos);
 		comboDepartamento.setItems(listaDepartamento);

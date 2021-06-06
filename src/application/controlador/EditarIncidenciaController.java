@@ -116,6 +116,9 @@ public class EditarIncidenciaController implements Initializable {
 	@FXML
 	private StackPane idStackPane;
 
+	@FXML
+	private JFXButton btnEliminar;
+
 	// ATRIBUTOS PRIVADOS
 	private Incidencia incidencia;
 	private Profesor profesor;
@@ -497,6 +500,50 @@ public class EditarIncidenciaController implements Initializable {
 		} else {
 			// Si no se ha modificado nada se muestra alerta
 			Alerta alerta = new Alerta(idStackPane, "Algo no ha salido como esperaba", "No has modificado nada!");
+			alerta.mostrarAlerta();
+		}
+
+	}
+
+	/**
+	 * Metodo que elimina una incidencia
+	 * 
+	 * @param event
+	 */
+	@FXML
+	void clickEliminar(ActionEvent event) {
+		DaoIncidencia daoIncidencia = new DaoIncidencia();
+
+		try {
+
+			// Comprobacion si es de tipo hardware primero eliminar estos datos:
+			if (incidencia.getTipo().getTipo().toUpperCase().equals("HARDWARE")) {
+				DaoInfoHardware daoInfoHardware = new DaoInfoHardware();
+				// Obtener informacion
+				InfoHardware infoHardware = daoInfoHardware.informacionIncidencia(incidencia);
+
+				// eliminar
+				daoInfoHardware.borrar(infoHardware);
+
+			}
+
+			daoIncidencia.borrar(incidencia);
+
+			// Mostrar alerta
+			Alerta alerta = new Alerta(idStackPane, "Incidencia eliminada", "Se ha eliminado con exito la incidencia.");
+			alerta.mostrarAlerta();
+
+		} catch (BusinessException e) {
+			VariablesEstaticas.log.logGeneral("[ERROR ELMINAR INCIDENCIA] No se ha podido eliminar incidencia:"
+					+ incidencia.getIdincidencia() + " \n\t" + e.getMessage());
+
+		} catch (Exception e) {
+			// No se puede eliminar
+			VariablesEstaticas.log.logGeneral("[ERROR ELMINAR INCIDENCIA] No se ha podido eliminar incidencia:"
+					+ incidencia.getIdincidencia() + " \n\t" + e.getMessage());
+
+			// Mostrar alerta
+			Alerta alerta = new Alerta(idStackPane, "ERROR AL ELIMINAR", "No se ha podido eliminar la incidencia");
 			alerta.mostrarAlerta();
 		}
 

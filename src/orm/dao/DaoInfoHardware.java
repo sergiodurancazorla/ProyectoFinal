@@ -53,4 +53,5 @@ public class DaoInfoHardware extends DaoGenericoHibernate<InfoHardware, Integer>
 		return informacion;
 
 	}
+
 }
