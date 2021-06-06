@@ -14,6 +14,13 @@ import javafx.scene.text.Text;
 import orm.pojos.Incidencia;
 import orm.pojos.Profesor;
 
+/**
+ * Clase que genera un dialogo personalizado en funcion si recibe una incidencia
+ * o un profesor.
+ * 
+ * @author Sergio
+ *
+ */
 public class DialogoEditar {
 	private Incidencia incidencia;
 	private Profesor profesor;

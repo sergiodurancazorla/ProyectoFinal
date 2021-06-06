@@ -57,7 +57,8 @@ public class PDFGenerator extends Thread {
 	public void run() {
 		try {
 			// LOG
-			VariablesEstaticas.log.logGeneral(" Se ha solicitado generar un pdf");
+			VariablesEstaticas.log
+					.logGeneral("[INFO]" + VariablesEstaticas.profesor.getDni() + " ha solicitado generar un pdf");
 
 			// Se crea el documento
 			Document documento = new Document();

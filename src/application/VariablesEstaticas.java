@@ -3,6 +3,13 @@ package application;
 import application.modelo.LogIncidencia;
 import orm.pojos.Profesor;
 
+/**
+ * Clase donde se guardan las constantes y variables estaticas que tienen uso
+ * compartido en la toda la aplicacion.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class VariablesEstaticas {
 	// ***********************CONTSTANTES*********************
 

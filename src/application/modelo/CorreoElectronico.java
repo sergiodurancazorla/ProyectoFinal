@@ -12,12 +12,26 @@ import javax.mail.internet.MimeMessage;
 
 import application.VariablesEstaticas;
 
+/**
+ * Clase que se usa para mandar correos electronicos. Es un thread que se tiene
+ * que ejecutar con start().
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class CorreoElectronico extends Thread {
 
 	private String destinatario;
 	private String asunto;
 	private String cuerpo;
 
+	/**
+	 * Constructor que recibe la informacion del mensaje a enviar
+	 * 
+	 * @param destinatario a quien va dirigido
+	 * @param asunto       del email
+	 * @param cuerpo       texto del email
+	 */
 	public CorreoElectronico(String destinatario, String asunto, String cuerpo) {
 		this.destinatario = destinatario;
 		this.asunto = asunto;
@@ -29,7 +43,7 @@ public class CorreoElectronico extends Thread {
 
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
-		props.put("mail.smtp.user", VariablesEstaticas.EMAIL_APLICACION);
+		props.put("mail.smtp.user", VariablesEstaticas.EMAIL_APLICACION); // email de la aplacion
 		props.put("mail.smtp.clave", VariablesEstaticas.PASS); // La clave de la cuenta
 		props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
 		props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP

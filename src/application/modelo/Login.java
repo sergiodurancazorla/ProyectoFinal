@@ -14,6 +14,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utiles.hibernate.UtilesHibernate;
 
+/**
+ * Clase de partida de la aplicacion. Es la primera clase que se lanza. Desde
+ * aqui se crea la pantalla login. Incluye un metodo que controla el movimiento
+ * de la ventana al mantener pulsado.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class Login extends Application {
 	private Parent root;
 	private double xOffset, yOffset;
@@ -25,8 +33,6 @@ public class Login extends Application {
 			VariablesEstaticas.log = new LogIncidencia();
 
 			// Abrir sesion
-
-			// FALTA AÑADIR QUE PASA SI FALLA LA CONEXION, MOSTRAR MENSAJE
 			UtilesHibernate.openSession();
 			// comenzamos sesion ;
 			Session s = UtilesHibernate.getSessionFactory().getCurrentSession();

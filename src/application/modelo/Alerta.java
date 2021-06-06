@@ -12,6 +12,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import orm.pojos.Incidencia;
 
+/**
+ * Clase que crea una alerta bloqueante personalizada y la muestra en un
+ * StackPane.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class Alerta {
 	private StackPane stackPane;
 	private String titulo;
@@ -44,6 +51,10 @@ public class Alerta {
 		this.incidencia = incidencia;
 	}
 
+	/**
+	 * Metodo que genera la alerta y la muestra. Es bloqueante hasta que el usuario
+	 * no pulse en aceptar la app se queda ahí parada.
+	 */
 	public void mostrarAlerta() {
 
 		JFXAlert<String> alert = new JFXAlert<>((Stage) stackPane.getScene().getWindow());
