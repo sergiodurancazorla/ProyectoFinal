@@ -27,6 +27,13 @@ import orm.dao.DaoProfesor;
 import orm.pojos.Profesor;
 import utiles.excepciones.BusinessException;
 
+/**
+ * Controlador de la vista Login. En esta clase se implementa el codigo para el
+ * login de un usuario a la app.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class LoginController {
 
 	// FXML
@@ -49,6 +56,13 @@ public class LoginController {
 	private Profesor profesor;
 	private DaoProfesor daoProfesor;
 
+	/**
+	 * Metodo que se lanza cuando el usuario pulsa el boton entrar. Si usuario y
+	 * pass son correcta crea la pantalla principal Main y la lanza
+	 * 
+	 * @param actionEvent
+	 * @throws Exception
+	 */
 	@FXML
 	public void clickEntrar(ActionEvent actionEvent) throws Exception {
 		daoProfesor = new DaoProfesor();

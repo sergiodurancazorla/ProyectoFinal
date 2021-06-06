@@ -85,6 +85,11 @@ public class GraficoInformeController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que genera los graficos de la incidencias por Estado y Departamento
+	 * 
+	 * @throws BusinessException
+	 */
 	private void cargarPieChart() throws BusinessException {
 		// ******************ESTADOS*********************************
 		dataEstado = FXCollections.observableArrayList();
@@ -200,15 +205,17 @@ public class GraficoInformeController implements Initializable {
 
 		} else {
 
-			// Calcular string en funcion de los segundos
+			// Formato del periodo. dia, horas , minutos y segundos.
 			PeriodFormatter dhm = new PeriodFormatterBuilder().appendDays().appendSuffix(" dia", " dias")
 					.appendSeparator("\n").appendHours().appendSuffix(" hora", " horas").appendSeparator("\n")
 					.appendMinutes().appendSuffix(" minuto", " minutos").appendSeparator("\n").appendSeconds()
 					.appendSuffix(" segundo", " segundos").toFormatter();
 
+			// Calculamos el periodo en funcion de los segundos
 			Seconds segundos = Seconds.seconds(segundosTiempoMedioIncidencias);
 			Period p1 = new Period(segundos);
 
+			// Guardamos en variable el string con el formato
 			texto = dhm.print(p1.normalizedStandard());
 
 		}

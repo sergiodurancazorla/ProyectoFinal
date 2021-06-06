@@ -30,6 +30,13 @@ import orm.pojos.Profesor;
 import orm.pojos.RolPermiso;
 import utiles.excepciones.BusinessException;
 
+/**
+ * Controlador de la vista Home. En esta clase se implementa el codigo del
+ * codigo de la pantalla principal de la aplicacion.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class HomeController implements Initializable {
 
 	@FXML
@@ -146,6 +153,11 @@ public class HomeController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que inicia la tabla
+	 * 
+	 * @throws BusinessException
+	 */
 	@SuppressWarnings("unchecked")
 	private void iniciarTabla() throws BusinessException {
 		// DAO NECESARIO

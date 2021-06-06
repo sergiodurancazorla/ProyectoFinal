@@ -57,6 +57,14 @@ import orm.pojos.Profesor;
 import orm.pojos.Tipo;
 import utiles.excepciones.BusinessException;
 
+/**
+ * Controlador de la vista Tabla. En esta clase se implemente el codigo para
+ * rellenar la tabla de las incidencias y las diferentes gestiones que en ella
+ * puedes hacer.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class TablaController implements Initializable {
 
 	@FXML
@@ -95,6 +103,42 @@ public class TablaController implements Initializable {
 
 	private Profesor profesor;
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		try {
+			this.profesor = VariablesEstaticas.profesor;
+
+			menuContextual();
+
+			iniciarTabla();
+
+			inciarCombosFiltros();
+
+			filtros();
+
+			// controlador doble click
+			tablaIncidencias.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent mouseEvent) {
+					if (mouseEvent.getClickCount() == 2) {
+						btnEditar.fire();
+					}
+				}
+			});
+
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Metodo que limpia los filtros de la tabla
+	 * 
+	 * @param event
+	 */
+
 	@FXML
 	void btnLimpiarFiltros(ActionEvent event) {
 
@@ -106,6 +150,13 @@ public class TablaController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que se lanza cuando pulsas el boton de editar. Abre dialogo para
+	 * editar la incidencia que se pulsa
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void btnEditar(ActionEvent event) throws IOException {
 
@@ -136,6 +187,12 @@ public class TablaController implements Initializable {
 		tablaIncidencias.refresh();
 	}
 
+	/**
+	 * Abre dialogo para anyadir nueva incidencia.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void clickAnyadirIncidencia(ActionEvent event) throws IOException {
 
@@ -146,36 +203,6 @@ public class TablaController implements Initializable {
 		((BorderPane) idAnchorPane.getParent()).setCenter(pane);
 
 		// Limpiar efectos
-
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		try {
-			this.profesor = VariablesEstaticas.profesor;
-
-			menuContextual();
-
-			iniciarTabla();
-
-			inciarCombosFiltros();
-
-			filtros();
-
-			// controlador doble click
-			tablaIncidencias.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent mouseEvent) {
-					if (mouseEvent.getClickCount() == 2) {
-						btnEditar.fire();
-					}
-				}
-			});
-
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		}
 
 	}
 

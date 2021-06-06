@@ -29,6 +29,15 @@ import javafx.stage.Stage;
 import orm.dao.DaoProfesor;
 import utiles.hibernate.UtilesHibernate;
 
+/**
+ * Controlador de la vista Main. La vista main es la vista principal, la unica
+ * que no cambia en toda la aplicacion. Controla si un usuario pulsa algunos de
+ * los iconos, si cierra sesion y se encarga de ir pintando los diferentes
+ * paneles en el centro.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class MainController implements Initializable {
 
 	@FXML
@@ -58,6 +67,40 @@ public class MainController implements Initializable {
 	@FXML
 	private ImageView btnAjustes;
 
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		btnHome.setEffect(new DropShadow(30, Color.BLACK));
+		StackPane pane;
+		try {
+			pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Home.fxml"));
+			borderPane.setCenter(pane);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// Añadir texto al hacer over
+		Tooltip.install(btnHome, new Tooltip("Home"));
+		Tooltip.install(btnAdd, new Tooltip("Añadir incidencia"));
+		Tooltip.install(btnGraficos, new Tooltip("Graficos e informes"));
+		Tooltip.install(btnDocumentos, new Tooltip("Listado de incidencias"));
+		Tooltip.install(btnUsuario, new Tooltip("Listado de usuarios"));
+		Tooltip.install(btnAjustes, new Tooltip("Ajustes"));
+		Tooltip.install(btnCerrar, new Tooltip("Cerrar sesión"));
+
+		// Rellenar variables estaticas
+		DaoProfesor daoProfesor = new DaoProfesor();
+
+		// SAI
+		VariablesEstaticas.SAI = daoProfesor.obtenerProfesor("SAI");
+
+	}
+
+	/**
+	 * Lanza la vista anyadir incidencia
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	void clickAdd(MouseEvent event) throws Exception {
 		limpiarEfectos();
@@ -69,6 +112,13 @@ public class MainController implements Initializable {
 
 	}
 
+	/**
+	 * Lanza la vista ajustes
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
+
 	@FXML
 	void clickAjustes(MouseEvent event) throws IOException {
 		limpiarEfectos();
@@ -78,6 +128,11 @@ public class MainController implements Initializable {
 
 	}
 
+	/**
+	 * Cierra sesion de la app.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void clickCerrar(MouseEvent event) {
 		limpiarEfectos();
@@ -86,6 +141,10 @@ public class MainController implements Initializable {
 
 	}
 
+	/**
+	 * Metodo que se lanza cuando el usuario quiere cerrar sesion. Si confirma
+	 * dialogo se cierra sesion.
+	 */
 	private void alertaCierreSesion() {
 
 		JFXAlert<String> alert = new JFXAlert<>((Stage) btnAdd.getScene().getWindow());
@@ -129,6 +188,12 @@ public class MainController implements Initializable {
 		alert.showAndWait();
 	}
 
+	/**
+	 * Lanza la tabla de incidencias
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void clickDocumentos(MouseEvent event) throws IOException {
 		limpiarEfectos();
@@ -138,6 +203,12 @@ public class MainController implements Initializable {
 
 	}
 
+	/**
+	 * Lanza los graficos de incidencias.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void clickGraficos(MouseEvent event) throws IOException {
 		limpiarEfectos();
@@ -148,6 +219,12 @@ public class MainController implements Initializable {
 
 	}
 
+	/**
+	 * Lanza el listado de usuairos, solo disposible para rol admin
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void clickUsuario(MouseEvent event) throws IOException {
 		if (VariablesEstaticas.profesor.getRol().getIdrol() == 1) {
@@ -164,6 +241,12 @@ public class MainController implements Initializable {
 		}
 	}
 
+	/**
+	 * Lanza pantalla principal
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void clickHome(MouseEvent event) throws IOException {
 		limpiarEfectos();
@@ -184,34 +267,6 @@ public class MainController implements Initializable {
 		btnGraficos.setEffect(null);
 		btnAjustes.setEffect(null);
 		btnUsuario.setEffect(null);
-
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		btnHome.setEffect(new DropShadow(30, Color.BLACK));
-		StackPane pane;
-		try {
-			pane = FXMLLoader.load(getClass().getClassLoader().getResource("application/vista/Home.fxml"));
-			borderPane.setCenter(pane);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		// Añadir texto al hacer over
-		Tooltip.install(btnHome, new Tooltip("Home"));
-		Tooltip.install(btnAdd, new Tooltip("Añadir incidencia"));
-		Tooltip.install(btnGraficos, new Tooltip("Graficos e informes"));
-		Tooltip.install(btnDocumentos, new Tooltip("Listado de incidencias"));
-		Tooltip.install(btnUsuario, new Tooltip("Listado de usuarios"));
-		Tooltip.install(btnAjustes, new Tooltip("Ajustes"));
-		Tooltip.install(btnCerrar, new Tooltip("Cerrar sesión"));
-
-		// Rellenar variables estaticas
-		DaoProfesor daoProfesor = new DaoProfesor();
-
-		// SAI
-		VariablesEstaticas.SAI = daoProfesor.obtenerProfesor("SAI");
 
 	}
 

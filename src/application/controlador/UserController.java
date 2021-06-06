@@ -49,8 +49,17 @@ import orm.pojos.Profesor;
 import orm.pojos.Rol;
 import utiles.excepciones.BusinessException;
 
+/**
+ * Controlador de la vista User. En esta clase se implemente el codigo para la
+ * modificacion y creacion de usuarios. A esta vista solo tiene acceso los
+ * profesores con rol admin.
+ * 
+ * @author Sergio Duran
+ *
+ */
 public class UserController implements Initializable {
 
+	// FXML
 	@FXML
 	private AnchorPane idAnchorPane;
 
@@ -75,53 +84,10 @@ public class UserController implements Initializable {
 	@FXML
 	private JFXButton btnLimpiarFiltro;
 
+	// ATRIBUTOS PRIVADOS
 	private ObservableList<Profesor> data;
 	private FilteredList<Profesor> listaFiltros;
 	static JFXDialog dialogo;
-
-	@FXML
-	void clickEditar(ActionEvent event) throws IOException {
-
-		tablaProfesores.refresh();
-
-		TreeItem<Profesor> item = tablaProfesores.getSelectionModel().getSelectedItem();
-		VariablesEstaticas.editarProfesor = item.getValue();
-
-		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/EditarUsuario.fxml");
-		FXMLLoader loader = new FXMLLoader(fxmlLocation);
-		Parent panel = loader.load();
-
-		JFXDialogLayout layout = new JFXDialogLayout();
-		layout.setHeading(new Text("Editar usuario"));
-		layout.setBody(panel);
-
-		dialogo = new JFXDialog(((StackPane) idAnchorPane.getParent()), layout, JFXDialog.DialogTransition.CENTER);
-		dialogo.show();
-	}
-
-	@FXML
-	void clickLimpiarFiltros(ActionEvent event) {
-		filtroDepartamento.getSelectionModel().clearSelection();
-		filtroRol.getSelectionModel().clearSelection();
-		busquedaProfesor.setText("");
-		tablaProfesores.refresh();
-	}
-
-	@FXML
-	void clickAnyadirProfesor(ActionEvent event) throws IOException {
-
-		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/CrearUsuario.fxml");
-		FXMLLoader loader = new FXMLLoader(fxmlLocation);
-		Parent panel = loader.load();
-
-		JFXDialogLayout layout = new JFXDialogLayout();
-		layout.setHeading(new Text("Crear nuevo usuario"));
-		layout.setBody(panel);
-
-		dialogo = new JFXDialog(((StackPane) idAnchorPane.getParent()), layout, JFXDialog.DialogTransition.CENTER);
-		dialogo.show();
-
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -146,6 +112,70 @@ public class UserController implements Initializable {
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	/**
+	 * Metodo que se lanza cuando el usuario pulsa el boton editar. Lanza un dialogo
+	 * para editar al usuario.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	void clickEditar(ActionEvent event) throws IOException {
+
+		tablaProfesores.refresh();
+
+		TreeItem<Profesor> item = tablaProfesores.getSelectionModel().getSelectedItem();
+		VariablesEstaticas.editarProfesor = item.getValue();
+
+		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/EditarUsuario.fxml");
+		FXMLLoader loader = new FXMLLoader(fxmlLocation);
+		Parent panel = loader.load();
+
+		JFXDialogLayout layout = new JFXDialogLayout();
+		layout.setHeading(new Text("Editar usuario"));
+		layout.setBody(panel);
+
+		dialogo = new JFXDialog(((StackPane) idAnchorPane.getParent()), layout, JFXDialog.DialogTransition.CENTER);
+		dialogo.show();
+	}
+
+	/**
+	 * Metodo que limpia los filtros de la tabla
+	 * 
+	 * @param event
+	 */
+
+	@FXML
+	void clickLimpiarFiltros(ActionEvent event) {
+		filtroDepartamento.getSelectionModel().clearSelection();
+		filtroRol.getSelectionModel().clearSelection();
+		busquedaProfesor.setText("");
+		tablaProfesores.refresh();
+	}
+
+	/**
+	 * Metodo que se lanza cuando el usuario pulsa en Anyadir profesor. Crea un
+	 * dialogo nuevo.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	void clickAnyadirProfesor(ActionEvent event) throws IOException {
+
+		URL fxmlLocation = getClass().getClassLoader().getResource("application/vista/CrearUsuario.fxml");
+		FXMLLoader loader = new FXMLLoader(fxmlLocation);
+		Parent panel = loader.load();
+
+		JFXDialogLayout layout = new JFXDialogLayout();
+		layout.setHeading(new Text("Crear nuevo usuario"));
+		layout.setBody(panel);
+
+		dialogo = new JFXDialog(((StackPane) idAnchorPane.getParent()), layout, JFXDialog.DialogTransition.CENTER);
+		dialogo.show();
 
 	}
 
@@ -183,6 +213,11 @@ public class UserController implements Initializable {
 		}
 	}
 
+	/**
+	 * Metodo que inicia la tabla, crea columnas y rellena.
+	 * 
+	 * @throws BusinessException
+	 */
 	@SuppressWarnings("unchecked")
 	private void iniciarTabla() throws BusinessException {
 		// DAO

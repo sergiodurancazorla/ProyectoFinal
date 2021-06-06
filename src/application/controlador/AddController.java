@@ -306,7 +306,6 @@ public class AddController implements Initializable {
 		ObservableList<Departamento> listaDepartamento = FXCollections
 				.observableArrayList(daoDepartamento.listadoDepartamentos());
 		ObservableList<Aula> listaAulas = FXCollections.observableArrayList(daoAula.listadoAulas());
-		ObservableList<Estado> listaEstados = FXCollections.observableArrayList(daoEstado.listadoEstados());
 
 		// PONER FECHA ACTUAL
 		fechaIncidencia.setValue(LocalDate.now());

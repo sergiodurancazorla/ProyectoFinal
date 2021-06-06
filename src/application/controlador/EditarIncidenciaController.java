@@ -368,7 +368,6 @@ public class EditarIncidenciaController implements Initializable {
 
 		}
 
-		// MODIFICAR****************************
 		if (incidencia.getInformacion() != null) {
 			btnSubirArchivo.setText("TIENE ARCHIVO");
 		}
@@ -402,7 +401,6 @@ public class EditarIncidenciaController implements Initializable {
 	 */
 	public void addIncidencia(Incidencia i) {
 		this.incidencia = i;
-
 	}
 
 	/**
