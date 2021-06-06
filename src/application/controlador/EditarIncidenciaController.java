@@ -531,6 +531,9 @@ public class EditarIncidenciaController implements Initializable {
 			Alerta alerta = new Alerta(idStackPane, "Incidencia eliminada", "Se ha eliminado con exito la incidencia.");
 			alerta.mostrarAlerta();
 
+			// CERRAR
+			DialogoEditar.cerrarDialogo();
+
 		} catch (BusinessException e) {
 			VariablesEstaticas.log.logGeneral("[ERROR ELMINAR INCIDENCIA] No se ha podido eliminar incidencia:"
 					+ incidencia.getIdincidencia() + " \n\t" + e.getMessage());
