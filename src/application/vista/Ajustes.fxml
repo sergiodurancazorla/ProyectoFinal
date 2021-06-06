@@ -100,7 +100,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXButton fx:id="btnRol" alignment="TOP_LEFT" buttonType="RAISED" onAction="#clickRol" prefHeight="30.0" prefWidth="180.0" ripplerFill="#0673bb" text="Crear / Modificar Rol">
+                  <JFXButton fx:id="btnTiposHardware" alignment="TOP_LEFT" buttonType="RAISED" onAction="#clickTiposHardware" prefHeight="25.0" prefWidth="245.0" ripplerFill="#0673bb" text="Crear / Modificar Tipos de Hardware">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
@@ -111,7 +111,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="btnTiposHardware" alignment="TOP_LEFT" buttonType="RAISED" onAction="#clickTiposHardware" prefHeight="25.0" prefWidth="245.0" ripplerFill="#0673bb" text="Crear / Modificar Tipos de Hardware">
+                  <JFXButton fx:id="btnRol" alignment="TOP_LEFT" buttonType="RAISED" onAction="#clickRol" prefHeight="30.0" prefWidth="180.0" ripplerFill="#0673bb" text="Crear / Modificar Rol" visible="false">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>

@@ -228,11 +228,6 @@ public class AjustesController implements Initializable {
 		dialogo.show();
 	}
 
-	@FXML
-	void clickRol(ActionEvent event) {
-
-	}
-
 	/**
 	 * Metodo que genera dialogo para crear/modificar tipo hardware
 	 * 
