@@ -7,6 +7,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
+import application.VariablesEstaticas;
+import application.modelo.Alerta;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import orm.dao.DaoInfoHardware;
 import orm.pojos.TipoHarware;
+import utiles.dao.DaoGenericoHibernate;
 
 /**
  * Controlador del dialogo de crear o modificar un tipo de Hardware.
@@ -101,6 +104,30 @@ public class CrearModificarTipoHardwareController implements Initializable {
 	@FXML
 	void clickEliminar(ActionEvent event) {
 
+		// obtener item TipoHardware para eliminar
+		TipoHarware eliminar = comboTipoHardware.valueProperty().getValue();
+
+		try {
+			DaoGenericoHibernate<TipoHarware, Integer> daoTipoHardware = new DaoGenericoHibernate<TipoHarware, Integer>();
+			daoTipoHardware.borrar(eliminar);
+
+			// Mostrar alerta
+			Alerta alerta = new Alerta(idStackPane, "Eliminado ", "Se ha eliminado el tipo de hardware correctamente");
+			alerta.mostrarAlerta();
+
+			// cerrar dialogo
+			AjustesController.dialogo.close();
+
+		} catch (Exception e) {
+			// Error al eliminar
+			VariablesEstaticas.log.logGeneral("[ERROR ACTUALIZAR TIPO HARDWARE] No se ha podido actualizar: "
+					+ eliminar.getNombre() + " \n\t" + e.getMessage());
+
+			// Mostrar alerta
+			Alerta alerta = new Alerta(idStackPane, "ERROR AL ELIMINAR",
+					"Si el tipo de harware está asignado a alguna incidencia no se puede eliminar");
+			alerta.mostrarAlerta();
+		}
 	}
 
 	@FXML
