@@ -2,7 +2,6 @@ package orm.dao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,8 +14,12 @@ import utiles.dao.DaoGenericoHibernate;
 import utiles.hibernate.UtilesHibernate;
 
 public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
-	private final static Logger LOGGER = Logger.getLogger(Incidencia.class.getName());
-
+	/**
+	 * Metodo que devuelve el listado de incidencia de un profesor
+	 * 
+	 * @param p profesor
+	 * @return listado de incidencias
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<Incidencia> getIncidenciasProfesor(Profesor p) {
 		ArrayList<Incidencia> lista = new ArrayList<Incidencia>();
@@ -31,6 +34,12 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 		return lista;
 	}
 
+	/**
+	 * Metodo que devuelve el tiempo medio(en segundos) de resolución de las
+	 * incidencias.
+	 * 
+	 * @return int segundos
+	 */
 	@SuppressWarnings("rawtypes")
 	public int segundosTiempoMedioIncidencias() {
 		int segundos = 0;
@@ -41,15 +50,23 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 		// Obtener media tiempo resolucion
 		String hql = "SELECT avg(i.tiempoResolucion) FROM Incidencia i";
 		Query query = s.createQuery(hql);
-
-		if (query.list() != null) {
-			double dSegundos = (double) query.list().get(0);
-			segundos = (int) dSegundos;
+		try {
+			if (query.getSingleResult() != null) {
+				double dSegundos = (double) query.getSingleResult();
+				segundos = (int) dSegundos;
+			}
+		} catch (NullPointerException e) {
 		}
-
 		return segundos;
 	}
 
+	/**
+	 * Metodo que devuelve el listado de incidencias sin revolver de un profesor en
+	 * concreto
+	 * 
+	 * @param p profesor
+	 * @return listado
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<Incidencia> getIncidenciasProfesorSinResolver(Profesor p) {
 		ArrayList<Incidencia> lista = new ArrayList<Incidencia>();
@@ -63,6 +80,13 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 		lista = (ArrayList<Incidencia>) query.list();
 		return lista;
 	}
+
+	/**
+	 * Metodo que devuelve un entero con la cantidad de incidencias para un estado e
+	 * 
+	 * @param e estado
+	 * @return cantidad de incidencias con ese estado
+	 */
 
 	public int cantidadIncidenciasPorEstado(Estado e) {
 		int resultado = 0;
@@ -82,6 +106,13 @@ public class DaoIncidencia extends DaoGenericoHibernate<Incidencia, Integer> {
 
 	}
 
+	/**
+	 * Metodo que devuelve un entero con la cantidad de incidencias para un
+	 * departamento
+	 * 
+	 * @param departamento
+	 * @return cantidad de incidencias del departamento
+	 */
 	public int cantidadIncidenciaPorDepartamento(Departamento departamento) {
 		int resultado = 0;
 

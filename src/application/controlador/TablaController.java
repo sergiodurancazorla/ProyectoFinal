@@ -164,8 +164,8 @@ public class TablaController implements Initializable {
 
 		TreeItem<Incidencia> item = tablaIncidencias.getSelectionModel().getSelectedItem();
 
-		if (profesor.getRol().getIdrol() == 1) {
-			// Eres admin, abres la incidencia
+		if (profesor.getRol().getIdrol() == 1 || profesor.getRol().getIdrol() == 3) {
+			// Eres admin/coordinador TIC, abres la incidencia
 			DialogoEditar editar = new DialogoEditar(item.getValue());
 			editar.mostrarDialogo((StackPane) (idAnchorPane.getParent().getParent()));
 

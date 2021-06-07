@@ -13,6 +13,11 @@ import utiles.hibernate.UtilesHibernate;
 public class DaoRol extends DaoGenericoHibernate<Rol, Integer> {
 	private final static Logger LOGGER = Logger.getLogger(Rol.class.getName());
 
+	/**
+	 * Metodo que devuelve una lista con los diferentes roles
+	 * 
+	 * @return
+	 */
 	public ArrayList<Rol> listadoRol() {
 
 		// comenzamos sesion

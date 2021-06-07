@@ -372,6 +372,10 @@ public class EditarIncidenciaController implements Initializable {
 			btnSubirArchivo.setText("TIENE ARCHIVO");
 		}
 
+		if (incidencia.getObservaciones() != null) {
+			txtObservaciones.setText(incidencia.getObservaciones());
+		}
+
 		// Si el responsable es el SAI checkear el checkbox
 		if (incidencia.getProfesorByResponsableSolucion() != null
 				&& incidencia.getProfesorByResponsableSolucion().equals(VariablesEstaticas.SAI)) {
@@ -382,9 +386,10 @@ public class EditarIncidenciaController implements Initializable {
 
 		}
 
-		// si tiene rol diferente a admin no se permite modificar el profesor que la
+		// si tiene rol diferente a admin/coordinador tic no se permite modificar el
+		// profesor que la
 		// crea y asignar responsable y SAI bloqueados.
-		if (profesor.getRol().getIdrol() != 1) {
+		if (profesor.getRol().getIdrol() != 1 && profesor.getRol().getIdrol() != 3) {
 			comboProfesor.getSelectionModel().select(profesor);
 			comboProfesor.setDisable(true);
 			comboProfesor.setOpacity(1);
@@ -442,18 +447,6 @@ public class EditarIncidenciaController implements Initializable {
 		DaoIncidencia daoIncidencia = new DaoIncidencia();
 		if (incidenciaModificada) {
 
-			// Si la incidencia tiene el estado "Solucionada" o "Solucion inviable" se le
-			// pone fecha de resolucion y se calcula su tiempo de resolucion
-			if (incidencia.getEstado().getNombre().toUpperCase().equals("SOLUCIONADA")
-					|| incidencia.getEstado().getNombre().toUpperCase().equals("SOLUCION INVIABLE")) {
-				incidencia.setFechaResolucion(Date.from(Instant.now()));
-				incidencia.setTiempoResolucion(calcularTiempoResolucion());
-
-			} else {
-				incidencia.setFechaResolucion(null);
-				incidencia.setTiempoResolucion(null);
-			}
-
 			// setear datos modificados, si se ha modificado.
 			if (booleanTipo) {
 				incidencia.setTipo(modificadoTipo);
@@ -481,6 +474,18 @@ public class EditarIncidenciaController implements Initializable {
 			}
 			if (booleanResponsableSolucion) {
 				incidencia.setProfesorByResponsableSolucion(modificadoResponsableSolucion);
+			}
+
+			// Si la incidencia tiene el estado "Solucionada" o "Solucion inviable" se le
+			// pone fecha de resolucion y se calcula su tiempo de resolucion
+			if (incidencia.getEstado().getNombre().toUpperCase().equals("SOLUCIONADA")
+					|| incidencia.getEstado().getNombre().toUpperCase().equals("SOLUCION INVIABLE")) {
+				incidencia.setFechaResolucion(Date.from(Instant.now()));
+				incidencia.setTiempoResolucion(calcularTiempoResolucion());
+
+			} else {
+				incidencia.setFechaResolucion(null);
+				incidencia.setTiempoResolucion(null);
 			}
 
 			// ACTUALIZAR

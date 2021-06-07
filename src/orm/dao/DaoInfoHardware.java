@@ -1,7 +1,6 @@
 package orm.dao;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -13,8 +12,11 @@ import utiles.dao.DaoGenericoHibernate;
 import utiles.hibernate.UtilesHibernate;
 
 public class DaoInfoHardware extends DaoGenericoHibernate<InfoHardware, Integer> {
-	private final static Logger LOGGER = Logger.getLogger(InfoHardware.class.getName());
-
+	/**
+	 * Metodo que devuelve listado de los diferentes tipos de Hardware
+	 * 
+	 * @return
+	 */
 	public ArrayList<TipoHarware> listadoTiposHw() {
 
 		// comenzamos sesion
@@ -37,7 +39,11 @@ public class DaoInfoHardware extends DaoGenericoHibernate<InfoHardware, Integer>
 
 		return lista;
 	}
-
+/**
+ * Metodo que devuelve la información del hardware de una incidencia en concreto
+ * @param i
+ * @return
+ */
 	public InfoHardware informacionIncidencia(Incidencia i) {
 
 		InfoHardware informacion = new InfoHardware();

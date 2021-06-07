@@ -442,6 +442,14 @@ public class AddController implements Initializable {
 			comboEstado.setStyle(null);
 		}
 
+		// fecha
+		if (fechaIncidencia.getValue() != null && fechaIncidencia.getValue().isAfter(LocalDate.now())) {
+			resultado = false;
+			fechaIncidencia.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+			new animatefx.animation.Shake(fechaIncidencia).play();
+
+		}
+
 		return resultado;
 	}
 }

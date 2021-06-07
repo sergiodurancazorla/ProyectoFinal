@@ -1,7 +1,6 @@
 package orm.dao;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -11,8 +10,11 @@ import utiles.dao.DaoGenericoHibernate;
 import utiles.hibernate.UtilesHibernate;
 
 public class DaoEstado extends DaoGenericoHibernate<Estado, Integer> {
-	private final static Logger LOGGER = Logger.getLogger(Estado.class.getName());
-
+	/**
+	 * Metodo que devuelve una lista con los diferentes estados
+	 * 
+	 * @return
+	 */
 	public ArrayList<Estado> listadoEstados() {
 
 		// comenzamos sesion

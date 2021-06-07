@@ -1,7 +1,6 @@
 package orm.dao;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -11,8 +10,11 @@ import utiles.dao.DaoGenericoHibernate;
 import utiles.hibernate.UtilesHibernate;
 
 public class DaoDepartamento extends DaoGenericoHibernate<Departamento, Integer> {
-	private final static Logger LOGGER = Logger.getLogger(Departamento.class.getName());
-
+	/**
+	 * Metodo que devuelve una lista con los diferentes departamentos
+	 * 
+	 * @return
+	 */
 	public ArrayList<Departamento> listadoDepartamentos() {
 
 		// comenzamos sesion

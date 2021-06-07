@@ -174,8 +174,8 @@ public class CreacionUsuarioController implements Initializable {
 					CorreoElectronico correo = new CorreoElectronico(nuevoProfesor.getEmail(),
 							"Alta nuevo usuario en Gestion de Incidencias",
 							"Muy buenas!\nHas sido registrado en la app Gestion de Incidencias. Ahora puedes crear, modificar"
-									+ " y ver las incidencias de tu centro. \n\nPara poder entrar a la aplicacion el usuario es su dni y la contraseña"
-									+ " el mismo dni. \n\nPara mayor seguridad se recomienda cambiar contraseña.\n\nUn saludo!");
+									+ " y ver las incidencias de tu centro. \n\nPara poder entrar a la aplicacion el usuario es su DNI y la contraseña"
+									+ " el mismo DNI en mayúsculas. \n\nPara mayor seguridad se recomienda cambiar contraseña.\n\nUn saludo!");
 
 					correo.start();
 				}

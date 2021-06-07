@@ -13,6 +13,11 @@ import utiles.hibernate.UtilesHibernate;
 public class DaoTipo extends DaoGenericoHibernate<Tipo, Integer> {
 	private final static Logger LOGGER = Logger.getLogger(Tipo.class.getName());
 
+	/**
+	 * Metodo que devuelve una lista de los diferentes tipos de incidencias
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<Tipo> tiposIncidencias() {
 

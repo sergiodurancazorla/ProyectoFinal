@@ -1,7 +1,6 @@
 package orm.dao;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -11,8 +10,11 @@ import utiles.dao.DaoGenericoHibernate;
 import utiles.hibernate.UtilesHibernate;
 
 public class DaoAula extends DaoGenericoHibernate<Aula, Integer> {
-	private final static Logger LOGGER = Logger.getLogger(Aula.class.getName());
-
+	/**
+	 * Metodo que devuelve una lista con las diferentes aulas
+	 * 
+	 * @return
+	 */
 	public ArrayList<Aula> listadoAulas() {
 
 		// comenzamos sesion

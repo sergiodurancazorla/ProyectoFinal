@@ -75,10 +75,14 @@ public class GraficoInformeController implements Initializable {
 			DaoIncidencia daoIncidencia = new DaoIncidencia();
 			this.data = FXCollections.observableArrayList(daoIncidencia.buscarTodos());
 
-			// Se obtienne informacion del profesor logueado
-			this.profesor = VariablesEstaticas.profesor;
-			cargarTextos();
-			cargarPieChart();
+			// Si estan vacias no mostrar nada
+			if (!data.isEmpty()) {
+				// Se obtienne informacion del profesor logueado
+				this.profesor = VariablesEstaticas.profesor;
+				cargarTextos();
+				cargarPieChart();
+			}
+
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
