@@ -89,7 +89,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="comboResponsable" prefHeight="36.0" prefWidth="143.0" text="Responsable Solución:" />
+                  <Label fx:id="comboResponsable" prefHeight="36.0" prefWidth="143.0" text="Responsable:" />
                   <Label text="Observaciones:" GridPane.rowIndex="1" />
                   <JFXComboBox fx:id="comboResponsableSolucion" prefHeight="25.0" prefWidth="137.0" GridPane.columnIndex="1" />
                </children>

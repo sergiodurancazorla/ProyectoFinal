@@ -344,7 +344,6 @@ public class AddController implements Initializable {
 		comboTipoHardware.setValue(null);
 		fechaIncidencia.setValue(LocalDate.now());
 		comboTipoIncidencia.setValue(null);
-		comboProfesor.setValue(null);
 		comboDepartamento.setValue(null);
 		comboUbicacion.setValue(null);
 		txtDescripcion.setText("");
@@ -353,10 +352,10 @@ public class AddController implements Initializable {
 
 		// quitar estilo si los tuviera
 		comboTipoIncidencia.setStyle(null);
-		comboProfesor.setStyle(null);
 		comboDepartamento.setStyle(null);
 		comboUbicacion.setStyle(null);
 		comboEstado.setStyle(null);
+		fechaIncidencia.setStyle(null);
 
 	}
 
@@ -447,6 +446,9 @@ public class AddController implements Initializable {
 			resultado = false;
 			fechaIncidencia.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
 			new animatefx.animation.Shake(fechaIncidencia).play();
+
+		} else {
+			fechaIncidencia.setStyle(null);
 
 		}
 

@@ -146,7 +146,7 @@ public class CrearModificarTipoHardwareController implements Initializable {
 
 			// Mostrar alerta
 			Alerta alerta = new Alerta(idStackPane, "ERROR AL ELIMINAR",
-					"Si el tipo de harware está asignado a alguna incidencia no se puede eliminar");
+					"Si el tipo de hardware está asignado a alguna incidencia no se puede eliminar");
 			alerta.mostrarAlerta();
 
 		}

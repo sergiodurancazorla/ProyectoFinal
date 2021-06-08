@@ -12,7 +12,7 @@ import orm.pojos.Profesor;
 
 /**
  * 
- * Clase principal que sse lanza desde el login. Recibe como parametor un
+ * Clase principal que se lanza desde el login. Recibe como parametro un
  * profesor, el que inicia la aplicacion. Incluye un metodo que controla el
  * movimiento de la ventana al mantener pulsado.
  * 

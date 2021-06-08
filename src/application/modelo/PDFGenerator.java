@@ -97,7 +97,7 @@ public class PDFGenerator extends Thread {
 				// *******INCIDENCIA INDIVIDUAL**********
 
 				// Parrafo titulo
-				Paragraph titulo = new Paragraph("Informacion de la incidencia\n",
+				Paragraph titulo = new Paragraph("Información de la incidencia\n",
 						FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLUE));
 				titulo.setAlignment(Element.ALIGN_CENTER);
 

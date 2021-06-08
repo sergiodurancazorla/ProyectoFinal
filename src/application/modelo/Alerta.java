@@ -10,7 +10,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import orm.pojos.Incidencia;
 
 /**
  * Clase que crea una alerta bloqueante personalizada y la muestra en un
@@ -23,7 +22,6 @@ public class Alerta {
 	private StackPane stackPane;
 	private String titulo;
 	private String cuerpo;
-	private Incidencia incidencia;
 
 	/**
 	 * Crea una alerta simple con titulo y cuerpo
@@ -39,19 +37,6 @@ public class Alerta {
 	}
 
 	/**
-	 * Crea una alerta personalizada para editar incidencia.
-	 * 
-	 * @param stackPane
-	 * @param titulo
-	 * @param incidencia
-	 */
-	public Alerta(StackPane stackPane, String titulo, Incidencia incidencia) {
-		this.stackPane = stackPane;
-		this.titulo = titulo;
-		this.incidencia = incidencia;
-	}
-
-	/**
 	 * Metodo que genera la alerta y la muestra. Es bloqueante hasta que el usuario
 	 * no pulse en aceptar la app se queda ahí parada.
 	 */
@@ -63,12 +48,7 @@ public class Alerta {
 		JFXDialogLayout contenido = new JFXDialogLayout();
 		contenido.setHeading(new Text(titulo));
 
-		if (incidencia == null) {
-			contenido.setBody(new Text(cuerpo));
-		} else {
-
-			contenido.setBody(new Text(incidencia.toString()));
-		}
+		contenido.setBody(new Text(cuerpo));
 
 		JFXButton boton = new JFXButton("Aceptar");
 		boton.setDefaultButton(true);

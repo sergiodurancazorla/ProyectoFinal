@@ -31,7 +31,7 @@ public class LogIncidencia {
 		try {
 			this.bufferedWriter = new BufferedWriter(new FileWriter(ruta + "/logsGenerales.txt", true));
 			this.bufferedWriter.write("\n\n[" + Date.from(Instant.now()) + "] " + "usuario: "
-					+ VariablesEstaticas.profesor.toString() + "\n\t" + linea);
+					+ VariablesEstaticas.profesor.getDni() + "\n\t" + linea);
 			this.close();
 
 		} catch (IOException e) {
