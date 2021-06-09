@@ -6,9 +6,10 @@ incidencias de Hardware y Software que se producen en el centro.
 
 ## Guía
 
-1. Descargar script base de datos y ejecutar. 
+1. Descargar script base de datos y ejecutar. (Script final incluye también la creación de la BBDD).
 2. Los datos de prueba se pueden ver directamente en la BBDD.
-   usuario con todos los permisos: "sai" ; pass: "sai"
+   usuario con todos los permisos: "sai" ; pass: "sai".
+ 
 
 ## Cosas a tener en cuenta
 
