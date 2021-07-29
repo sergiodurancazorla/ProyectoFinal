@@ -17,13 +17,19 @@ incidencias de Hardware y Software que se producen en el centro.
 2. Si da error con JavaFX hay que añadir las librerias de JavaFX desde Build Path>Add Libraries > JavaFX SDK
 3. Para hacer funcionar la BBDD tendrás que cambiar usuario y password con la inicies desde propiedades dentro del proyecto. 
 
-## Documentción
+## Documentación
+
  Toda la documentación se ha recopilado en el siguiente fichero: 
  
   [SergioDuran_GestiónIncidencias_ProyectoFinal.pdf](https://github.com/sergiodurancazorla/ProyectoFinal/files/6902289/SergioDuran_GestionIncidencias_ProyectoFinal.pdf)
  
  Al final del pdf hay unos videos-guía con el front de la aplicación, pasando por todas las vistas de la app.
  
+##Capturas de pantalla de la app
+Login
+![image](https://user-images.githubusercontent.com/57665696/127536589-b2510128-18c0-4f63-a40e-c787563b525c.png)
+
+
 
 
 
