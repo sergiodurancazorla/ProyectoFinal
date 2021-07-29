@@ -15,3 +15,15 @@ incidencias de Hardware y Software que se producen en el centro.
 
 1. Para que el proyecto funcione correctamente es necesario el JDK 1.8
 2. Si da error con JavaFX hay que añadir las librerias de JavaFX desde Build Path>Add Libraries > JavaFX SDK
+3. Para hacer funcionar la BBDD tendrás que cambiar usuario y password con la inicies desde propiedades dentro del proyecto. 
+
+## Documentción
+ Toda la documentación se ha recopilado en el siguiente fichero: 
+ 
+  [SergioDuran_GestiónIncidencias_ProyectoFinal.pdf](https://github.com/sergiodurancazorla/ProyectoFinal/files/6902289/SergioDuran_GestionIncidencias_ProyectoFinal.pdf)
+ 
+ Al final del pdf hay unos videos-guía con el front de la aplicación, pasando por todas las vistas de la app.
+ 
+
+
+
