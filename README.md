@@ -25,9 +25,15 @@ incidencias de Hardware y Software que se producen en el centro.
  
  Al final del pdf hay unos videos-guía con el front de la aplicación, pasando por todas las vistas de la app.
  
-##Capturas de pantalla de la app
+## Capturas de pantalla de la app
 Login
+
 ![image](https://user-images.githubusercontent.com/57665696/127536589-b2510128-18c0-4f63-a40e-c787563b525c.png)
+
+Main
+
+![image](https://user-images.githubusercontent.com/57665696/127536770-d8db8653-4753-40b1-b5d5-2ad05f13f285.png)
+
 
 
 
